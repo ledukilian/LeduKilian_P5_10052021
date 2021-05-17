@@ -1,4 +1,4 @@
-# Projet 5 Openclassrooms : Créez votre premier blog en PH
+# Projet 5 Openclassrooms : Créez votre premier blog en PHP
 
 ## Validation
 ### Codeclimate :
