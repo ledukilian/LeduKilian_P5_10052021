@@ -1,0 +1,14 @@
+{
+    "name": "kilian/ledu-kilian_p5_10052021",
+    "authors": [
+        {
+            "name": "ledukilian",
+            "email": "ledu.kilian@gmail.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "^3.3",
+        "cocur/slugify": "^4.0",
+        "phpmailer/phpmailer": "^6.4"
+    }
+}
