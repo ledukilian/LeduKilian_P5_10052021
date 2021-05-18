@@ -1,0 +1,6 @@
+home:
+  uri: /
+  area: Public
+  controller: HomeController
+  action: showHome
+  parameters: [ ]
