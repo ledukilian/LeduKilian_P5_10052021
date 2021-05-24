@@ -1,4 +1,5 @@
 <?php
+namespace App\Core;
 
 class Entity {
    private $_id;
