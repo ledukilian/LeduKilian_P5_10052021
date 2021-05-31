@@ -1,8 +1,14 @@
 <?php
+
+use App\Core\Router;
+
+define('ROOT_DIR', realpath(dirname(__DIR__)));
 define('CONF_DIR', realpath(dirname(__DIR__)) . '/config');
 
+require_once(ROOT_DIR . '/vendor/autoload.php');
+
 try {
-   $config = Yaml::parseFile(CONF_DIR."/config.yml");
+   $config = yaml_parse_file(CONF_DIR."/config.yml");
 } catch (\Exception $e) {
    echo "Config not found";
 }
@@ -13,4 +19,3 @@ try {
 } catch (\Exception $e) {
 
 }
-
