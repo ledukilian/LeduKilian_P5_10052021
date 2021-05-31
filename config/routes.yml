@@ -12,4 +12,4 @@ singlePost:
   uri: /blog/([a-zA-Z0-9-]+)
   controller: BlogController
   action: showPost
-  parameters: ["slug"]
+  parameters: ["id_post"]

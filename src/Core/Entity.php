@@ -10,6 +10,10 @@ class Entity {
       // Empty constructor
    }
 
+   public function hydrate() {
+      // Function hydrate
+   }
+
    public function getId() {
       return $this->_id;
    }
