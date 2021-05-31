@@ -1,6 +1,15 @@
 home:
   uri: /
-  area: Public
-  controller: HomeController
+  controller: IndexController
   action: showHome
   parameters: [ ]
+contact:
+  uri: /contact
+  controller: IndexController
+  action: showContact
+  parameters: [ ]
+singlePost:
+  uri: /blog/([a-zA-Z0-9-]+)
+  controller: BlogController
+  action: showPost
+  parameters: ["slug"]
