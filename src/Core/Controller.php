@@ -3,12 +3,15 @@ namespace App\Core;
 
 class Controller {
    protected $action;
+   protected $params;
 
-   public function __construct($action) {
+   public function __construct($action, $params) {
       $this->action = $action;
+      $this->params = $params;
    }
 
    public function execute() {
-      $this->action();
+      $method = $this->action;
+      $this->$method();
    }
 }
