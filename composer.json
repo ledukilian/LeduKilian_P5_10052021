@@ -9,6 +9,12 @@
     "require": {
         "twig/twig": "^3.3",
         "cocur/slugify": "^4.0",
-        "phpmailer/phpmailer": "^6.4"
-    }
+        "phpmailer/phpmailer": "^6.4",
+        "ext-yaml": "*"
+    },
+    "autoload": {
+            "psr-4": {
+                "App\\": "src/"
+            }
+      }
 }
