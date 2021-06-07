@@ -5,8 +5,8 @@ use App\Core\Controller;
 
 class IndexController extends Controller {
    public function showHome() {
-      echo 'Home.';
-      // Ici on ira chercher la vue de l'accueil
+      $this->render("@client/pages/index.html.twig", []);
+
    }
 
    public function showContact() {
