@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
-        <title>My Webpage</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Kilian Blog{% endblock %}</title>
+          <meta name="description" content="{% block metaDescription %}{% endblock %}">
+          <meta property="og:url" content=" {% block ogUrl %}{% endblock %}" />
+          <meta property="og:type" content=" {% block ogType %}website{% endblock %}" />
+          <meta property="og:title" content="{{  block('title') }}" />
+          <meta property="og:description" content=" {{ block('metaDescription') }}" />
+          <meta property="og:image" content="{% block ogImage %}{% endblock %}" />
+
+          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:site" content="@fauxcompte" />
+          <meta name="twitter:title" content="{{  block('title') }}" />
+          <meta name="twitter:description" content="{{  block('metaDescription') }}" />
+          <meta name="twitter:image" content="{{  block('ogImage') }}" />
+
     </head>
     <body>
-      {% block body %}
+      {% include "client/parts/_header.html.twig" %}
+      <main>
+      {% block main %}
         {% endblock %}
+     </main>
+      {% include "client/parts/_footer.html.twig" %}
     </body>
 </html>
