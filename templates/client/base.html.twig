@@ -3,6 +3,7 @@
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Kilian Blog{% endblock %}</title>
+
           <meta name="description" content="{% block metaDescription %}{% endblock %}">
           <meta property="og:url" content=" {% block ogUrl %}{% endblock %}" />
           <meta property="og:type" content=" {% block ogType %}website{% endblock %}" />
@@ -15,6 +16,8 @@
           <meta name="twitter:title" content="{{  block('title') }}" />
           <meta name="twitter:description" content="{{  block('metaDescription') }}" />
           <meta name="twitter:image" content="{{  block('ogImage') }}" />
+          <link rel="stylesheet" href="css/litera.css">
+          <link rel="stylesheet" href="css/style.css">
 
     </head>
     <body>

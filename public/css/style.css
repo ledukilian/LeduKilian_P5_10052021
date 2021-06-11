@@ -1,0 +1,9 @@
+.bg-dark {
+   background-color: #1F1F1F !important;
+}
+
+#logo {
+   height: 100%;
+   width: auto;
+   max-height: 40px;
+}
