@@ -1,29 +1,22 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-        <img src="img/logo.png" id="logo" alt="Logo du blog" />
-        KLD Blog
-   </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarColor01">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Accueil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Blog</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
-       </li>
-      </ul>
-      <form class="d-flex">
-        <button class="btn btn-success my-2 my-sm-0 pr-2" type="submit">Connexion</button>
-        <span class="d-flex flex-row align-items-center text-white mx-3"> ou </span>
-       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Inscription</button>
-      </form>
-    </div>
-  </div>
-</nav>
+<!-- Fixed navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top headroom" >
+   <div class="container">
+      <div class="navbar-header">
+         <!-- Button for smallest screens -->
+         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+         <a class="navbar-brand" href="index.html">
+            <img id="logo" src="img/logo.png" alt="Progressus HTML5 template">
+            KLD Blog
+         </a>
+      </div>
+      <div class="navbar-collapse collapse">
+         <ul class="nav navbar-nav pull-right">
+            <li class="active"><a href="#">Accueil</a></li>
+            <li><a href="about.html">Portfolio</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a class="btn" href="signin.html">Authentification</a></li>
+         </ul>
+      </div><!--/.nav-collapse -->
+   </div>
+</div>
+<!-- /.navbar -->
