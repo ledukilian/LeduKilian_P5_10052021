@@ -1,10 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
-        <title>My Webpage</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Kilian Blog{% endblock %}</title>
+
+          <meta name="description" content="{% block metaDescription %}{% endblock %}">
+          <meta property="og:url" content=" {% block ogUrl %}{% endblock %}" />
+          <meta property="og:type" content=" {% block ogType %}website{% endblock %}" />
+          <meta property="og:title" content="{{  block('title') }}" />
+          <meta property="og:description" content=" {{ block('metaDescription') }}" />
+          <meta property="og:image" content="{% block ogImage %}{% endblock %}" />
+
+          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:site" content="@kilian_ld" />
+          <meta name="twitter:title" content="{{  block('title') }}" />
+          <meta name="twitter:description" content="{{  block('metaDescription') }}" />
+          <meta name="twitter:image" content="{{  block('ogImage') }}" />
+
+          <link rel="icon" href="img/logo.png" type="image/x-icon"/>
+
+         <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+       	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+         <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+         <link rel="stylesheet" href="css/bootstrap.css">
+       	<link rel="stylesheet" href="css/theme.css">
+       	<link rel="stylesheet" href="css/style.css">
+
     </head>
-    <body>
-      {% block body %}
+    <body class="home">
+      {% include "client/parts/_header.html.twig" %}
+      <main>
+      {% block main %}
         {% endblock %}
+     </main>
+      {% include "client/parts/_footer.html.twig" %}
     </body>
 </html>

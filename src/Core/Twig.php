@@ -2,8 +2,8 @@
 
 namespace App\Core;
 
-use App\Exception\ConfigException;
-use App\Exception\TwigException;
+use App\Exceptions\ConfigException;
+use App\Exceptions\TwigException;
 use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Extension\DebugExtension;
@@ -73,7 +73,8 @@ class Twig
         try {
             return $this->twig->render($template, $array);
         } catch (\Exception $e) {
-            throw new TwigException("Une erreur est survenue pendant le rendu de la page." . $e);
+           echo $e;
+           throw new TwigException("Une erreur est survenue pendant le rendu de la page." . $e);
         }
     }
 }

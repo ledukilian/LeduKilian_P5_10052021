@@ -8,6 +8,11 @@ contact:
   controller: IndexController
   action: showContact
   parameters: [ ]
+portfolio:
+  uri: /portfolio
+  controller: IndexController
+  action: showPortfolio
+  parameters: [ ]
 blog:
   uri: /blog/
   controller: BlogController
