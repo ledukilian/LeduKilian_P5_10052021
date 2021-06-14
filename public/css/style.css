@@ -1,8 +1,10 @@
 main {
    /*margin-top: -240px;*/
 }
-header {
-
+#containerTete {
+   padding: 20px;
+   border-radius: 5px;
+   background-color: rgba(0, 0, 0, 0.7) !important;
 }
 .navbar.bg-dark {
    position: fixed;
@@ -20,4 +22,8 @@ header {
 
 .navbar {
    padding: 30px 10px;
+}
+
+.nav-item {
+   padding: 0px 10px;
 }
