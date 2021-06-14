@@ -39,12 +39,12 @@ deletePost:
   action: deletePost
   parameters: ["slug"]
 login:
-  uri: /connexion/
+  uri: /connexion
   controller: AccountController
   action: login
   parameters: [ ]
 register:
-  uri: /inscription/
+  uri: /inscription
   controller: AccountController
   action: register
   parameters: [ ]
