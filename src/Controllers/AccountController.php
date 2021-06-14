@@ -8,11 +8,11 @@ class AccountController extends Controller {
 
 
    public function login() {
-      echo "Page de connexion";
+      $this->render("@client/pages/login.html.twig", []);
    }
 
    public function register() {
-      echo "Page d'inscription";
+      $this->render("@client/pages/register.html.twig", []);
    }
 
 
