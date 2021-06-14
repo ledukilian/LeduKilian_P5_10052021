@@ -27,3 +27,7 @@ main {
 .nav-item {
    padding: 0px 10px;
 }
+
+.mt-6 {
+   margin-top: 6em !important;
+}

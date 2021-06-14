@@ -5,5 +5,37 @@ Contact - {{parent()}}
 {% endblock %}
 
 {% block main %}
-<h1>Test contact  </h1>
+<div class="container text-center d-flex flex-row flex-wrap mt-6 p-4 text-left">
+   <section id="information" class="col-md-12 col-lg-6 px-0">
+      <h1 class="h3 font-weight-bold p-2"><i class="fas fa-phone-alt custom-icon-color"></i> Par téléphone</h1>
+      <p class="px-3">Vous pouvez nous conctacter par téléphone au numéro suivant :</p>
+      <p class="px-3 h2 text-warning font-weight-bold text-center my-3">01 12 23 34 45</p>
+      <p class="px-3 mt-2 text-secondary font-italic">Disponible du lundi au vendredi de 09h00 à 17h00.<br />Appel non surtaxé, prix d'un appel local</p>
+   </section>
+   <section id="contact" class="col-md-12 col-lg-6 px-0">
+      <h2 class="h3 font-weight-bold p-2"><i class="fas fa-envelope custom-icon-color"></i> Contactez-nous</h2>
+      <form name="contact" id="contact-form" class="d-flex flex-column form-inline">
+         <div class="d-flex flex-column col-12 form-group px-5">
+            <label for="contact-nom" class="text-secondary align-self-start pb-1">Nom</label>
+            <input required type="text" name="nom" id="contact-nom" class="form-control w-100" minlength="1" maxlength="30" />
+         </div>
+
+         <div class="d-flex flex-column col-12 form-group mt-2 px-5">
+            <label for="contact-email" class="text-secondary align-self-start pb-1">Adresse e-mail</label>
+            <input required type="email" name="email" id="contact-email" class="form-control w-100" minlength="1" maxlength="30" />
+         </div>
+
+         <div class="d-flex flex-column col-12 form-group mt-2 px-5">
+            <label for="contact-sujet" class="text-secondary align-self-start pb-1">Sujet</label>
+            <input required type="text" name="sujet" id="contact-sujet" class="form-control w-100" minlength="1" maxlength="30" />
+         </div>
+
+         <div class="d-flex flex-column col-12 form-group mt-2 px-5">
+            <label for="contact-message" class="text-secondary align-self-start pb-1">Message</label>
+            <textarea class="form-control w-100" name="message" id="contact-message" rows="6" cols="50"></textarea>
+         </div>
+         <input type="submit" class="btn btn-warning mt-3" value="Envoyer mon message" />
+      </form>
+   </section>
+</div>
 {% endblock %}
