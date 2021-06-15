@@ -1,6 +1,12 @@
 main {
    /*margin-top: -240px;*/
 }
+a {
+   color: auto;
+}
+a:hover {
+   text-decoration: none;
+}
 #containerTete {
    padding: 20px;
    border-radius: 5px;
