@@ -14,7 +14,7 @@ class BlogController extends Controller {
    }
 
    public function showBlog() {
-      echo "Page du blog";
+      $this->render("@client/pages/blog.html.twig", []);
    }
 
 
