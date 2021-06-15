@@ -14,7 +14,7 @@ portfolio:
   action: showPortfolio
   parameters: [ ]
 blog:
-  uri: /blog/
+  uri: /blog
   controller: BlogController
   action: showBlog
   parameters: [ ]
