@@ -23,6 +23,11 @@ singlePost:
   controller: BlogController
   action: showPost
   parameters: ["slug"]
+administration:
+   uri: /admin/
+   controller: AdminController
+   action: showAdmin
+   parameters: [ ]
 addPost:
   uri: /admin/blog/ajouter/
   controller: AdminController

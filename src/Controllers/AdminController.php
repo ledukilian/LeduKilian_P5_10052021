@@ -5,7 +5,9 @@ use App\Core\Controller;
 
 
 class AdminController extends Controller {
-
+   public function showAdmin() {
+      $this->render("@admin/pages/index.html.twig", []);
+   }
 
    public function addPost() {
       echo "Page d'ajout d'un post";
