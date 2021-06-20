@@ -1,27 +1,22 @@
+{% set assets_directory = '../' %}
+
 {% extends "client/base.html.twig" %}
 
 {% block title %}
 Post - {{parent()}}
 {% endblock %}
 
-{% block cssImports %}
-   <link rel="icon" href="../img/logo.png" type="image/x-icon"/>
-   <link rel="stylesheet" href="../css/bootstrap.css">
-   <link rel="stylesheet" href="../css/theme.css">
-   <link rel="stylesheet" href="../css/style.css">
-{% endblock %}
-
 {% block main %}
 <div class="container d-flex flex-row flex-wrap justify-content-around text-justify mt-6 p-4 px-5">
-   <a href="/blog" class="col-12 mb-3">
+   <a href="/blog" class="col-12 mb-3 mt-3">
       <button class="btn btn-warning"><i class="fas fa-arrow-circle-left mr-2"></i>Retour au blog</button>
    </a>
-   <img class="card-img-top w-90 border" src="../img/periodic_table.jpg" alt="Card image cap">
+   <img class="card-img-top w-75 border" src="../img/periodic_table.jpg" alt="Card image cap">
    <h1 class="col-12">Ceci est un titre d'article de blog</h1>
    <p class="col-12 h3">{{ postId }}</p>
    <p class="col-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel arcu condimentum, elementum neque nec, porttitor leo. Nullam nibh arcu, suscipit ut ligula et, interdum euismod tortor. Cras consequat nec nunc eget mattis. Vestibulum ultrices elit dolor, nec luctus felis blandit eu. Phasellus vulputate eros nibh, vel finibus mauris rhoncus et. Aliquam suscipit, enim eu dignissim elementum, metus nulla congue dui, ac accumsan metus leo sit amet augue. Maecenas quis porttitor enim. Aliquam tellus sapien, iaculis eu pulvinar nec, luctus sed diam. Aenean felis tortor, tincidunt a venenatis non, pretium vitae nibh. Maecenas rhoncus dolor velit, semper tincidunt enim vestibulum ut. Proin eget eros sapien. Vestibulum vitae convallis mauris.</p>
    <p class="col-12">Sed tincidunt risus ante, ut euismod risus semper sit amet. Praesent fermentum, felis a suscipit tempor, nisi nisi porttitor odio, id vulputate lectus lorem non neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer sed dolor dictum, tempor dolor sed, rutrum nisl. Ut neque nunc, fermentum ut lacinia porta, ultrices laoreet tortor. Praesent et sem imperdiet, ultrices velit a, luctus metus. Aenean a eleifend tortor.</p>
-   <a href="/blog" class="col-12">
+   <a href="/blog" class="col-12 mb-5">
       <button class="btn btn-warning"><i class="fas fa-arrow-circle-left mr-2"></i>Retour au blog</button>
   </a>
 </div>
