@@ -12,8 +12,6 @@ class BlogController extends Controller {
          $this->render("@client/pages/post.html.twig", [
             'postId' => $slug,
          ]);
-      //echo "Page du post ".$slug;
-      // var_dump($slug);
    }
 
    public function showBlog() {
