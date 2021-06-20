@@ -55,10 +55,13 @@ class Twig
             }
         });
 
+
+
         $twig->addExtension(new DebugExtension());
         $twig->addExtension(new IntlExtension());
         $twig->addExtension(new MarkdownExtension());
 
+        $twig->addGlobal('uri', $_SERVER['REQUEST_URI']);
         $this->twig = $twig;
     }
 
