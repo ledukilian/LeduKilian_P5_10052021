@@ -28,6 +28,11 @@ administration:
    controller: AdminController
    action: showAdmin
    parameters: [ ]
+listPost:
+  uri: /admin/blog/
+  controller: AdminController
+  action: showPostList
+  parameters: [ ]
 addPost:
   uri: /admin/blog/ajouter/
   controller: AdminController

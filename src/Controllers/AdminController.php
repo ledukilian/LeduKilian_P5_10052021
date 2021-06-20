@@ -13,6 +13,10 @@ class AdminController extends Controller {
       $this->render("@admin/pages/blog/ajouter.html.twig", []);
    }
 
+   public function showPostList() {
+      $this->render("@admin/pages/blog/list.html.twig", []);
+   }
+
    public function editPost() {
       echo "Page de modification d'un post";
    }
