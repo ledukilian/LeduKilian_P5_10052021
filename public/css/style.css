@@ -33,7 +33,9 @@ a:hover {
 .nav-item {
    padding: 0px 10px;
 }
-
 .mt-6 {
    margin-top: 6em !important;
+}
+.w-90 {
+    width: 90% !important;
 }

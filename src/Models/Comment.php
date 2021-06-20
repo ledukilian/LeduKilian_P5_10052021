@@ -24,7 +24,7 @@ class Comment extends Entity {
       return $this->_status;
    }
 
-   public function setContent($value) {
+   public function setStatus($value) {
       $this->_status = $value;
    }
 
