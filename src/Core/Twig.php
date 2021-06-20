@@ -14,8 +14,7 @@ use Twig\Extra\Markdown\MarkdownRuntime;
 use Twig\RuntimeLoader\RuntimeLoaderInterface;
 use Twig\Extra\Markdown\MarkdownExtension;
 
-class Twig
-{
+class Twig {
     /** @var Environment */
     private $twig;
     /** @var mixed */
@@ -26,44 +25,48 @@ class Twig
      * @throws ConfigException
      * @throws LoaderError
      */
-    public function __construct()
-    {
-        try {
-            $this->config = yaml_parse_file(CONF_DIR . '/config.yml');
-        } catch (\Exception $e) {
-            throw new ConfigException($e->getMessage());
-        }
+   public function __construct() {
+     try {
+         $this->config = yaml_parse_file(CONF_DIR . '/config.yml');
+     } catch (\Exception $e) {
+         throw new ConfigException($e->getMessage());
+     }
 
-        $loader = new FilesystemLoader(TEMPLATE_DIR);
+     $loader = new FilesystemLoader(TEMPLATE_DIR);
 
-        $loader->addPath(TEMPLATE_DIR . '/client', 'client');
-        $loader->addPath(TEMPLATE_DIR . '/admin', 'admin');
+     $loader->addPath(TEMPLATE_DIR . '/client', 'client');
+     $loader->addPath(TEMPLATE_DIR . '/admin', 'admin');
 
-        $twig = new Environment($loader, [
-            'debug' => $this->config['env'] === 'dev',
-            'cache' => $this->config['env'] === 'dev' ? false : ROOT_DIR . '/var/cache'
-        ]);
+     $twig = new Environment($loader, [
+         'debug' => $this->config['env'] === 'dev',
+         'cache' => $this->config['env'] === 'dev' ? false : ROOT_DIR . '/var/cache'
+     ]);
 
-        $twig->addRuntimeLoader(new class implements RuntimeLoaderInterface {
-            public function load($class)
-            {
-                if (MarkdownRuntime::class === $class) {
-                    return new MarkdownRuntime(new DefaultMarkdown());
-                }
+     $twig->addRuntimeLoader(new class implements RuntimeLoaderInterface {
+         public function load($class)
+         {
+             if (MarkdownRuntime::class === $class) {
+                 return new MarkdownRuntime(new DefaultMarkdown());
+             }
+             return null;
+         }
+     });
 
-                return null;
-            }
-        });
+     self::addTwigExtensions($twig);
+     self::addTwigGlobals($twig);
 
+     $this->twig = $twig;
+   }
 
+   public function addTwigExtensions($twig) {
+      $twig->addExtension(new DebugExtension());
+      $twig->addExtension(new IntlExtension());
+      $twig->addExtension(new MarkdownExtension());
+   }
 
-        $twig->addExtension(new DebugExtension());
-        $twig->addExtension(new IntlExtension());
-        $twig->addExtension(new MarkdownExtension());
-
-        $twig->addGlobal('uri', $_SERVER['REQUEST_URI']);
-        $this->twig = $twig;
-    }
+   public function addTwigGlobals($twig) {
+      $twig->addGlobal('uri', $_SERVER['REQUEST_URI']);
+   }
 
     /**
      * @param $template
@@ -71,8 +74,7 @@ class Twig
      * @return string
      * @throws TwigException
      */
-    public function twigRender($template, $array): ?string
-    {
+    public function twigRender($template, $array): ?string {
         try {
             return $this->twig->render($template, $array);
         } catch (\Exception $e) {
