@@ -11,9 +11,9 @@ Ajouter - {{parent()}}
  <div class="container-fluid">
      <div class="row">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Ajouter un nouveau post</h1>
+            <h1 class="h3 mb-0 text-gray-800 mx-2"><i class="fas fa-plus-circle mr-2"></i>Ajouter un nouveau post</h1>
         </div>
-         <form class="d-flex flex-column col-lg-12 mb-4">
+         <form class="d-flex flex-column col-lg-12 mb-4" action="#">
             <div class="form-group">
               <label for="titreArticle">Titre</label>
               <input type="text" class="form-control" id="titreArticle" placeholder="Titre de l'article">
@@ -26,7 +26,6 @@ Ajouter - {{parent()}}
                <button class="btn btn-primary"><i class="fas fa-save mr-2"></i> Enregistrer</button>
                <button class="btn btn-success"><i class="fas fa-paper-plane mr-2"></i> Poster l'article</button>
             </div>
-
          </form>
         </div>
      </div>
