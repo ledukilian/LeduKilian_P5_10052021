@@ -19,17 +19,14 @@ a:hover {
    width: 100%;
    background-color: rgba(0, 0, 0, 0.9) !important;
 }
-
 #logo {
    height: 100%;
    width: auto;
    max-height: 40px;
 }
-
 .navbar {
    padding: 30px 10px;
 }
-
 .nav-item {
    padding: 0px 10px;
 }
@@ -38,4 +35,7 @@ a:hover {
 }
 .w-90 {
     width: 90% !important;
+}
+#accordionSidebar {
+   background: #0F0F0F;
 }
