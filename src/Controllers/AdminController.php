@@ -10,7 +10,7 @@ class AdminController extends Controller {
    }
 
    public function addPost() {
-      $this->render("@admin/pages/blog/ajouter.html.twig", []);
+      $this->render("@admin/pages/blog/add.html.twig", []);
    }
 
    public function showPostList() {
