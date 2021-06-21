@@ -6,11 +6,13 @@ class Entity {
    private $_createdAt;
    private $_updatedAt;
 
-   public function __construct() {
-      // Empty constructor
+   public function __construct(array $data = []) {
+      if (!empty($data)) {
+         $this->hydrate($data);
+      }
    }
 
-   public function hydrate($data)
+   public function hydrate(array $data)
    {
       foreach ($data as $attribut => $value) {
            $method = 'set'.str_replace(' ', '', ucwords(str_replace('_', ' ', $attribut)));

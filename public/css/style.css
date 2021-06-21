@@ -2,10 +2,6 @@ main {
    /*margin-top: -240px;*/
 }
 
-a {
-   color: auto;
-}
-
 a:hover {
    text-decoration: none;
 }
