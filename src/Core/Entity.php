@@ -10,8 +10,14 @@ class Entity {
       // Empty constructor
    }
 
-   public function hydrate() {
-      // Function hydrate
+   public function hydrate($data)
+   {
+      foreach ($data as $attribut => $value) {
+           $method = 'set'.str_replace(' ', '', ucwords(str_replace('_', ' ', $attribut)));
+           if (is_callable(array($this, $method))) {
+               $this->$method($value);
+           }
+      }
    }
 
    public function getId() {
