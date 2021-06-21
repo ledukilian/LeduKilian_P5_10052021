@@ -3,36 +3,43 @@
 {% extends "client/base.html.twig" %}
 
 {% block title %}
-Blog - {{parent()}}
+   Blog -
+   {{parent()}}
 {% endblock %}
 
 {% block main %}
-<div class="container d-flex flex-row flex-wrap justify-content-around mt-6 p-4">
-<h1 class="col-12 mb-5">Blog : Derniers posts</h1>
-   <a href="/blog/ceci-est-un-test" class="card mb-3 col-12 col-md-4">
-     <img class="card-img-top" src="img/periodic_table.jpg" alt="Card image cap">
-     <div class="card-body">
-       <h5 class="card-title text-dark">Titre article blog 1</h5>
-       <p class="card-text text-dark">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-       <p class="card-text"><small class="text-muted">Le 15/06/2021 à 00:29</small></p>
-     </div>
-  </a>
-   <a href="/blog/ceci-est-un-test" class="card mb-3 col-12 col-md-4">
-     <img class="card-img-top" src="img/periodic_table.jpg" alt="Card image cap">
-     <div class="card-body">
-        <h5 class="card-title text-dark">Titre article blog 2</h5>
-       <p class="card-text text-dark">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-       <p class="card-text"><small class="text-muted">Le 15/06/2021 à 00:29</small></p>
-     </div>
-  </a>
-   <a href="/blog/ceci-est-un-test" class="card mb-3 col-12 col-md-4">
-     <img class="card-img-top" src="img/periodic_table.jpg" alt="Card image cap">
-     <div class="card-body">
-        <h5 class="card-title text-dark">Titre article blog 2</h5>
-       <p class="card-text text-dark">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-       <p class="card-text"><small class="text-muted">Le 15/06/2021 à 00:29</small></p>
-     </div>
-  </a>
-  {% include "client/parts/_pagination.html.twig" %}
-</div>
+   <div class="container d-flex flex-row flex-wrap justify-content-around mt-6 p-4">
+      <h1 class="col-12 mb-5">Blog : Derniers posts</h1>
+      <a href="/blog/ceci-est-un-test" class="card mb-3 col-12 col-md-4">
+         <img class="card-img-top" src="img/periodic_table.jpg" alt="Card image cap">
+         <div class="card-body">
+            <h5 class="card-title text-dark">Titre article blog 1</h5>
+            <p class="card-text text-dark">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text">
+               <small class="text-muted">Le 15/06/2021 à 00:29</small>
+            </p>
+         </div>
+      </a>
+      <a href="/blog/ceci-est-un-test" class="card mb-3 col-12 col-md-4">
+         <img class="card-img-top" src="img/periodic_table.jpg" alt="Card image cap">
+         <div class="card-body">
+            <h5 class="card-title text-dark">Titre article blog 2</h5>
+            <p class="card-text text-dark">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text">
+               <small class="text-muted">Le 15/06/2021 à 00:29</small>
+            </p>
+         </div>
+      </a>
+      <a href="/blog/ceci-est-un-test" class="card mb-3 col-12 col-md-4">
+         <img class="card-img-top" src="img/periodic_table.jpg" alt="Card image cap">
+         <div class="card-body">
+            <h5 class="card-title text-dark">Titre article blog 2</h5>
+            <p class="card-text text-dark">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text">
+               <small class="text-muted">Le 15/06/2021 à 00:29</small>
+            </p>
+         </div>
+      </a>
+      {% include "client/parts/_pagination.html.twig" %}
+   </div>
 {% endblock %}

@@ -1,35 +1,36 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Kilian Blog{% endblock %}</title>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>
+         {% block title %}Kilian Blog{% endblock %}
+      </title>
 
-    <meta name="description" content="{% block metaDescription %}{% endblock %}">
-    <meta property="og:url" content=" {% block ogUrl %}{% endblock %}" />
-    <meta property="og:type" content=" {% block ogType %}website{% endblock %}" />
-    <meta property="og:title" content="{{  block('title') }}" />
-    <meta property="og:description" content=" {{ block('metaDescription') }}" />
-    <meta property="og:image" content="{% block ogImage %}{% endblock %}" />
+      <meta name="description" content="{% block metaDescription %}{% endblock %}">
+      <meta property="og:url" content=" {% block ogUrl %}{% endblock %}"/>
+      <meta property="og:type" content=" {% block ogType %}website{% endblock %}"/>
+      <meta property="og:title" content="{{  block('title') }}"/>
+      <meta property="og:description" content=" {{ block('metaDescription') }}"/>
+      <meta property="og:image" content="{% block ogImage %}{% endblock %}"/>
 
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@kilian_ld" />
-    <meta name="twitter:title" content="{{  block('title') }}" />
-    <meta name="twitter:description" content="{{  block('metaDescription') }}" />
-    <meta name="twitter:image" content="{{  block('ogImage') }}" />
+      <meta name="twitter:card" content="summary"/>
+      <meta name="twitter:site" content="@kilian_ld"/>
+      <meta name="twitter:title" content="{{  block('title') }}"/>
+      <meta name="twitter:description" content="{{  block('metaDescription') }}"/>
+      <meta name="twitter:image" content="{{  block('ogImage') }}"/>
 
-    <link rel="icon" href="{{ assets_directory }}img/logo.png" type="image/x-icon"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="{{ assets_directory }}css/bootstrap.css">
-    <link rel="stylesheet" href="{{ assets_directory }}css/style.css">
-    <link href="{{ assets_directory }}css/admin.css" rel="stylesheet">
+      <link rel="icon" href="{{ assets_directory }}img/logo.png" type="image/x-icon"/>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+      <link rel="stylesheet" href="{{ assets_directory }}css/bootstrap.css">
+      <link rel="stylesheet" href="{{ assets_directory }}css/style.css">
+      <link href="{{ assets_directory }}css/admin.css" rel="stylesheet">
 
-</head>
-<body id="page-top" class="d-flex flex-row">
-  {% include "admin/parts/_header.html.twig" %}
-  <div id="wrapper" class="d-flex flex-column w-100">
-   {% block main %}
-   {% endblock %}
-   {% include "admin/parts/_footer.html.twig" %}
- </div>
-</body>
+   </head>
+   <body id="page-top" class="d-flex flex-row">
+      {% include "admin/parts/_header.html.twig" %}
+      <div id="wrapper" class="d-flex flex-column w-100">
+         {% block main %}{% endblock %}
+         {% include "admin/parts/_footer.html.twig" %}
+      </div>
+   </body>

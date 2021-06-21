@@ -1,70 +1,70 @@
 home:
-  uri: /
-  controller: IndexController
-  action: showHome
-  parameters: [ ]
+  uri:              /
+  controller:       IndexController
+  action:           showHome
+  parameters:       [ ]
 contact:
-  uri: /contact
-  controller: IndexController
-  action: showContact
-  parameters: [ ]
+  uri:              /contact
+  controller:       IndexController
+  action:           showContact
+  parameters:       [ ]
 portfolio:
-  uri: /portfolio
-  controller: IndexController
-  action: showPortfolio
-  parameters: [ ]
+  uri:              /portfolio
+  controller:       IndexController
+  action:           showPortfolio
+  parameters:       [ ]
 blog:
-  uri: /blog
-  controller: BlogController
-  action: showBlog
-  parameters: [ ]
+  uri:              /blog
+  controller:       BlogController
+  action:           showBlog
+  parameters:       [ ]
 singlePost:
-  uri: /blog/([a-zA-Z0-9-]+)
-  controller: BlogController
-  action: showPost
-  parameters: ["slug"]
+  uri:              /blog/([a-zA-Z0-9-]+)
+  controller:       BlogController
+  action:           showPost
+  parameters:       ["slug"]
 administration:
-   uri: /admin/
-   controller: AdminController
-   action: showAdmin
-   parameters: [ ]
+   uri:             /admin/
+   controller:      AdminController
+   action:          showAdmin
+   parameters:      [ ]
 listPost:
-  uri: /admin/blog/
-  controller: AdminController
-  action: showPostList
-  parameters: [ ]
+  uri:              /admin/blog/
+  controller:       AdminController
+  action:           showPostList
+  parameters:       [ ]
 addPost:
-  uri: /admin/blog/ajouter/
-  controller: AdminController
-  action: addPost
-  parameters: [ ]
+  uri:              /admin/blog/ajouter/
+  controller:       AdminController
+  action:           addPost
+  parameters:       [ ]
 editPost:
-  uri: /admin/blog/([a-zA-Z0-9-]+)/modifier/
-  controller: AdminController
-  action: editPost
-  parameters: ["slug"]
+  uri:              /admin/blog/([a-zA-Z0-9-]+)/modifier/
+  controller:       AdminController
+  action:           editPost
+  parameters:       ["slug"]
 deletePost:
-  uri: /admin/blog/([a-zA-Z0-9-]+)/supprimer/
-  controller: AdminController
-  action: deletePost
-  parameters: ["slug"]
+  uri:              /admin/blog/([a-zA-Z0-9-]+)/supprimer/
+  controller:       AdminController
+  action:           deletePost
+  parameters:       ["slug"]
 login:
-  uri: /connexion
-  controller: AccountController
-  action: login
-  parameters: [ ]
+  uri:              /connexion
+  controller:       AccountController
+  action:           login
+  parameters:       [ ]
 register:
-  uri: /inscription
-  controller: AccountController
-  action: register
-  parameters: [ ]
+  uri:              /inscription
+  controller:       AccountController
+  action:           register
+  parameters:       [ ]
 putCommentOnline:
-   uri: /admin/comment/([a-zA-Z0-9-]+)/mettre-en-ligne/
-   controller: CommentController
-   action: putOnline
-   parameters: ["id"]
+   uri:             /admin/comment/([a-zA-Z0-9-]+)/mettre-en-ligne/
+   controller:      CommentController
+   action:          putOnline
+   parameters:      ["id"]
 putCommentOffline:
- uri: /admin/comment/([a-zA-Z0-9-]+)/mettre-hors-ligne/
- controller: CommentController
- action: putOffline
- parameters: ["id"]
+ uri:               /admin/comment/([a-zA-Z0-9-]+)/mettre-hors-ligne/
+ controller:        CommentController
+ action:            putOffline
+ parameters:        ["id"]

@@ -3,37 +3,41 @@
 {% extends "admin/base.html.twig" %}
 
 {% block title %}
-Ajouter - {{parent()}}
+   Ajouter -
+   {{parent()}}
 {% endblock %}
 
 {% block main %}
- {% include "admin/parts/_navbar.html.twig" %}
- <div class="container-fluid">
-     <div class="row">
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800 mx-2"><i class="fas fa-plus-circle mr-2"></i>Ajouter un nouveau post</h1>
-        </div>
+   {% include "admin/parts/_navbar.html.twig" %}
+   <div class="container-fluid">
+      <div class="row">
+         <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800 mx-2">
+               <i class="fas fa-plus-circle mr-2"></i>Ajouter un nouveau post</h1>
+         </div>
          <form class="d-flex flex-column col-lg-12 mb-4" action="#">
             <div class="form-group">
-              <label for="titreArticle">Titre</label>
-              <input type="text" class="form-control" id="titreArticle" placeholder="Titre de l'article">
+               <label for="titreArticle">Titre</label>
+               <input type="text" class="form-control" id="titreArticle" placeholder="Titre de l'article">
             </div>
-               <div class="form-group">
-                 <label for="imageArticle">Image</label>
-                 <input class="col-12" type="file" id="imageArticle" name="imageArticle">
-               </div>
-
-
+            <div class="form-group">
+               <label for="imageArticle">Image</label>
+               <input class="col-12" type="file" id="imageArticle" name="imageArticle">
+            </div>
 
             <div class="form-group">
-              <label for="titreArticle">Contenu</label>
-              <textarea class="form-control" id="contenuArticle" rows="12" placeholder="Contenu de l'article"></textarea>
+               <label for="titreArticle">Contenu</label>
+               <textarea class="form-control" id="contenuArticle" rows="12" placeholder="Contenu de l'article"></textarea>
             </div>
             <div class="form-group align-self-end">
-               <button class="btn btn-primary"><i class="fas fa-save mr-2"></i> Enregistrer</button>
-               <button class="btn btn-success"><i class="fas fa-paper-plane mr-2"></i> Poster l'article</button>
+               <button class="btn btn-primary">
+                  <i class="fas fa-save mr-2"></i>
+                  Enregistrer</button>
+               <button class="btn btn-success">
+                  <i class="fas fa-paper-plane mr-2"></i>
+                  Poster l'article</button>
             </div>
          </form>
-        </div>
-     </div>
+      </div>
+   </div>
 {% endblock %}
