@@ -9,16 +9,20 @@ class AdminController extends Controller {
       $this->render("@admin/pages/index.html.twig", []);
    }
 
-   public function addPost() {
-      $this->render("@admin/pages/blog/add.html.twig", []);
+   public function showCommentList() {
+      $this->render("@admin/pages/blog/comments.html.twig", []);
+   }
+
+   public function editPortfolio() {
+      $this->render("@admin/pages/portfolio/edit.html.twig", []);
    }
 
    public function showPostList() {
       $this->render("@admin/pages/blog/list.html.twig", []);
    }
 
-   public function showCommentList() {
-      $this->render("@admin/pages/blog/comments.html.twig", []);
+   public function addPost() {
+      $this->render("@admin/pages/blog/add.html.twig", []);
    }
 
    public function editPost() {
