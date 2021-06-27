@@ -33,6 +33,11 @@ listPost:
   controller:       AdminController
   action:           showPostList
   parameters:       [ ]
+listComments:
+   uri:              /admin/blog/commentaires/
+   controller:       AdminController
+   action:           showCommentList
+   parameters:       [ ]
 addPost:
   uri:              /admin/blog/ajouter/
   controller:       AdminController

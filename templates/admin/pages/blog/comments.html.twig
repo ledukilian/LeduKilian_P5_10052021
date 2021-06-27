@@ -3,7 +3,7 @@
 {% extends "admin/base.html.twig" %}
 
 {% block title %}
-   Articles -
+   Commentaires -
    {{parent()}}
 {% endblock %}
 
@@ -13,10 +13,11 @@
       <div class="container-fluid">
          <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800 mx-2">
-               <i class="fas fa-th-list mr-2"></i>Liste des articles</h1>
+               <i class="fas fa-comments mr-2"></i>Liste des derniers commentaires</h1>
          </div>
          <div class="row">
-            {% include "admin/parts/_article_list.html.twig" %}
+            {% include "admin/parts/_comment_list.html.twig" %}
+            {% include "admin/parts/_pagination.html.twig" %}
          </div>
       </div>
    </div>

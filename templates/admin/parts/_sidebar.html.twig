@@ -19,16 +19,29 @@
          <i class="fas fa-plus-circle"></i>
          <span>Ajouter un article</span></a>
    </li>
-   <li class="nav-item pt-0 {% if uri == '/admin/blog/' %}active{% endif %}">
+   <li class="nav-item {% if uri == '/admin/blog/' %}active{% endif %}">
       <a class="nav-link" href="/admin/blog/">
          <i class="fas fa-th-list"></i>
          <span>Articles</span></a>
    </li>
-   <li class="nav-item pt-0 {% if uri == '/admin/blog/' %}active{% endif %}">
-      <a class="nav-link" href="/admin/blog/">
+   <li class="nav-item {% if uri == '/admin/blog/commentaires/' %}active{% endif %}">
+      <a class="nav-link" href="/admin/blog/commentaires/">
          <i class="fas fa-comments"></i>
          <span>Commentaires</span></a>
    </li>
+   <hr class="sidebar-divider">
+   <div class="sidebar-heading">
+      Portfolio
+   </div>
+   <li class="nav-item {% if uri == '###################' %}active{% endif %}">
+      <a class="nav-link" href="###################">
+         <i class="fas fa-edit"></i>
+         <span>Modifier les informations</span></a>
+   </li>
+
+
+
+
    <hr class="sidebar-divider d-none d-md-block">
    <li class="nav-item">
       <a class="nav-link" href="{{ assets_directory }}../">
