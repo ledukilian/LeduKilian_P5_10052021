@@ -33,3 +33,8 @@ a:hover {
 #accordion-sidebar {
    background: #0F0F0F;
 }
+input[type=text]
+, input[type=email]
+, input[type=password] {
+   color: #0F0F0F !important;
+}
