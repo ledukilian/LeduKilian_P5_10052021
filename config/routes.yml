@@ -38,6 +38,11 @@ editPortfolio:
    controller:       AdminController
    action:           editPortfolio
    parameters:       [ ]
+editSocialNetworks:
+   uri:              /admin/reseaux/
+   controller:       AdminController
+   action:           editSocialNetworks
+   parameters:       [ ]
 listPost:
   uri:              /admin/blog/
   controller:       AdminController

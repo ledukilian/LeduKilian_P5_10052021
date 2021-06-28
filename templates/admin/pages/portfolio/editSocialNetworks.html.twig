@@ -1,0 +1,71 @@
+{% set assets_directory = '../../../' %}
+
+{% extends "admin/base.html.twig" %}
+
+{% block title %}
+   Modifier le portfolio -
+   {{parent()}}
+{% endblock %}
+
+{% block main %}
+   {% include "admin/parts/_navbar.html.twig" %}
+   <div class="container-fluid">
+      <div class="row">
+         <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800 mx-2">
+            <i class="fas fa-hashtag mr-2"></i>Gestion des réseaux sociaux</h1>
+         </div>
+         <div class="d-flex flex-column col-lg-12 mb-4">
+            <form class="card px-3 py-1" action="#">
+               <div class="form-group d-flex flex-row flex-wrap">
+                  <label class="col-12 px-0 font-weight-bold text-dark mb-3">Ajouter un réseau</label>
+                  <select class="form-control w-25" id="iconSocial" name="iconSocial">
+                     <option value="fas fa-hashtag"><i class="fas fa-hashtag"></i>Hashtag</option>
+                  </select>
+                  <input type="text" class="form-control w-75" id="textSocial" name="textSocial" placeholder="Texte du réseau" />
+                  <div class="input-group w-100 mt-2">
+                     <div class="input-group-prepend">
+                        <span class="input-group-text">
+                           <i class="fas fa-link"></i>
+                        </span>
+                     </div>
+                     <input type="text" class="form-control" id="textSocial" name="textSocial" placeholder="Lien vers le réseau social" />
+                  </div>
+               </div>
+               <div class="form-group mb-1 align-self-end">
+                  <button class="btn btn-success">
+                     <i class="fas fa-plus mr-2"></i>
+                     Ajouter</button>
+               </div>
+            </form>
+            <hr>
+            <div class="card px-3 py-1" action="#">
+               <label class="col-12 px-0 font-weight-bold text-dark mb-3">Liste des réseaux</label>
+
+               <table class="table table-striped table-hover w-100">
+                  <thead>
+                     <tr>
+                        <th></th>
+                        <th>Nom</th>
+                        <th class="w-25">Actions</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td class="h3 text-center"><i class="fab fa-github"></i></td>
+                        <td><a href="https://github.com/ledukilian">https://github.com/ledukilian</a></td>
+                        <td>
+                           <a href="#" class="text-warning mx-1">
+                              <i class="fas fa-eye"></i>
+                           </a>
+                           <a href="#" class="text-danger mx-1">
+                              <i class="fas fa-trash-alt"></i>
+                           </a>
+                        </tr>
+                        </tbody>
+                     </table>
+            </div>
+         </div>
+      </div>
+   </div>
+{% endblock %}

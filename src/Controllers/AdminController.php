@@ -17,6 +17,10 @@ class AdminController extends Controller {
       $this->render("@admin/pages/portfolio/edit.html.twig", []);
    }
 
+   public function editSocialNetworks() {
+      $this->render("@admin/pages/portfolio/editSocialNetworks.html.twig", []);
+   }
+
    public function showPostList() {
       $this->render("@admin/pages/blog/list.html.twig", []);
    }
