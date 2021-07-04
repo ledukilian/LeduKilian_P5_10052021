@@ -52,6 +52,7 @@
          <div class="row">
             {% include "admin/parts/_article_list.html.twig" %}
          </div>
+         {% include "admin/parts/_modal.html.twig" with {'modal_id': 'confirmerSuppression'} %}
       </div>
    </div>
 {% endblock %}
