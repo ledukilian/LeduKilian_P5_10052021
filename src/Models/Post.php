@@ -65,14 +65,6 @@ class Post extends Entity {
       $this->_slug = $value;
    }
 
-   public function getSlug() {
-      return $this->_slug;
-   }
-
-   public function setSlug($value) {
-      $this->_slug = $value;
-   }
-
    public function getAuthor() {
       return $this->_author;
    }

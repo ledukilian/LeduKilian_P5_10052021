@@ -1,0 +1,59 @@
+<ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordion-sidebar">
+   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../">
+      <div class="sidebar-brand-icon">
+         <img id="logo" src="{{ assets_directory }}img/logo.png" alt="KLD Blog">
+      </div>
+   </a>
+   <hr class="sidebar-divider my-0">
+   <li class="nav-item {% if uri == '/admin/' %}active{% endif %}">
+      <a class="nav-link" href="/admin/">
+         <i class="fas fa-fw fa-tachometer-alt"></i>
+         <span>Accueil</span></a>
+   </li>
+   <hr class="sidebar-divider">
+   <div class="sidebar-heading">
+      Blog
+   </div>
+   <li class="nav-item {% if uri == '/admin/blog/ajouter/' %}active{% endif %}">
+      <a class="nav-link" href="/admin/blog/ajouter/">
+         <i class="fas fa-plus-circle"></i>
+         <span>Ajouter un article</span></a>
+   </li>
+   <li class="nav-item {% if uri == '/admin/blog/' %}active{% endif %}">
+      <a class="nav-link" href="/admin/blog/">
+         <i class="fas fa-th-list"></i>
+         <span>Articles</span></a>
+   </li>
+   <li class="nav-item {% if uri == '/admin/blog/commentaires/' %}active{% endif %}">
+      <a class="nav-link" href="/admin/blog/commentaires/">
+         <i class="fas fa-comments"></i>
+         <span>Commentaires</span></a>
+   </li>
+   <hr class="sidebar-divider">
+   <div class="sidebar-heading">
+      Portfolio
+   </div>
+   <li class="nav-item {% if uri == '/admin/portfolio/' %}active{% endif %}">
+      <a class="nav-link" href="/admin/portfolio/">
+         <i class="fas fa-edit"></i>
+         <span>Modifier les informations</span></a>
+   </li>
+   <li class="nav-item {% if uri == '/admin/reseaux/' %}active{% endif %}">
+      <a class="nav-link" href="/admin/reseaux/">
+         <i class="fas fa-hashtag"></i>
+         <span>Réseaux sociaux</span></a>
+   </li>
+
+
+
+
+   <hr class="sidebar-divider d-none d-md-block">
+   <li class="nav-item">
+      <a class="nav-link" href="{{ assets_directory }}../">
+         <i class="fas fa-arrow-circle-left"></i>
+         <span>Retour au site</span></a>
+   </li>
+   <div class="text-center d-none d-md-inline">
+      <button class="rounded-circle border-0" id="sidebarToggle"></button>
+   </div>
+</ul>

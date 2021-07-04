@@ -1,0 +1,77 @@
+{% set assets_directory = '../../../' %}
+
+{% extends "admin/base.html.twig" %}
+
+{% block title %}
+   Modifier le portfolio -
+   {{parent()}}
+{% endblock %}
+
+{% block main %}
+   {% include "admin/parts/_navbar.html.twig" %}
+   <div class="container-fluid">
+      <div class="row">
+         <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800 mx-2">
+               <i class="fas fa-edit mr-2"></i>Modifier le portfolio</h1>
+         </div>
+         <div class="d-flex flex-column col-lg-12 mb-4">
+
+            <form class="card px-3 py-1" action="#">
+               <div class="form-group d-flex flex-row flex-wrap">
+                  <label class="col-12 px-0 font-weight-bold text-dark mb-3" for="cvProfil">Informations générales</label>
+                  <div class="form-group col-12">
+                     <div class="input-group pb-2">
+                        <label class="w-100" for="leadPhrasePortfolio">Phrase d'accroche</label>
+                        <input type="text" class="form-control" id="leadPhrasePortfolio" name="leadPhrasePortfolio" value="Le développeur qu’il vous faut !" />
+                        <label class="w-100 mt-2" for="emailAddressPortfolio">Adresse mail</label>
+                        <input name="email" class="form-control" type="email" id="emailAddressPortfolio" name="emailAddressPortfolio" value="ledu.kilian@gmail.com" />
+                        <label class="w-100 mt-2" for="lastnamePortfolio">Nom et prénom</label>
+                        <input name="nom" class="form-control" type="text" id="lastnamePortfolio" name="lastnamePortfolio" placeholder="Nom" value="LE DU" />
+                        <input name="prenom" class="form-control" type="text" id="firstnamePortfolio" name="firstnamePortfolio" placeholder="Prénom" value="Kilian" />
+                        <label class="w-100 mt-2" for="usernamePortfolio">Nom d'utilisateur</label>
+                        <input name="username" class="form-control" id="usernamePortfolio" name="usernamePortfolio" type="text" value="kld" />
+                        <label class="w-100 mt-2" for="passwordPortfolio">Mot de passe</label>
+                        <small class="col-12 px-0 mb-2"><i class="fas fa-info-circle mr-2"></i>Laissez vide pour ne pas changer.</small>
+                        <input name="password" class="form-control" id="passwordPortfolio" name="passwordPortfolio" type="password" />
+                        <input name="password-confirm" class="form-control" id="passwordConfirmPortfolio" name="passwordConfirmPortfolio" type="password" />
+                     </div>
+                  </div>
+               </div>
+               <div class="form-group align-self-end">
+                  <button class="btn btn-success">
+                     <i class="fas fa-save mr-2"></i>
+                     Enregistrer les informations</button>
+               </div>
+            </form>
+            <hr>
+            <form class="card px-3 py-1" action="#">
+               <div class="form-group d-flex flex-row flex-wrap">
+                  <label class="col-12 px-0 font-weight-bold text-dark mb-3" for="cvProfil">CV</label>
+                  <input class="col-12" type="file" id="cvProfil" name="cvProfil" accept="application/pdf" />
+                  <small class="col-12"><i class="fas fa-info-circle mr-2"></i>Au format PDF uniquement.</small>
+               </div>
+               <div class="form-group align-self-end">
+                  <button class="btn btn-success">
+                     <i class="fas fa-save mr-2"></i>
+                     Enregistrer le CV</button>
+               </div>
+            </form>
+            <hr>
+            <form class="card px-3 py-1" action="#">
+               <div class="form-group d-flex flex-row flex-wrap">
+                  <label class="col-12 px-0 font-weight-bold text-dark mb-3" for="imageProfil">Image de profil</label>
+                  <input class="col-12 col-md-5" type="file" id="imageProfil" name="imageProfil" accept="image/png, image/gif, image/jpeg" />
+                  <input type="text" class="form-control col-12 col-md-6" id="textImage" placeholder="Texte alternatif de l'image de profil" />
+               </div>
+               <div class="form-group align-self-end">
+                  <button class="btn btn-success">
+                     <i class="fas fa-save mr-2"></i>
+                     Enregistrer l'image</button>
+               </div>
+            </form>
+
+         </div>
+      </div>
+   </div>
+{% endblock %}

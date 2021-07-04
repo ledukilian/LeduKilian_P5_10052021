@@ -5,10 +5,28 @@ use App\Core\Controller;
 
 
 class AdminController extends Controller {
+   public function showAdmin() {
+      $this->render("@admin/pages/index.html.twig", []);
+   }
 
+   public function showCommentList() {
+      $this->render("@admin/pages/blog/comments.html.twig", []);
+   }
+
+   public function editPortfolio() {
+      $this->render("@admin/pages/portfolio/edit.html.twig", []);
+   }
+
+   public function editSocialNetworks() {
+      $this->render("@admin/pages/portfolio/editSocialNetworks.html.twig", []);
+   }
+
+   public function showPostList() {
+      $this->render("@admin/pages/blog/list.html.twig", []);
+   }
 
    public function addPost() {
-      echo "Page d'ajout d'un post";
+      $this->render("@admin/pages/blog/add.html.twig", []);
    }
 
    public function editPost() {

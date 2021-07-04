@@ -1,13 +1,7 @@
-main {
-   /*margin-top: -240px;*/
-}
-a {
-   color: auto;
-}
 a:hover {
    text-decoration: none;
 }
-#containerTete {
+#container-tete {
    padding: 20px;
    border-radius: 5px;
    background-color: rgba(0, 0, 0, 0.6) !important;
@@ -19,17 +13,14 @@ a:hover {
    width: 100%;
    background-color: rgba(0, 0, 0, 0.9) !important;
 }
-
 #logo {
    height: 100%;
    width: auto;
    max-height: 40px;
 }
-
 .navbar {
    padding: 30px 10px;
 }
-
 .nav-item {
    padding: 0px 10px;
 }
@@ -37,5 +28,13 @@ a:hover {
    margin-top: 6em !important;
 }
 .w-90 {
-    width: 90% !important;
+   width: 90% !important;
+}
+#accordion-sidebar {
+   background: #0F0F0F;
+}
+input[type=text]
+, input[type=email]
+, input[type=password] {
+   color: #0F0F0F !important;
 }

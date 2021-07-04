@@ -18,5 +18,4 @@ class BlogController extends Controller {
       $this->render("@client/pages/blog.html.twig", []);
    }
 
-
 }
