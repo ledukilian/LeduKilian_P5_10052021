@@ -14,12 +14,12 @@ class SocialNetwork extends Entity {
       parent::__construct();
    }
 
-   public function getLink() {
-      return $this->_link;
+   public function getName() {
+      return $this->_name;
    }
 
-   public function setLink($value) {
-      $this->_link = $value;
+   public function setName($value) {
+      $this->_name = $value;
    }
 
    public function getIcon() {
@@ -30,12 +30,12 @@ class SocialNetwork extends Entity {
       $this->_icon = $value;
    }
 
-   public function getName() {
-      return $this->_name;
+   public function getLink() {
+      return $this->_link;
    }
 
-   public function setName($value) {
-      $this->_name = $value;
+   public function setLink($value) {
+      $this->_link = $value;
    }
 
 }
