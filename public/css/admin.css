@@ -89,7 +89,6 @@ p {
 abbr[data-original-title], abbr[title] {
    text-decoration: underline;
    -webkit-text-decoration: underline dotted;
-   text-decoration: underline dotted;
    cursor: help;
    border-bottom: 0;
    -webkit-text-decoration-skip-ink: none;
@@ -9813,7 +9812,6 @@ a.text-dark:focus, a.text-dark:hover {
 }
 
 .text-hide {
-   font: 0/0 a;
    color: transparent;
    text-shadow: none;
    background-color: transparent;
@@ -10285,7 +10283,6 @@ a:focus {
    border: 0;
    font-weight: 900;
    content: '\f105';
-   font-family: 'Font Awesome 5 Free'
 }
 
 .sidebar .nav-item.dropdown.show .dropdown-toggle::after, .topbar .nav-item.dropdown.show .dropdown-toggle::after {
@@ -10560,7 +10557,6 @@ a:focus {
 .sidebar #sidebarToggle::after {
    font-weight: 900;
    content: '\f104';
-   font-family: 'Font Awesome 5 Free';
    margin-right: .1rem
 }
 
@@ -10579,7 +10575,6 @@ a:focus {
 
 .sidebar.toggled #sidebarToggle::after {
    content: '\f105';
-   font-family: 'Font Awesome 5 Free';
    margin-left: .25rem
 }
 
@@ -10679,7 +10674,6 @@ a:focus {
       width: 100%;
       text-align: left;
       padding: 0.5rem;
-      width: 14rem
    }
 
    .sidebar .nav-item .nav-link i {
@@ -10700,7 +10694,6 @@ a:focus {
       border: 0;
       font-weight: 900;
       content: '\f107';
-      font-family: 'Font Awesome 5 Free'
    }
 
    .sidebar .nav-item .nav-link[data-toggle=collapse].collapsed::after {
