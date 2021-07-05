@@ -1,16 +1,18 @@
 <?php
 namespace App\Core;
 
-use PDO;
+use App\Core\PDOFactory;
 use ReflectionClass;
+use PDO;
 
 class Manager {
-   protected $db;
-   protected $tableName;
-   protected $entity;
+   private $db;
+   private $tableName;
+   private $entity;
 
    public function __construct()  {
-      $this->db = (new PDOFactory())->getMySQLConnection();
+      $PDOFactory = new PDOFactory();
+      $this->db = $PDOFactory->getPDO();
       $this->tableName = $this->getTableName();
       $this->entity = "\\App\\Models\\".ucfirst($this->tableName);
    }
@@ -26,11 +28,32 @@ class Manager {
 
    }
 
-   public function findAll() {
+   public function findAll(int $limit = null) {
       $sql = 'SELECT * FROM '.$this->tableName;
+      if (is_numeric($limit)) {
+         $sql .= ' LIMIT '.$limit;
+      }
       $results = ($this->db)->query($sql)->fetchAll(PDO::FETCH_ASSOC);
       return $results;
    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
