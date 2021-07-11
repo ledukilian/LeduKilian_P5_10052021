@@ -11,8 +11,7 @@ class Manager {
    private $entity;
 
    public function __construct()  {
-      $PDOFactory = new PDOFactory();
-      $this->db = $PDOFactory->getPDO();
+      $this->db = (new PDOFactory())->getMySQLConnection();
       $this->tableName = $this->getTableName();
       $this->entity = "\\App\\Models\\".ucfirst($this->tableName);
    }
@@ -28,17 +27,27 @@ class Manager {
 
    }
 
-   public function findAll(int $limit = null) {
+   public function findAll() {
       $sql = 'SELECT * FROM '.$this->tableName;
-      if (is_numeric($limit)) {
-         $sql .= ' LIMIT '.$limit;
-      }
       $results = ($this->db)->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-      return $results;
+      return $this->transformToEntities($results);
    }
 
+   // TODO : findBy
+   // where (tableau : AND et =), order (valeur ASC ou DESC), limit, offset
+   // return entities
 
+   // TODO : findOneBy : findBy avec LIMIT 1
 
+   
+
+   public function transformToEntities(array $results) {
+      $entities = [];
+      foreach ($results as $result) {
+         $entities[] = new $this->entity($result);
+      }
+      return $entities;
+   }
 
 
 

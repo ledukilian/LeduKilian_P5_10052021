@@ -13,10 +13,6 @@ class Post extends Entity {
    private $_slug;
    private $_author;
 
-   public function __construct() {
-      parent::__construct();
-   }
-
    public function getTitle() {
       return $this->_title;
    }
