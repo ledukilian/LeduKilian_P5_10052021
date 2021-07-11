@@ -21,5 +21,11 @@ tinymce.init({
 });
 
 function afficherModal(element) {
-   console.log(element);
+   data = element.dataset;
+   modal = document.getElementById(data.target);
+   // console.log(modal);
+   // console.log(modal.getElementsByClassName('modal-content')[0].innerHTML);
+   modal.getElementsByClassName('modal-body')[0].innerHTML = data.content;
+   modal.getElementsByClassName('modal-title')[0].innerHTML = data.title;
+   $('#'+data.target).modal('show');
 }

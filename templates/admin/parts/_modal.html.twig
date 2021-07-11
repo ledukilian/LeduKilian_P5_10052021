@@ -1,27 +1,11 @@
-<!-- Option 1 -->
-{% if modal_id is empty %}
-   {% set modal_id = 'default' %}
-{% endif %}
-
-<!-- Option 2 -->
-{# {% set modal_id = 'default' %}
-{% set modal_title = 'default' %}
-{% set modal_text = 'default' %} #}
-
-<!-- Option 3 -->
-{% if modal_id == 'confirmerSuppression' %}
-   {% set modal_title = 'Confirmation de suppression' %}
-   {% set modal_text = 'Voulez-vous vraiment confirmer la suppression ?' %}
-{% endif %}
-
-<div class="modal fade" id="{{modal_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header bg-dark text-white">
-        <h5 class="modal-title" id="exampleModalLabel">{{modal_title}}</h5>
+        <h5 class="modal-title">Default title</h5>
       </div>
       <div class="modal-body">
-        {{modal_text}}
+        Default content
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
