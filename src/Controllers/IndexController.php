@@ -10,11 +10,11 @@ class IndexController extends Controller {
       // $pdoFactory = new PDOFactory();
       // var_dump($pdoFactory);
       // echo '<hr>';
-      $postManager = new PostManager();
+      // $postManager = new PostManager();
       // var_dump($postManager);
       // echo '<hr>';
-      var_dump($postManager->findAll(1));
-      //$this->render("@client/pages/index.html.twig", []);
+      // var_dump($postManager->findAll(1));
+      $this->render("@client/pages/index.html.twig", []);
    }
 
    public function showContact() {
