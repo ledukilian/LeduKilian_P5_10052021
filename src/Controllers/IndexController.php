@@ -13,9 +13,10 @@ class IndexController extends Controller {
       $postManager = new PostManager();
       // var_dump($postManager);
       // echo '<hr>';
-      $test = array(array('name' => 'test', 'order' => 'ASC'), array('name' => 'test2', 'order' => 'DESC'));
-      var_dump($postManager->findBy(null, $test, 0, 0));
-      $this->render("@client/pages/index.html.twig", []);
+      $testWhere = array();
+      $testOrder = array(array('name' => 'id', 'order' => 'ASC'), array('name' => 'id_admin', 'order' => 'DESC'));
+      var_dump($postManager->findBy(array(), $testOrder, 0, 0));
+      //$this->render("@client/pages/index.html.twig", []);
    }
 
    public function showContact() {
