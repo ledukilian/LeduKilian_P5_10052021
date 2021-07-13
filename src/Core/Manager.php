@@ -27,12 +27,12 @@ class Manager {
       return $this->transformToEntities($results);
    }
 
-   public function findBy(array $where = null, array $order = null, int $limit = null, int $offset = null) {
+   public function findBy(array $where = [], array $order = [], int $limit = 0, int $offset = 0) {
       $sql = 'SELECT * FROM '.$this->tableName;
-      if (sizeof($where)>0) {
+      if (!empty($where)) {
          $sql = $this->setWhere($where, $sql);
       }
-      if (sizeof($order)>0) {
+      if (!empty($order)) {
          $sql = $this->setOrderBy($order, $sql);
       }
       if ($limit>0) {
@@ -41,27 +41,37 @@ class Manager {
       if ($offset>0) {
          $sql = $this->setOffset($offset, $sql);
       }
-      var_dump($sql);
       $results = ($this->db)->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-      return $results;
-      //return $this->transformToEntities($results);
+      //return $results;
+      return $this->transformToEntities($results);
    }
 
-   public function findOneBy(array $where = null) {
-      return $this->findBy($where, null, 1, null);
+   public function findOneBy(array $where = [], array $order = [], int $offset = 0) {
+      return $this->findBy($where, $order, 1, $offset)[0];
    }
 
    public function setWhere(array $where, string $sql) {
+      $whereSql = '';
+      foreach($where as $key => $value) {
+            $whereSql .= $key.' = "'.$value.'" AND ';
+      }
+      if (!empty($whereSql)) {
+         return $sql.' WHERE '.substr($whereSql, 0, -5);
+      }
       return $sql;
    }
 
    public function setOrderBy(array $orders, string $sql) {
-      $sql .= ' ORDER BY';
-      $i = 0;
-      for ($i = 0; $i <= sizeof($orders)-1; $i++) {
-         $sql .= ' '.$orders[$i]['name'].' '.$orders[$i]['order'].',';
+      $order = '';
+      foreach($orders as $key => $value) {
+         if (in_array($value, ['ASC', 'DESC'])) {
+            $order .= $key.' '.$value.', ';
+         }
       }
-      return substr($sql, 0, -1);
+      if (!empty($order)) {
+         return $sql.' ORDER BY '.substr($order, 0, -2);
+      }
+      return $sql;
    }
 
    public function setLimit(int $limit, string $sql) {

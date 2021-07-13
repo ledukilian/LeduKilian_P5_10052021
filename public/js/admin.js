@@ -20,7 +20,7 @@ tinymce.init({
    branding: false,
 });
 
-function afficherModal(element) {
+function showModal(element) {
    data = element.dataset;
    modal = document.getElementById(data.target);
    // console.log(modal);
