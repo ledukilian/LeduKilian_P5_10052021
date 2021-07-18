@@ -50,9 +50,9 @@
             </div>
          </div>
          <div class="row">
-            {% include "admin/parts/_article_list.html.twig" %}
+            {% include "admin/parts/_article_list.html.twig" with {'window_title': 'Derniers articles'} %}
          </div>
-         {% include "admin/parts/_modal.html.twig" with {'modal_id': 'confirmerSuppression'} %}
+         {% include "admin/parts/_modal.html.twig"%}
       </div>
    </div>
 {% endblock %}

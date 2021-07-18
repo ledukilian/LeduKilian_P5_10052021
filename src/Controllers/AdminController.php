@@ -2,11 +2,24 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
+use App\Managers\PostManager;
 
 
 class AdminController extends Controller {
    public function showAdmin() {
-      $this->render("@admin/pages/index.html.twig", []);
+      $postManager = new PostManager();
+      $posts = $postManager->findBy(
+         [],
+         [
+            'created_at' => 'DESC'
+         ],
+         10
+      );
+
+      $this->render("@admin/pages/index.html.twig", [
+         'posts' => $posts
+      ]);
+
    }
 
    public function showCommentList() {

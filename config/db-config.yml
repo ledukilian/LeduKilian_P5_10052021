@@ -1,10 +1,4 @@
-local:
-  host: localhost
-  name: ledukilian_p5_blog
-  user: openclassrooms
-  pass: openclassrooms
-# online:
-#   host:
-#   name: ledukilian_p5_blog
-#   user:
-#   pass:
+host: localhost
+name: ledukilian_p5_blog
+user: openclassrooms
+pass: openclassrooms

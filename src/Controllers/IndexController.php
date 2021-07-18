@@ -2,6 +2,8 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
+use App\Managers\PostManager;
+use App\Core\PDOFactory;
 
 class IndexController extends Controller {
    public function showHome() {
@@ -11,7 +13,7 @@ class IndexController extends Controller {
    public function showContact() {
       $this->render("@client/pages/contact.html.twig", []);
    }
-   
+
    public function showPortfolio() {
       $this->render("@client/pages/portfolio.html.twig", []);
    }

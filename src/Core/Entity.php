@@ -42,7 +42,7 @@ class Entity {
       $this->_createdAt = $value;
    }
 
-   public function setUpdatedAt() {
+   public function setUpdatedAt($value) {
       $this->_updatedAt = $value;
    }
 }
