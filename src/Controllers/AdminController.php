@@ -43,7 +43,10 @@ class AdminController extends Controller {
    }
 
    public function editPost() {
-      echo "Page de modification d'un post";
+      $post = 12;
+      $this->render("@admin/pages/blog/edit.html.twig", [
+         'post' => $post
+      ]);
    }
 
    public function deletePost() {
