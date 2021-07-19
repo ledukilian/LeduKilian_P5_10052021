@@ -10,40 +10,5 @@
 {% block main %}
    {% include "admin/parts/_navbar.html.twig" %}
    <div class="container-fluid">
-      <div class="row">
-         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800 mx-2">
-               <i class="fas fa-plus-circle mr-2"></i>Modifier un article</h1>
-         </div>
-         <form class="d-flex flex-column col-lg-12 mb-4" action="#">
-            <div class="form-group">
-               <label for="titreArticle">Titre</label>
-               <input type="text" class="form-control" id="titreArticle" placeholder="Titre de l'article">
-            </div>
-            <div class="form-group">
-               <label for="titreArticle">Lead Phrase</label>
-               <input type="text" class="form-control" id="leadPhraseArticle" placeholder="Phrase d'entête">
-            </div>
-            <div class="form-group d-flex flex-row flex-wrap">
-               <label class="col-12 px-0" for="imageArticle">Image</label>
-               <input class="col-12 col-md-5" type="file" id="imageArticle" name="imageArticle">
-               <input type="text" class="form-control col-12 col-md-6" id="textimage" placeholder="Texte alternatif de l'image">
-            </div>
-            <div class="form-group">
-               <label for="titreArticle">Contenu</label>
-               <form method="post">
-               <textarea class="form-control" id="contenuArticle" rows="12" placeholder="Contenu de l'article"></textarea>
-             </form>
-            </div>
-            <div class="form-group col-12 d-flex justify-content-end">
-               <button class="btn btn-primary mx-2">
-                  <i class="fas fa-save mr-2"></i>
-                  Enregistrer</button>
-               <button class="btn btn-success mx-2">
-                  <i class="fas fa-paper-plane mr-2"></i>
-                  Poster l'article</button>
-            </div>
-         </form>
-      </div>
-   </div>
+	{% include "admin/parts/_article_form.html.twig" with {'form_type': 'edit'} %}
 {% endblock %}
