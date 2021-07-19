@@ -46,6 +46,12 @@ class Manager {
       return $this->transformToEntities($results);
    }
 
+   public function countElements() {
+      $sql = 'SELECT count(*) AS count FROM '.$this->tableName;
+      $results = ($this->db)->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+      return $results[0]['count'];
+   }
+
    public function findOneBy(array $where = [], array $order = [], int $offset = 0) {
       return $this->findBy($where, $order, 1, $offset)[0];
    }
