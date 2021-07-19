@@ -15,7 +15,6 @@ class AdminController extends Controller {
          ],
          10
       );
-
       $this->render("@admin/pages/index.html.twig", [
          'posts' => $posts
       ]);
@@ -43,9 +42,20 @@ class AdminController extends Controller {
    }
 
    public function editPost() {
-      $post = 12;
+      $slug = $this->params['slug'];
+      $postManager = new PostManager();
+      $post = $postManager->findBy(
+         [
+            'id' => $slug
+         ],
+         [
+            'created_at' => 'DESC'
+         ]
+      );
+      var_dump($post);
+
       $this->render("@admin/pages/blog/edit.html.twig", [
-         'post' => $post
+         'post' => $post[0]
       ]);
    }
 
@@ -55,3 +65,13 @@ class AdminController extends Controller {
 
 
 }
+
+
+
+
+
+
+
+
+
+
