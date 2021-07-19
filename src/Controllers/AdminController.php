@@ -37,7 +37,17 @@ class AdminController extends Controller {
    }
 
    public function showPostList() {
-      $this->render("@admin/pages/blog/list.html.twig", []);
+      $postManager = new PostManager();
+      $posts = $postManager->findBy(
+         [],
+         [
+            'created_at' => 'DESC'
+         ],
+         10
+      );
+      $this->render("@admin/pages/blog/list.html.twig", [
+         'posts' => $posts
+      ]);
    }
 
    public function addPost() {
@@ -55,8 +65,6 @@ class AdminController extends Controller {
             'created_at' => 'DESC'
          ]
       );
-      var_dump($post);
-
       $this->render("@admin/pages/blog/edit.html.twig", [
          'post' => $post[0]
       ]);
