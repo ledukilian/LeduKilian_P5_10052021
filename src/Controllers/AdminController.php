@@ -3,11 +3,13 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Managers\PostManager;
+use App\Managers\CommentManager;
 
 
 class AdminController extends Controller {
    public function showAdmin() {
       $postManager = new PostManager();
+      $commentManager = new CommentManager();
       $posts = $postManager->findBy(
          [],
          [
@@ -16,9 +18,10 @@ class AdminController extends Controller {
          10
       );
       $this->render("@admin/pages/index.html.twig", [
-         'posts' => $posts
+         'posts' => $posts,
+         'articles_count' => $postManager->countElements(),
+         'comments_count' => $commentManager->countElements()
       ]);
-
    }
 
    public function showCommentList() {
