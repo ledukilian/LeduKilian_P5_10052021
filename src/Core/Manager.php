@@ -27,7 +27,7 @@ class Manager {
       return $this->transformToEntities($results);
    }
 
-   public function findBy(array $where = [], array $order = [], int $limit = 0, int $offset = 0) {
+   public function findBy(array $where = [], array $order = [], int $limit = null, int $offset = null) {
       $sql = 'SELECT * FROM '.$this->tableName;
       if (!empty($where)) {
          $sql = $this->setWhere($where, $sql);
@@ -52,7 +52,7 @@ class Manager {
       return $results[0]['count'];
    }
 
-   public function findOneBy(array $where = [], array $order = [], int $offset = 0) {
+   public function findOneBy(array $where = [], array $order = [], int $offset = null) {
       return $this->findBy($where, $order, 1, $offset)[0];
    }
 
