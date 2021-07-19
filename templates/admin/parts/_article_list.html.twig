@@ -23,7 +23,7 @@
                      <a href="#" class="text-primary mx-1">
                         <i class="fas fa-eye"></i>
                      </a>
-                     <a href="#" class="text-warning mx-1">
+                     <a href="/admin/blog/{{post.id}}/modifier/" class="text-warning mx-1">
                         <i class="fas fa-pen"></i>
                      </a>
                      <a href="#" class="text-danger mx-1" onclick="showModal(this);return false;" data-toggle="modal" data-target="confirm" data-title="Supprimer" data-content="{{ "Voulez-vous vraiment supprimer l'article "~post.title~" ?"}}">

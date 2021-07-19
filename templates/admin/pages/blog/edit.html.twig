@@ -1,0 +1,14 @@
+{% set assets_directory = '../../../../' %}
+
+{% extends "admin/base.html.twig" %}
+
+{% block title %}
+   Modifier un post -
+   {{parent()}}
+{% endblock %}
+
+{% block main %}
+   {% include "admin/parts/_navbar.html.twig" %}
+   <div class="container-fluid">
+	{% include "admin/parts/_article_form.html.twig" with {'form_type': 'edit'} %}
+{% endblock %}
