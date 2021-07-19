@@ -18,7 +18,7 @@
          <h1 class="h3 mb-0 text-gray-800 mx-2">
             <i class="fas fa-plus-circle mr-2"></i>{{ form_title }}</h1>
       </div>
-      <form class="d-flex flex-column col-lg-12 mb-4" action="#">
+      <form class="d-flex flex-column col-lg-12 mb-0" action="#">
          <div class="form-group">
             <label for="titreArticle">Titre</label>
             <input type="text" class="form-control" id="titreArticle" placeholder="Titre de l'article" value="{{ article_title }}">
@@ -38,10 +38,15 @@
             <textarea class="form-control" id="contenuArticle" rows="12" placeholder="Contenu de l'article">{{ article_content }}</textarea>
           </form>
          </div>
+         {% if form_type == 'edit' %}
+         <small class="col-12"><i class="fas fa-history mr-2"></i>Dernière modification le {{ post.updatedat | date('d/m/y à h:i') }}</small>
+         {% endif %}
          <div class="form-group col-12 d-flex justify-content-end">
+         {% if form_type == 'add' %}
             <button class="btn btn-primary mx-2">
                <i class="fas fa-save mr-2"></i>
                Enregistrer</button>
+               {% endif %}
             <button class="btn btn-success mx-2">
                <i class="fas fa-paper-plane mr-2"></i>
                {{ button_label }} l'article</button>
