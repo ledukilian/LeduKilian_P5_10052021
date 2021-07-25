@@ -12,10 +12,6 @@ class User extends Entity {
    private $_password;
    private $_role;
 
-   public function __construct() {
-      parent::__construct();
-   }
-
    public function getUsername() {
       return $this->_username;
    }
@@ -63,5 +59,5 @@ class User extends Entity {
    public function setRole($value) {
       $this->_role = $value;
    }
-   
+
 }

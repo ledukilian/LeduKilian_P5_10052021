@@ -59,7 +59,7 @@ class AdminController extends Controller {
       $postManager = new PostManager();
       $post = $postManager->findBy(
          [
-            'id' => $slug
+            'slug' => $slug
          ],
          [
             'created_at' => 'DESC'

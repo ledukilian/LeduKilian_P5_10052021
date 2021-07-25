@@ -10,10 +10,6 @@ class Admin extends User {
    private $_catchPhrase;
    private $_urlCV;
 
-   public function __construct() {
-      parent::__construct();
-   }
-
    public function getAvatarUrl() {
       return $this->_avatarUrl;
    }
