@@ -6,9 +6,9 @@ use ReflectionClass;
 use PDO;
 
 class Manager {
-   private $db;
-   private $tableName;
-   private $entity;
+   protected $db;
+   protected $tableName;
+   protected $entity;
 
    public function __construct()  {
       $this->db = (new PDOFactory())->getMySQLConnection();
