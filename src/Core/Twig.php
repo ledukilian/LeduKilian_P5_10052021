@@ -13,7 +13,7 @@ use Twig\Extra\Markdown\DefaultMarkdown;
 use Twig\Extra\Markdown\MarkdownRuntime;
 use Twig\RuntimeLoader\RuntimeLoaderInterface;
 use Twig\Extra\Markdown\MarkdownExtension;
-use App\Services\GetTwigGlobals;
+use App\Services\TwigGlobals;
 
 class Twig {
     /** @var Environment */
@@ -67,9 +67,9 @@ class Twig {
 
    public function addTwigGlobals($twig) {
       $twig->addGlobal('uri', $_SERVER['REQUEST_URI']);
-      $twigGlobals = new GetTwigGlobals();
-      var_dump($twigGlobals->getAdmin());
+      $twigGlobals = new TwigGlobals();
       $twig->addGlobal('admin', $twigGlobals->getAdmin());
+      $twig->addGlobal('session', $twigGlobals->getSession());
    }
 
     /**
