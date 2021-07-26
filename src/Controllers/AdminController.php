@@ -36,6 +36,7 @@ class AdminController extends Controller {
    public function editSocialNetworks() {
       echo 'test';
       $socialManager = new SocialNetworksManager();
+      var_dump($socialManager);
       $socials = $socialManager->findBy(
          [
             'id_admin' => 1

@@ -7,7 +7,17 @@ use App\Core\PDOFactory;
 
 class IndexController extends Controller {
    public function showHome() {
-      $this->render("@client/pages/index.html.twig", []);
+      $postManager = new PostManager();
+      $posts = $postManager->findBy(
+         [],
+         [
+            'created_at' => 'DESC'
+         ],
+         3
+      );
+      $this->render("@client/pages/index.html.twig", [
+         'posts' => $posts
+      ]);
    }
 
    public function showContact() {

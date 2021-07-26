@@ -7,7 +7,6 @@ class TwigGlobals {
 
    public function getAdmin() {
       $adminManager = new AdminManager();
-      var_dump($adminManager->findAdminBy(1));
       return $adminManager->findAdminBy(1);
    }
 

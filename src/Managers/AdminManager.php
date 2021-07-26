@@ -10,8 +10,11 @@ class AdminManager extends Manager {
          $sql = 'SELECT * FROM admin JOIN user ON admin.id_user = user.id WHERE admin.id = '.$id;
 
          $results = ($this->db)->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-         // var_dump($results);
-         return $this->transformToEntities($results);
+         $entities = $this->transformToEntities($results);
+         if (empty($entities)) {
+            return null;
+         }
+         return $entities[0];
    }
 
 
