@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 use App\Core\Router;
 
 define('ROOT_DIR', realpath(dirname(__DIR__)));
