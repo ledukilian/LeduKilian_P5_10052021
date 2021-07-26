@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Managers\PostManager;
 use App\Managers\CommentManager;
+use App\Managers\SocialNetworksManager;
 
 
 class AdminController extends Controller {
@@ -33,7 +34,18 @@ class AdminController extends Controller {
    }
 
    public function editSocialNetworks() {
-      $this->render("@admin/pages/portfolio/editSocialNetworks.html.twig", []);
+      echo 'test';
+      $socialManager = new SocialNetworksManager();
+      var_dump($socialManager);
+      $socials = $socialManager->findBy(
+         [
+            'id_admin' => 1
+         ]
+      );
+      var_dump($socials);
+      $this->render("@admin/pages/portfolio/editSocialNetworks.html.twig", [
+         'socials' => $socials
+      ]);
    }
 
    public function showPostList() {
@@ -59,7 +71,7 @@ class AdminController extends Controller {
       $postManager = new PostManager();
       $post = $postManager->findBy(
          [
-            'slug' => $slug
+            'id' => $slug
          ],
          [
             'created_at' => 'DESC'
