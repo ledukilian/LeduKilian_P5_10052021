@@ -21,8 +21,8 @@ class PDOFactory {
       try {
          $pdo = new PDO('mysql:host='.$this->config['host'].';dbname='.$this->config['name'],$this->config['user'],$this->config['pass']);
          $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      } catch (\Exception $e) {
-         throw new DatabaseException('Erreur avec la base de données: ' . $e->getMessage());
+      } catch (\PDOException $e) {
+         throw new PDOException('Erreur avec la base de données : ' . $e->getMessage());
       }
       // echo 'test';
       // var_dump($this->$db);
