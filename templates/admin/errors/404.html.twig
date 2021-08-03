@@ -1,0 +1,22 @@
+{% set assets_directory = '../' %}
+
+{% extends "admin/base.html.twig" %}
+
+{% block title %}
+   Erreur 404 -
+   {{parent()}}
+{% endblock %}
+
+
+
+{% block main %}
+   <div id="content">
+      {% include "admin/parts/_navbar.html.twig" %}
+      <div class="container-fluid">
+         <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800 mx-2">
+               Erreur 404</h1>
+         </div>
+      </div>
+   </div>
+{% endblock %}

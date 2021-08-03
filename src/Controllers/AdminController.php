@@ -86,6 +86,14 @@ class AdminController extends Controller {
       echo "Page de suppression d'un post";
    }
 
+   public function showError() {
+      $this->render("@admin/errors/error.html.twig", []);
+   }
+
+   public function show404() {
+      $this->render("@admin/errors/404.html.twig", []);
+   }
+
 
 }
 

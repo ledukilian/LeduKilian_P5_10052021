@@ -28,6 +28,14 @@ class IndexController extends Controller {
       $this->render("@client/pages/portfolio.html.twig", []);
    }
 
+   public function showError() {
+      $this->render("@client/errors/error.html.twig", []);
+   }
+
+   public function show404() {
+      $this->render("@client/errors/404.html.twig", []);
+   }
+
 
 
 }
