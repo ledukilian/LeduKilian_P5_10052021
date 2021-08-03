@@ -21,12 +21,16 @@ class PDOFactory {
       try {
          $pdo = new PDO('mysql:host='.$this->config['host'].';dbname='.$this->config['name'],$this->config['user'],$this->config['pass']);
          $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      } catch (\PDOException $e) {
-         throw new PDOException('Erreur avec la base de données : ' . $e->getMessage());
-      }
+     }
+     catch(PDOException $ex){
+        throw new PDOException('Erreur avec la base de données : ' . $e->getMessage());
+        die(json_encode(array('outcome' => false, 'message' => 'Unable to connect')));
+     }
       // echo 'test';
       // var_dump($this->$db);
       return $pdo;
+
+
    }
 
 
