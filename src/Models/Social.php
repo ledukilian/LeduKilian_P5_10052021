@@ -4,7 +4,7 @@ namespace App\Models;
 use App\Core\Entity;
 
 
-class SocialNetwork extends Entity {
+class Social extends Entity {
    private $_id_user;
    private $_catch_phrase;
    private $_avatar_url;

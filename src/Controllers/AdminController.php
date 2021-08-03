@@ -4,7 +4,7 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Managers\PostManager;
 use App\Managers\CommentManager;
-use App\Managers\SocialNetworksManager;
+use App\Managers\SocialManager;
 
 
 class AdminController extends Controller {
@@ -33,9 +33,9 @@ class AdminController extends Controller {
       $this->render("@admin/pages/portfolio/edit.html.twig", []);
    }
 
-   public function editSocialNetworks() {
+   public function editSocials() {
       echo 'test';
-      $socialManager = new SocialNetworksManager();
+      $socialManager = new SocialManager();
       var_dump($socialManager);
       $socials = $socialManager->findBy(
          [
@@ -43,7 +43,7 @@ class AdminController extends Controller {
          ]
       );
       var_dump($socials);
-      $this->render("@admin/pages/portfolio/editSocialNetworks.html.twig", [
+      $this->render("@admin/pages/portfolio/editSocials.html.twig", [
          'socials' => $socials
       ]);
    }

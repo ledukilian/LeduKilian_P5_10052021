@@ -3,7 +3,7 @@ namespace App\Managers;
 
 use App\Core\Manager;
 
-class SocialNetworksManager extends Manager {
+class SocialManager extends Manager {
 
 
 
