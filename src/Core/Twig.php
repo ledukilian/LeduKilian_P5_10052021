@@ -70,6 +70,8 @@ class Twig {
       $twigGlobals = new TwigGlobals();
       $twig->addGlobal('admin', $twigGlobals->getAdmin());
       $twig->addGlobal('session', $twigGlobals->getSession());
+      $twig->addGlobal('socials', $twigGlobals->getSocials());
+      $twig->addGlobal('portfolio', $twigGlobals->getPortfolio());
    }
 
     /**
