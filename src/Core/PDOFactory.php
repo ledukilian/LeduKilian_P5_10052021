@@ -19,7 +19,7 @@ class PDOFactory {
 
    public function getMySQLConnection() {
       try {
-         $pdo = new PDO('mysql:host='.$this->config['host'].';dbname='.$this->config['name'],$this->config['user'],$this->config['pass']);
+         $pdo = new PDO('mysql:host='.$this->config['host'].';dbname='.$this->config['name'].";charset=utf8mb4;",$this->config['user'],$this->config['pass']);
          $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
      }
      catch(PDOException $ex){

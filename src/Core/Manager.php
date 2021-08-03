@@ -42,6 +42,7 @@ class Manager {
          $sql = $this->setOffset($offset, $sql);
       }
       $results = ($this->db)->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+      // var_dump($results);
       return $this->transformToEntities($results);
    }
 

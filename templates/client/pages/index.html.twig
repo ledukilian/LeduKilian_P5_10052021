@@ -19,7 +19,7 @@
             <p class="tagline">{{admin.catchPhrase}}</p>
             <div class="col row-md col-12 px-0">
                <a class="btn btn-default btn-lg col-12 col-md-5" role="button">Voir le Portfolio</a>
-               <a class="btn btn-action btn-lg col-12 col-md-5" role="button">Télécharger le CV</a>
+               <a href="{{admin.urlCV}}" download class="btn btn-action btn-lg col-12 col-md-5" role="button">Télécharger le CV</a>
             </div>
          </div>
       </div>
@@ -36,36 +36,18 @@
    <div class="jumbotron top-space">
       <div class="container">
          <div class="row">
-            <a href="/blog/ceci-est-un-test" class="card mb-3 col-12 col-md-4">
-               <img class="card-img-top" src="img/periodic_table.jpg" alt="Card image cap">
+            {% for post in posts %}
+            <a href="{{ "/blog/"~post.slug }}" class="card mb-3 col-12 col-md-4">
+               <img class="card-img-top" src="{{ "/img/"~post.coverImg }}" alt="{{post.coverAltImg}}">
                <div class="card-body">
-                  <h5 class="card-title text-dark">Titre article blog 1</h5>
-                  <p class="card-text text-dark">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <h5 class="card-title text-dark">{{post.title}}</h5>
+                  <p class="card-text text-dark">{{ post.content|length > 150 ? post.content|slice(0, 150) ~ '...' : post.content  }}</p>
                   <p class="card-text">
-                     <small class="text-muted">Le 15/06/2021 à 00:29</small>
+                     <small class="text-muted">Le {{post.createdAt|date('d/m/Y à h:i')}}</small>
                   </p>
                </div>
             </a>
-            <a href="/blog/ceci-est-un-test" class="card mb-3 col-12 col-md-4">
-               <img class="card-img-top" src="img/periodic_table.jpg" alt="Card image cap">
-               <div class="card-body">
-                  <h5 class="card-title text-dark">Titre article blog 2</h5>
-                  <p class="card-text text-dark">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <p class="card-text">
-                     <small class="text-muted">Le 15/06/2021 à 00:29</small>
-                  </p>
-               </div>
-            </a>
-            <a href="/blog/ceci-est-un-test" class="card mb-3 col-12 col-md-4">
-               <img class="card-img-top" src="img/periodic_table.jpg" alt="Card image cap">
-               <div class="card-body">
-                  <h5 class="card-title text-dark">Titre article blog 2</h5>
-                  <p class="card-text text-dark">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <p class="card-text">
-                     <small class="text-muted">Le 15/06/2021 à 00:29</small>
-                  </p>
-               </div>
-            </a>
+            {% endfor %}
          </div>
       </div>
    </div>

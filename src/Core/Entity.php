@@ -7,6 +7,7 @@ class Entity {
    private $_updatedAt;
 
    public function __construct(array $data = []) {
+      var_dump($data);
       if (!empty($data)) {
          $this->hydrate($data);
       }

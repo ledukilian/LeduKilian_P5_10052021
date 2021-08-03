@@ -72,6 +72,7 @@ class Twig {
       $twig->addGlobal('session', $twigGlobals->getSession());
       $twig->addGlobal('socials', $twigGlobals->getSocials());
       $twig->addGlobal('portfolio', $twigGlobals->getPortfolio());
+      //var_dump($twigGlobals->getSocials());
    }
 
     /**

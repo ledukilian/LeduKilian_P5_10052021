@@ -5,55 +5,46 @@ use App\Core\Entity;
 
 
 class Social extends Entity {
-   private $_id_user;
-   private $_catch_phrase;
-   private $_avatar_url;
-   private $_alt_avatar_url;
-   private $_url_cv;
+   private $_id_admin;
+   private $_name;
+   private $_icon;
+   private $_link;
 
 
    public function __construct() {
       parent::__construct();
    }
 
-   public function getIdUser() {
-      return $this->_id_user;
+   public function getIdAdmin() {
+      return $this->_id_admin;
    }
 
-   public function setIdUser($value) {
-      $this->_id_user = $value;
+   public function setIdAdmin($value) {
+      $this->_id_admin = $value;
    }
 
-   public function getCatchPhrase() {
-      return $this->_catch_phrase;
+   public function getName() {
+      return $this->_name;
    }
 
-   public function setCatchPhrase($value) {
-      $this->_catch_phrase = $value;
+   public function setName($value) {
+      $this->_name = $value;
    }
 
-   public function getAvatarUrl() {
-      return $this->_avatar_url;
+   public function getIcon() {
+      return $this->_icon;
    }
 
-   public function setAvatarUrl($value) {
-      $this->_avatar_url = $value;
+   public function setIcon($value) {
+      $this->_icon = $value;
    }
 
-   public function getAltAvatarUrl() {
-      return $this->_alt_avatar_url;
+   public function getLink() {
+      return $this->_link;
    }
 
-   public function setAltAvatarUrl($value) {
-      $this->_alt_avatar_url = $value;
-   }
-
-   public function getUrlCV() {
-      return $this->_url_cv;
-   }
-
-   public function setUrlCV($value) {
-      $this->_url_cv = $value;
+   public function setLink($value) {
+      $this->_link = $value;
    }
 
 }
