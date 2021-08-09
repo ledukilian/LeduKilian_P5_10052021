@@ -25,7 +25,6 @@ class PDOFactory {
      }
      catch(PDOException $ex){
         throw new PDOException('Erreur avec la base de données : ' . $ex->getMessage());
-        die(json_encode(array('outcome' => false, 'message' => 'Unable to connect')));
      }
       // echo 'test';
       // var_dump($this->$db);
