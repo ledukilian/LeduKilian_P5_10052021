@@ -4,14 +4,18 @@ namespace App\Models;
 use App\Core\Entity;
 
 
-class SocialNetwork extends Entity {
+class Social extends Entity {
+   private $_id_admin;
    private $_name;
    private $_icon;
    private $_link;
-   // Un attribut qui le relie à son objet (admin) ?
 
-   public function __construct() {
-      parent::__construct();
+   public function getIdAdmin() {
+      return $this->_id_admin;
+   }
+
+   public function setIdAdmin($value) {
+      $this->_id_admin = $value;
    }
 
    public function getName() {

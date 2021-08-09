@@ -6,9 +6,9 @@ use ReflectionClass;
 use PDO;
 
 class Manager {
-   private $db;
-   private $tableName;
-   private $entity;
+   protected $db;
+   protected $tableName;
+   protected $entity;
 
    public function __construct()  {
       $this->db = (new PDOFactory())->getMySQLConnection();
@@ -27,7 +27,7 @@ class Manager {
       return $this->transformToEntities($results);
    }
 
-   public function findBy(array $where = [], array $order = [], int $limit = 0, int $offset = 0) {
+   public function findBy(array $where = [], array $order = [], int $limit = null, int $offset = null) {
       $sql = 'SELECT * FROM '.$this->tableName;
       if (!empty($where)) {
          $sql = $this->setWhere($where, $sql);
@@ -42,11 +42,17 @@ class Manager {
          $sql = $this->setOffset($offset, $sql);
       }
       $results = ($this->db)->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-      //return $results;
+      // var_dump($results);
       return $this->transformToEntities($results);
    }
 
-   public function findOneBy(array $where = [], array $order = [], int $offset = 0) {
+   public function countElements() {
+      $sql = 'SELECT count(*) AS count FROM '.$this->tableName;
+      $results = ($this->db)->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+      return $results[0]['count'];
+   }
+
+   public function findOneBy(array $where = [], array $order = [], int $offset = null) {
       return $this->findBy($where, $order, 1, $offset)[0];
    }
 
@@ -89,13 +95,6 @@ class Manager {
       }
       return $entities;
    }
-
-
-
-
-
-
-
 
 
 

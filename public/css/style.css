@@ -30,6 +30,14 @@ a:hover {
 .w-90 {
    width: 90% !important;
 }
+.article-blog {
+   transition: 0.4s;
+   transform: scale(0.9);
+}
+.article-blog:hover {
+   transition: 0.4s;
+   transform: scale(1);
+}
 #accordion-sidebar {
    background: #0F0F0F;
 }

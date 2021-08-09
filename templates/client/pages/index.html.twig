@@ -15,11 +15,11 @@
    <header id="head">
       <div class="container w-75" id="container-tete">
          <div class="col">
-            <h1 class="lead">LE DU Kilian</h1>
-            <p class="tagline">Le développeur qu’il vous faut !</p>
+            <h1 class="lead">{{admin.firstName}} {{admin.lastName}}</h1>
+            <p class="tagline">{{admin.catchPhrase}}</p>
             <div class="col row-md col-12 px-0">
                <a class="btn btn-default btn-lg col-12 col-md-5" role="button">Voir le Portfolio</a>
-               <a class="btn btn-action btn-lg col-12 col-md-5" role="button">Télécharger le CV</a>
+               <a href="{{admin.urlCV}}" download class="btn btn-action btn-lg col-12 col-md-5" role="button">Télécharger le CV</a>
             </div>
          </div>
       </div>
@@ -35,36 +35,19 @@
    </div>
    <div class="jumbotron top-space">
       <div class="container">
-         <h3 class="text-center thin">Titre</h3>
          <div class="row">
-            <div class="col-md-4 col-sm-6 highlight">
-               <div class="h-caption">
-                  <h4>
-                     <i class="fa fa-cogs fa-5"></i>Titre 1</h4>
-               </div>
-               <div class="h-body text-center">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque aliquid adipisci aspernatur. Soluta quisquam dignissimos earum quasi voluptate. Amet, dignissimos, tenetur vitae dolor quam iusto assumenda hic reprehenderit?</p>
-               </div>
-            </div>
-            <div class="col-md-4 col-sm-6 highlight">
-               <div class="h-caption">
-                  <h4>
-                     <i class="fa fa-cogs fa-5"></i>Titre 2</h4>
-               </div>
-               <div class="h-body text-center">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, vitae, perferendis, perspiciatis nobis voluptate quod illum soluta minima ipsam ratione quia numquam eveniet eum reprehenderit dolorem dicta nesciunt corporis?</p>
-               </div>
-            </div>
-            <div class="col-md-4 col-sm-6 highlight">
-               <div class="h-caption">
-                  <h4>
-                     <i class="fa fa-cogs fa-5"></i>Titre 3</h4>
-               </div>
-               <div class="h-body text-center">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, excepturi, maiores, dolorem quasi reprehenderit illo accusamus nulla minima repudiandae quas ducimus reiciendis odio sequi atque temporibus facere corporis eos expedita?
+            {% for post in posts %}
+            <a href="{{ "/blog/"~post.slug }}" class="card mb-3 col-12 col-md-4 article-blog">
+               <img class="card-img-top mr-2 mt-2 rounded" src="{{ "/img/articles/"~post.coverImg }}" alt="{{post.coverAltImg}}">
+               <div class="card-body">
+                  <h5 class="card-title text-dark mb-1">{{post.title}}</h5>
+                  <p class="card-text mb-0">
+                     <small class="text-muted mb-1">Le {{post.createdAt|date('d/m/Y à h:i')}}</small>
                   </p>
+                  <small class="card-text text-dark">{{ post.content|length > 150 ? post.content|slice(0, 150) ~ '...' : post.content  }}</small>
                </div>
-            </div>
+            </a>
+            {% endfor %}
          </div>
       </div>
    </div>

@@ -2,7 +2,7 @@
 
 namespace App\Core;
 
-use App\Manager\SocialNetworkManager;
+use App\Manager\SocialManager;
 use App\Services\Session;
 use Symfony\Component\Yaml\Yaml;
 use Twig\Extension\AbstractExtension;

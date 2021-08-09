@@ -38,10 +38,10 @@ editPortfolio:
    controller:       AdminController
    action:           editPortfolio
    parameters:       [ ]
-editSocialNetworks:
+editSocials:
    uri:              /admin/reseaux/
    controller:       AdminController
-   action:           editSocialNetworks
+   action:           editSocials
    parameters:       [ ]
 listPost:
   uri:              /admin/blog/
@@ -83,3 +83,23 @@ putCommentOffline:
  controller:        CommentController
  action:            putOffline
  parameters:        ["id"]
+error:
+ uri:              /erreur
+ controller:       IndexController
+ action:           showError
+ parameters:       [ ]
+notfound:
+ uri:              /404
+ controller:       IndexController
+ action:           show404
+ parameters:       [ ]
+errorAdmin:
+ uri:              /admin/erreur
+ controller:       IndexController
+ action:           showError
+ parameters:       [ ]
+notfoundAdmin:
+ uri:              /admin/404
+ controller:       IndexController
+ action:           show404
+ parameters:       [ ]

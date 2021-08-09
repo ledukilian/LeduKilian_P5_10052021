@@ -3,11 +3,14 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Managers\PostManager;
+use App\Managers\CommentManager;
+use App\Managers\SocialManager;
 
 
 class AdminController extends Controller {
    public function showAdmin() {
       $postManager = new PostManager();
+      $commentManager = new CommentManager();
       $posts = $postManager->findBy(
          [],
          [
@@ -15,11 +18,11 @@ class AdminController extends Controller {
          ],
          10
       );
-
       $this->render("@admin/pages/index.html.twig", [
-         'posts' => $posts
+         'posts' => $posts,
+         'articles_count' => $postManager->countElements(),
+         'comments_count' => $commentManager->countElements()
       ]);
-
    }
 
    public function showCommentList() {
@@ -30,12 +33,31 @@ class AdminController extends Controller {
       $this->render("@admin/pages/portfolio/edit.html.twig", []);
    }
 
-   public function editSocialNetworks() {
-      $this->render("@admin/pages/portfolio/editSocialNetworks.html.twig", []);
+   public function editSocials() {
+      $socialManager = new SocialManager();
+      $socials = $socialManager->findBy(
+         [
+            'id_admin' => 1
+         ]
+      );
+      var_dump($socials);
+      $this->render("@admin/pages/portfolio/editSocials.html.twig", [
+         'socials' => $socials
+      ]);
    }
 
    public function showPostList() {
-      $this->render("@admin/pages/blog/list.html.twig", []);
+      $postManager = new PostManager();
+      $posts = $postManager->findBy(
+         [],
+         [
+            'created_at' => 'DESC'
+         ],
+         10
+      );
+      $this->render("@admin/pages/blog/list.html.twig", [
+         'posts' => $posts
+      ]);
    }
 
    public function addPost() {
@@ -43,9 +65,18 @@ class AdminController extends Controller {
    }
 
    public function editPost() {
-      $post = 12;
+      $slug = $this->params['slug'];
+      $postManager = new PostManager();
+      $post = $postManager->findBy(
+         [
+            'id' => $slug
+         ],
+         [
+            'created_at' => 'DESC'
+         ]
+      );
       $this->render("@admin/pages/blog/edit.html.twig", [
-         'post' => $post
+         'post' => $post[0]
       ]);
    }
 
@@ -53,5 +84,23 @@ class AdminController extends Controller {
       echo "Page de suppression d'un post";
    }
 
+   public function showError() {
+      $this->render("@admin/errors/error.html.twig", []);
+   }
+
+   public function show404() {
+      $this->render("@admin/errors/404.html.twig", []);
+   }
+
 
 }
+
+
+
+
+
+
+
+
+
+
