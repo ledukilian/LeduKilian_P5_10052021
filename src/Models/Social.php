@@ -10,11 +10,6 @@ class Social extends Entity {
    private $_icon;
    private $_link;
 
-
-   public function __construct() {
-      parent::__construct();
-   }
-
    public function getIdAdmin() {
       return $this->_id_admin;
    }

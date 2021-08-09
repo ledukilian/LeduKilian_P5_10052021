@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
+use App\Managers\PostManager;
 
 
 class BlogController extends Controller {
@@ -15,7 +16,17 @@ class BlogController extends Controller {
    }
 
    public function showBlog() {
-      $this->render("@client/pages/blog.html.twig", []);
+      $postManager = new PostManager();
+      $posts = $postManager->findBy(
+         [],
+         [
+            'created_at' => 'DESC'
+         ],
+         9
+      );
+      $this->render("@client/pages/blog.html.twig", [
+         'posts' => $posts
+      ]);
    }
 
 }

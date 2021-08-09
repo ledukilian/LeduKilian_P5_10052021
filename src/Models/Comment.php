@@ -8,10 +8,6 @@ class Comment extends Entity {
    private $_content;
    private $_status;
 
-   public function __construct() {
-      parent::__construct();
-   }
-
    public function getContent() {
       return $this->_content;
    }

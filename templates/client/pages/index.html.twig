@@ -37,14 +37,14 @@
       <div class="container">
          <div class="row">
             {% for post in posts %}
-            <a href="{{ "/blog/"~post.slug }}" class="card mb-3 col-12 col-md-4">
-               <img class="card-img-top" src="{{ "/img/"~post.coverImg }}" alt="{{post.coverAltImg}}">
+            <a href="{{ "/blog/"~post.slug }}" class="card mb-3 col-12 col-md-4 article-blog">
+               <img class="card-img-top mr-2 mt-2 rounded" src="{{ "/img/articles/"~post.coverImg }}" alt="{{post.coverAltImg}}">
                <div class="card-body">
-                  <h5 class="card-title text-dark">{{post.title}}</h5>
-                  <p class="card-text text-dark">{{ post.content|length > 150 ? post.content|slice(0, 150) ~ '...' : post.content  }}</p>
-                  <p class="card-text">
-                     <small class="text-muted">Le {{post.createdAt|date('d/m/Y à h:i')}}</small>
+                  <h5 class="card-title text-dark mb-1">{{post.title}}</h5>
+                  <p class="card-text mb-0">
+                     <small class="text-muted mb-1">Le {{post.createdAt|date('d/m/Y à h:i')}}</small>
                   </p>
+                  <small class="card-text text-dark">{{ post.content|length > 150 ? post.content|slice(0, 150) ~ '...' : post.content  }}</small>
                </div>
             </a>
             {% endfor %}
