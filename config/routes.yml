@@ -88,18 +88,8 @@ error:
  controller:       IndexController
  action:           showError
  parameters:       [ ]
-notfound:
- uri:              /404
- controller:       IndexController
- action:           show404
- parameters:       [ ]
 errorAdmin:
  uri:              /admin/erreur
  controller:       IndexController
  action:           showError
- parameters:       [ ]
-notfoundAdmin:
- uri:              /admin/404
- controller:       IndexController
- action:           show404
  parameters:       [ ]

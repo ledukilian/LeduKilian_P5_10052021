@@ -1,22 +1,16 @@
 {% set assets_directory = '../' %}
 
-{% extends "admin/base.html.twig" %}
+{% extends "client/base.html.twig" %}
 
 {% block title %}
    Erreur 404 -
    {{parent()}}
 {% endblock %}
 
-
-
 {% block main %}
-   <div id="content">
-      {% include "admin/parts/_navbar.html.twig" %}
-      <div class="container-fluid">
-         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800 mx-2">
-               Erreur 404</h1>
-         </div>
-      </div>
+   <div class="container d-flex flex-row flex-wrap justify-content-around mt-6 p-4">
+      <h1 class="col-12 mt-5"><i class="fas fa-exclamation-circle text-warning"></i> Erreur 404</h1>
+      <h3 class="col-12 mt-0 mb-5">{{message}}</h3>
+      <img src="/img/404.svg" class="w-50 my-5" alt="404 not found" />
    </div>
 {% endblock %}
