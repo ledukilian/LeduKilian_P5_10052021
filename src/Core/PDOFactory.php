@@ -21,14 +21,14 @@ class PDOFactory {
       try {
          $pdo = new PDO('mysql:host='.$this->config['host'].';dbname='.$this->config['name'].";charset=utf8mb4;",$this->config['user'],$this->config['pass']);
          $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+         return $pdo;
      }
      catch(PDOException $ex){
-        throw new PDOException('Erreur avec la base de données : ' . $e->getMessage());
+        throw new PDOException('Erreur avec la base de données : ' . $ex->getMessage());
         die(json_encode(array('outcome' => false, 'message' => 'Unable to connect')));
      }
       // echo 'test';
       // var_dump($this->$db);
-      return $pdo;
 
 
    }
