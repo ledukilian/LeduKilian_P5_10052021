@@ -20,9 +20,6 @@ class Router {
       } catch (\Exception $e) {
          echo "Config not found";
       }
-      // if (str_contains($_SERVER['REQUEST_URI'], 'admin')) {
-      //     echo "The string 'lazy' was found in the string\n";
-      // }
       foreach ($routes as $route) {
          if (preg_match('#^' . $route['uri'] . '$#', $_SERVER['REQUEST_URI'], $matches)) {
             $controller = "\\App\\Controllers\\".$route['controller'];
@@ -30,8 +27,10 @@ class Router {
             return $this->controller= new $controller($route['action'], $params);
          }
       }
-      $params     = array_combine($route['parameters'], array_slice($matches, 1));
-      return $this->controller= new IndexController('show404', $params);
+      if (!isset($error)) {
+         $params     = array_combine($route['parameters'], array_slice($matches, 1));
+         return $this->controller= new IndexController('show404', $params);
+      }
    }
 
 }

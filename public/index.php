@@ -1,6 +1,7 @@
 <?php
 session_start();
 use App\Core\Router;
+use App\Controllers\IndexController;
 
 define('ROOT_DIR', realpath(dirname(__DIR__)));
 define('CONF_DIR', realpath(dirname(__DIR__)) . '/config');
@@ -18,5 +19,10 @@ try {
    $controller = $router->getRoute();
    $controller->execute();
 } catch (\Exception $e) {
-
+   $params = [
+      'message' => 'test'
+   ];
+   return new IndexController('showError', $params);
+   //var_dump($e->getMessage());
+   var_dump('on est là');
 }

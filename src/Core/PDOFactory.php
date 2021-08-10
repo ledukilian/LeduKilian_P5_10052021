@@ -23,11 +23,9 @@ class PDOFactory {
          $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
          return $pdo;
      }
-     catch(PDOException $ex){
-        throw new PDOException('Erreur avec la base de données : ' . $ex->getMessage());
+     catch(PDOException $error){
+        throw new PDOException('Erreur avec la base de données : ' . $error->getMessage());
      }
-      // echo 'test';
-      // var_dump($this->$db);
 
 
    }
