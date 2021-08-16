@@ -27,10 +27,6 @@ class Router {
             return $this->controller= new $controller($route['action'], $params);
          }
       }
-      if (!isset($error)) {
-         $params     = array_combine($route['parameters'], array_slice($matches, 1));
-         return $this->controller= new IndexController('show404', $params);
+      return $this->controller= new IndexController('show404');
       }
-   }
-
 }
