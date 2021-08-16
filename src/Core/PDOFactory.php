@@ -24,7 +24,7 @@ class PDOFactory {
          return $pdo;
      }
      catch(PDOException $error){
-        throw new PDOException('Erreur avec la base de données : ' . $error->getMessage());
+        throw new PDOException('<i class="fas fa-exclamation-circle text-danger mx-2"></i>Erreur avec la base de données :<br /><span class="text-warning">' . $error->getMessage().'</span>');
      }
 
 
