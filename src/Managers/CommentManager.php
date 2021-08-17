@@ -2,6 +2,7 @@
 namespace App\Managers;
 
 use App\Core\Manager;
+use PDO;
 
 class CommentManager extends Manager {
 

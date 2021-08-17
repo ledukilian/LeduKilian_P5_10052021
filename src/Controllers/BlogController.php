@@ -6,13 +6,17 @@ use App\Managers\PostManager;
 
 
 class BlogController extends Controller {
-
-
    public function showPost() {
       $slug = $this->params['slug'];
-         $this->render("@client/pages/post.html.twig", [
-            'postId' => $slug,
-         ]);
+      $postManager = new PostManager();
+      $post = $postManager->findPostAndComments(
+         $slug
+      );
+      var_dump($post[0]);
+      $this->render("@client/pages/post.html.twig", [
+         //'post' => $post[0],
+         'post' => $post
+      ]);
    }
 
    public function showBlog() {
