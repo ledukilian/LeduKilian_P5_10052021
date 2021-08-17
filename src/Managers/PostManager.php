@@ -18,6 +18,7 @@ class PostManager extends Manager {
                , post.lead
                , post.content
                , post.slug
+               , post.created_at AS post_date
                , comment.content AS com_content
                , comment.created_at AS com_date
                , user_a.firstname AS com_firstname

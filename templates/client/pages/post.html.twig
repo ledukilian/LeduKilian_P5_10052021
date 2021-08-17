@@ -13,14 +13,11 @@
          <button class="btn btn-warning">
             <i class="fas fa-arrow-circle-left mr-2"></i>Retour au blog</button>
       </a>
-      <img class="card-img-top w-75 border" src="../img/periodic_table.jpg" alt="Card image cap">
-      <h1 class="col-12">{{ post|first.title }}</h1>
-      <p class="col-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel arcu condimentum, elementum neque nec, porttitor leo. Nullam nibh arcu, suscipit ut ligula et, interdum euismod tortor. Cras consequat nec nunc eget mattis.
-         Vestibulum ultrices elit dolor, nec luctus felis blandit eu. Phasellus vulputate eros nibh, vel finibus mauris rhoncus et. Aliquam suscipit, enim eu dignissim elementum, metus nulla congue dui, ac accumsan metus leo sit amet augue. Maecenas quis
-         porttitor enim. Aliquam tellus sapien, iaculis eu pulvinar nec, luctus sed diam. Aenean felis tortor, tincidunt a venenatis non, pretium vitae nibh. Maecenas rhoncus dolor velit, semper tincidunt enim vestibulum ut. Proin eget eros sapien. Vestibulum
-         vitae convallis mauris.</p>
-      <p class="col-12">Sed tincidunt risus ante, ut euismod risus semper sit amet. Praesent fermentum, felis a suscipit tempor, nisi nisi porttitor odio, id vulputate lectus lorem non neque. Pellentesque habitant morbi tristique senectus et netus et
-         malesuada fames ac turpis egestas. Integer sed dolor dictum, tempor dolor sed, rutrum nisl. Ut neque nunc, fermentum ut lacinia porta, ultrices laoreet tortor. Praesent et sem imperdiet, ultrices velit a, luctus metus. Aenean a eleifend tortor.</p>
+      <img class="card-img-top w-75 border rounded" src="../img/articles/{{ post|first.cover_img }}" alt="{{ post|first.cover_alt_img }}">
+      <small class="text-muted mb-1">Article posté le {{post|first.post_date|date('d/m/Y à h:i')}} par {{ post|first.post_firstname }} {{ post|first.post_lastname }}</small>
+      <h1 class="col-12 mt-3">{{ post|first.title }}</h1>
+      <h3 class="col-12 mt-1">{{ post|first.lead }}</h3>
+      <p class="col-12">{{ post|first.content }}</p>
       <a href="/blog" class="col-12 mb-5">
          <button class="btn btn-warning">
             <i class="fas fa-arrow-circle-left mr-2"></i>Retour au blog</button>
