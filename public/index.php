@@ -18,11 +18,14 @@ try {
    $router = new Router();
    $controller = $router->getRoute();
    $controller->execute();
-} catch (\Exception $e) {
+}
+catch (\ConfigException | \DisplayException | \EntityException | \MailException | \SQLException | \TwigException $e) {
+   // Affichage ConfigException
+}
+catch (\Exception | \PDOException $e) {
    $params = [
       'message' => $e->getMessage()
    ];
    $errorController = new ErrorController();
    $errorController->showCriticalError($params);
-
 }
