@@ -3,6 +3,7 @@ namespace App\Core;
 
 use PDO;
 use PDOException;
+use App\Exceptions\ConfigException;
 
 class PDOFactory {
    private $pdo;
@@ -14,7 +15,11 @@ class PDOFactory {
    }
 
    private function getConfig() {
-      return yaml_parse_file(CONF_DIR."/db-config.yml");
+      if (file_exists(CONF_DIR."/db-config.yml")) {
+         return yaml_parse_file(CONF_DIR."/db-config.yml");
+      } else {
+         throw new ConfigException('<i class="fas fa-exclamation-circle text-danger mx-2"></i>Erreur avec la configuration de la base de données :<br /><span class="text-warning">Le fichier de configuration n\'existe pas</span>');
+      }
    }
 
    public function getMySQLConnection() {
