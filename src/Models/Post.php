@@ -14,6 +14,7 @@ class Post extends Entity {
    private $_slug;
    private $_admin;
    private $_adminId;
+   private $_comments = [];
 
    public function getTitle() {
       return $this->_title;
@@ -81,6 +82,17 @@ class Post extends Entity {
       $this->setAdmin($adminManager->findAdminBy($value));
    }
 
+   public function getComments() {
+      return $this->_comments;
+   }
+
+   public function setComments(Array $value) {
+      $this->_comments = $value;
+   }
+
+   public function addComment($data) {
+
+   }
 }
 
 
