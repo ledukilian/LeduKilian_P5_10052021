@@ -28,16 +28,17 @@ class PostManager extends Manager {
       $comments = [];
       $post = new Post($results[0]);
       foreach ($results as $comment) {
-         $comment['id'] = $comment['comment_id'];
-         unset($comment['comment_id']);
-         $comment['created_at'] = $comment['comment_created_at'];
-         unset($comment['comment_created_at']);
-         $comment['updated_at'] = $comment['comment_updated_at'];
-         unset($comment['comment_updated_at']);
-         $comment['user_id'] = $comment['comment_user_id'];
-         unset($comment['comment_user_id']);
-
-         $comments[] = new Comment($comment);
+         if(!is_null($comment['comment_id'])) {
+            $comment['id'] = $comment['comment_id'];
+            unset($comment['comment_id']);
+            $comment['created_at'] = $comment['comment_created_at'];
+            unset($comment['comment_created_at']);
+            $comment['updated_at'] = $comment['comment_updated_at'];
+            unset($comment['comment_updated_at']);
+            $comment['user_id'] = $comment['comment_user_id'];
+            unset($comment['comment_user_id']);
+            $comments[] = new Comment($comment);
+         }
       }
       $post->setComments($comments);
       var_dump($post);
