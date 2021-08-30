@@ -64,19 +64,19 @@ class Post extends Entity {
       $this->_slug = $value;
    }
 
-   public function getAdmin() {
+   public function getAdminId() {
       return $this->_admin;
    }
 
-   public function setAdmin($value) {
+   public function setAdminId($value) {
       $this->_admin = $value;
    }
 
-   public function getAdminId() {
+   public function getAdmin() {
       return $this->_adminId;
    }
 
-   public function setAdminId($value) {
+   public function setAdmin($value) {
       $this->_adminId = $value;
       $adminManager = new AdminManager();
       $this->setAdmin($adminManager->findAdminBy($value));
