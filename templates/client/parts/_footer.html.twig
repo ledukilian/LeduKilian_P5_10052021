@@ -5,15 +5,11 @@
             <div class="col-md-5 widget">
                <h3 class="widget-title">Réseaux sociaux</h3>
                <div class="widget-body">
-                  <a class="h1 m-2" href="https://twitter.com/kilian_ld" target="_blank">
-                     <i class="fab fa-twitter"></i>
-                  </a>
-                  <a class="h1 m-2" href="https://www.linkedin.com/in/ledu-kilian/" target="_blank">
-                     <i class="fab fa-linkedin-in"></i>
-                  </a>
-                  <a class="h1 m-2" href="https://github.com/ledukilian" target="_blank">
-                     <i class="fab fa-github"></i>
-                  </a>
+                  {% for social in socials %}
+                     <a class="h1 m-2" href="{{social.link}}" target="_blank">
+                        {{social.icon | raw }}
+                     </a>
+                  {% endfor %}
                </div>
             </div>
             <div class="col-md-7 widget">
