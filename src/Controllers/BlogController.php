@@ -12,7 +12,6 @@ class BlogController extends Controller {
       $post = $postManager->findPostAndComments(
          $slug
       );
-      var_dump($post[0]);
       $this->render("@client/pages/post.html.twig", [
          //'post' => $post[0],
          'post' => $post
