@@ -18,6 +18,16 @@ blog:
   controller:       BlogController
   action:           showBlog
   parameters:       [ ]
+blog2:
+  uri:              /blog/
+  controller:       BlogController
+  action:           showBlog
+  parameters:       [ ]
+blogPage:
+  uri:              /blog-([0-9-]+)
+  controller:       BlogController
+  action:           showBlog
+  parameters:       ["slug"]
 singlePost:
   uri:              /blog/([a-zA-Z0-9-]+)
   controller:       BlogController

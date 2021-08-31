@@ -72,6 +72,16 @@ class PostManager extends Manager {
    }
 
 
+   public function getPagination() {
+      $post_per_page = 6;
+      $sql = "SELECT CEIL(COUNT(*)/".$post_per_page.") AS page_count
+              FROM post";
+      $result = ($this->db)->query($sql)->fetch(PDO::FETCH_ASSOC);
+      return [
+         'per_page' => $post_per_page,
+         'page_count' => $result['page_count']
+      ];
+   }
 
 
 }

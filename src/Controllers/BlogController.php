@@ -20,15 +20,29 @@ class BlogController extends Controller {
 
    public function showBlog() {
       $postManager = new PostManager();
+      $pagination = $postManager->getPagination();
+      $limit = $pagination['per_page'];
+      if (isset($this->params['slug'])) {
+         $offset = ($this->params['slug']) * $pagination['per_page'] - $pagination['per_page'];
+         $pagination['current'] = $this->params['slug'];
+      } else {
+         $offset = 0;
+         $pagination['current'] = 1;
+      }
+      // var_dump($limit);
+      // var_dump($offset);
+      // die;
       $posts = $postManager->findBy(
          [],
          [
             'created_at' => 'DESC'
          ],
-         9
+         $limit,
+         $offset
       );
       $this->render("@client/pages/blog.html.twig", [
-         'posts' => $posts
+         'posts' => $posts,
+         'pagination' => $pagination
       ]);
    }
 
