@@ -65,21 +65,21 @@ class Post extends Entity {
    }
 
    public function getAdminId() {
-      return $this->_admin;
-   }
-
-   public function setAdminId($value) {
-      $this->_admin = $value;
-   }
-
-   public function getAdmin() {
       return $this->_adminId;
    }
 
-   public function setAdmin($value) {
+   public function setAdminId($value) {
       $this->_adminId = $value;
       $adminManager = new AdminManager();
       $this->setAdmin($adminManager->findAdminBy($value));
+   }
+
+   public function getAdmin() {
+      return $this->_admin;
+   }
+
+   public function setAdmin($value) {
+      $this->_admin = $value;
    }
 
    public function getComments() {

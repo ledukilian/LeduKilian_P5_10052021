@@ -46,6 +46,41 @@ class Admin extends User {
       $this->_urlCV = $value;
    }
 
+   // public function getAdminId() {
+   //    return $this->_user;
+   // }
+   //
+   // public function setAdminId($value) {
+   //    $this->_user = $value;
+   // }
+   //
+   // public function getAdmin() {
+   //    return $this->_user;
+   // }
+   //
+   // public function setAdmin($value) {
+   //    $this->_user = $value;
+   //    $userManager = new UserManager();
+   //    $this->setUser($userManager->findOneBy([
+   //       'id' => $this->_userId
+   //    ]));
+   // }
 
+   // Override elements from User class
+   // public function getUser() {
+   //    return $this->_user;
+   // }
+   //
+   // public function setUser($value) {
+   //    $this->_user = $value;
+   // }
+   //
+   // public function getUserId() {
+   //    return $this->_userId;
+   // }
+   //
+   // public function setUserId($value) {
+   //    $this->_userId = $value;
+   // }
 
 }

@@ -64,8 +64,8 @@ class PostManager extends Manager {
       }
       $post->setComments($comments);
       // 🟢 Mentorat
-      // var_dump($post);
-      // die;
+      var_dump($post);
+      die;
       // var_dump($post->getComments());
       // die;
       return $post;
