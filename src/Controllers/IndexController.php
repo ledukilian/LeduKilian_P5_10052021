@@ -33,7 +33,9 @@ class IndexController extends Controller {
    }
 
    public function show404() {
-      $this->render("@client/errors/404.html.twig", []);
+      $this->render("@client/errors/404.html.twig", [
+         'message' => 'La page que vous recherchez n\'existe pas.'
+      ]);
    }
 
 

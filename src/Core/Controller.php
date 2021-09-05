@@ -6,7 +6,7 @@ class Controller {
    protected $params;
    protected $twig;
 
-   public function __construct($action, $params) {
+   public function __construct($action, $params = NULL) {
       $this->action = $action;
       $this->params = $params;
       $this->twig = new Twig();
@@ -20,9 +20,6 @@ class Controller {
    public function render($template, $array) {
       echo $this->twig->twigRender($template, $array);
    }
-
-
-   
 
 
 

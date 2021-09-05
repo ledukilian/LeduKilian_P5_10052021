@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Core\Entity;
+use App\Managers\AdminManager;
 
 
 class Post extends Entity {
@@ -11,7 +12,9 @@ class Post extends Entity {
    private $_lead;
    private $_content;
    private $_slug;
-   private $_author;
+   private $_admin;
+   private $_adminId;
+   private $_comments = [];
 
    public function getTitle() {
       return $this->_title;
@@ -61,12 +64,43 @@ class Post extends Entity {
       $this->_slug = $value;
    }
 
-   public function getAuthor() {
-      return $this->_author;
+   public function getAdminId() {
+      return $this->_adminId;
    }
 
-   public function setAuthor($value) {
-      $this->_author = $value;
+   public function setAdminId($value) {
+      $this->_adminId = $value;
+      $adminManager = new AdminManager();
+      $this->setAdmin($adminManager->findAdminBy($value));
    }
 
+   public function getAdmin() {
+      return $this->_admin;
+   }
+
+   public function setAdmin($value) {
+      $this->_admin = $value;
+   }
+
+   public function getComments() {
+      return $this->_comments;
+   }
+
+   public function setComments(Array $value) {
+      $this->_comments = $value;
+   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -18,6 +18,11 @@ blog:
   controller:       BlogController
   action:           showBlog
   parameters:       [ ]
+blogPage:
+  uri:              /blog/([0-9-]+)/
+  controller:       BlogController
+  action:           showBlog
+  parameters:       ["page"]
 singlePost:
   uri:              /blog/([a-zA-Z0-9-]+)
   controller:       BlogController
@@ -88,18 +93,8 @@ error:
  controller:       IndexController
  action:           showError
  parameters:       [ ]
-notfound:
- uri:              /404
- controller:       IndexController
- action:           show404
- parameters:       [ ]
 errorAdmin:
  uri:              /admin/erreur
  controller:       IndexController
  action:           showError
- parameters:       [ ]
-notfoundAdmin:
- uri:              /admin/404
- controller:       IndexController
- action:           show404
  parameters:       [ ]

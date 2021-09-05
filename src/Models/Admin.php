@@ -10,10 +10,6 @@ class Admin extends User {
    private $_catchPhrase;
    private $_urlCV;
 
-   public function getParent() {
-      // 🔴 TODO : Récupération du parent (User) ?
-   }
-
    public function getAvatarUrl() {
       return $this->_avatarUrl;
    }
@@ -45,7 +41,5 @@ class Admin extends User {
    public function setUrlCV($value) {
       $this->_urlCV = $value;
    }
-
-
 
 }

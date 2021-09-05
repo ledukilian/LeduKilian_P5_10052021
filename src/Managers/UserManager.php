@@ -4,7 +4,7 @@ namespace App\Managers;
 use App\Core\Manager;
 use PDO;
 
-class SocialManager extends Manager {
+class UserManager extends Manager {
 
 
 

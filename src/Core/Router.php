@@ -1,6 +1,8 @@
 <?php
 namespace App\Core;
 
+use App\Controllers\IndexController;
+
 class Router {
    private $controller;
 
@@ -25,6 +27,6 @@ class Router {
             return $this->controller= new $controller($route['action'], $params);
          }
       }
-   }
-
+      return $this->controller= new IndexController('show404');
+      }
 }
