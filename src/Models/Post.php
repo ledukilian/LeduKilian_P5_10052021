@@ -89,10 +89,6 @@ class Post extends Entity {
    public function setComments(Array $value) {
       $this->_comments = $value;
    }
-
-   public function addComment($data) {
-
-   }
 }
 
 

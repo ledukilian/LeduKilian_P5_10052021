@@ -8,7 +8,7 @@ use App\Core\PDOFactory;
 class ErrorController {
 
    public function __construct() {
-
+      // Empty constructor
    }
 
    public function showCriticalError($params) {
@@ -18,6 +18,7 @@ class ErrorController {
          $error = 'Erreur inconnue';
       }
       include("../templates/admin/errors/critical.php");
+      return $error;
    }
 
 

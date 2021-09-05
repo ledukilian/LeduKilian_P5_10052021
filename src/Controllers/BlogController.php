@@ -13,7 +13,6 @@ class BlogController extends Controller {
          $slug
       );
       $this->render("@client/pages/post.html.twig", [
-         //'post' => $post[0],
          'post' => $post
       ]);
    }
@@ -29,9 +28,6 @@ class BlogController extends Controller {
          $offset = 0;
          $pagination['current'] = 1;
       }
-      // var_dump($limit);
-      // var_dump($offset);
-      // die;
       $posts = $postManager->findBy(
          [],
          [
