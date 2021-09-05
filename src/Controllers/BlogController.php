@@ -22,9 +22,9 @@ class BlogController extends Controller {
       $postManager = new PostManager();
       $pagination = $postManager->getPagination();
       $limit = $pagination['per_page'];
-      if (isset($this->params['slug'])) {
-         $offset = ($this->params['slug']) * $pagination['per_page'] - $pagination['per_page'];
-         $pagination['current'] = $this->params['slug'];
+      if (isset($this->params['page'])) {
+         $offset = ($this->params['page']) * $pagination['per_page'] - $pagination['per_page'];
+         $pagination['current'] = $this->params['page'];
       } else {
          $offset = 0;
          $pagination['current'] = 1;
