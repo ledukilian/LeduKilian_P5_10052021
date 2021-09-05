@@ -38,18 +38,7 @@ class PostManager extends Manager {
       $comments = [];
       $post = new Post($results[0]);
       foreach ($results as $element) {
-         $userData = [
-            'id' => $element['comment_user_id'],
-            'username' => $element['comment_user_username'],
-            'firstname' => $element['comment_user_firstname'],
-            'lastname' => $element['comment_user_lastname'],
-            'password' => $element['comment_user_password'],
-            'email' => $element['comment_user_email'],
-            'role' => $element['comment_user_role'],
-            'created_at' => $element['comment_user_created_at'],
-            'updated_at' => $element['comment_user_updated_at'],
-         ];
-         $user = new User($userData);
+         $user = self::createUser($element);
          $commentData = [
             'id' => $element['comment_id'],
             'user' => $user,
@@ -63,14 +52,23 @@ class PostManager extends Manager {
          $comments[] = new Comment($commentData);
       }
       $post->setComments($comments);
-      // 🟢 Mentorat
-      // var_dump($post);
-      // die;
-      // var_dump($post->getComments());
-      // die;
       return $post;
    }
 
+   public function createUser($element) {
+      $userData = [
+         'id' => $element['comment_user_id'],
+         'username' => $element['comment_user_username'],
+         'firstname' => $element['comment_user_firstname'],
+         'lastname' => $element['comment_user_lastname'],
+         'password' => $element['comment_user_password'],
+         'email' => $element['comment_user_email'],
+         'role' => $element['comment_user_role'],
+         'created_at' => $element['comment_user_created_at'],
+         'updated_at' => $element['comment_user_updated_at'],
+      ];
+      return new User($userData);
+   }
 
    public function getPagination() {
       $post_per_page = 6;
