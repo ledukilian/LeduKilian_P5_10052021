@@ -23,6 +23,17 @@
             <i class="fas fa-arrow-circle-left mr-2"></i>Retour au blog</button>
       </a>
       <div class="col-lg-12 mb-4">
+
+      <h3 class="h3 mb-3">Ajouter mon commentaire<i class="fas fa-comment-medical ml-2"></i></h3>
+      <i class="fas fa-user mr-2 ml-4"></i> {UTILISATEUR CONNECTE}
+      <form action="#" method="POST" class="d-flex flex-row justify-content-end flex-wrap">
+         <textarea class="form-control my-2"></textarea>
+         <button class="btn btn-success px-3"><i class="fas fa-paper-plane mr-2"></i>Poster</button>
+      </form>
+
+      <div class="alert alert-danger" role="alert">
+         <i class="fas fa-exclamation-circle mr-2"></i>Vous devez être connecté pour pouvoir ajouter un commentaire
+      </div>
          <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800 mx-2"><i class="fas fa-comments mr-2"></i>Commentaires</h1>
          </div>
@@ -34,13 +45,6 @@
             </div>
          </div>
          {% endfor %}
-         <hr />
-         <h3 class="h3 mb-3">Ajouter mon commentaire</h3>
-         <i class="fas fa-user mr-2 ml-4"></i> Utilisateur connecté
-         <form action="#" method="POST" class="d-flex flex-row justify-content-end flex-wrap">
-            <textarea class="form-control my-2"></textarea>
-            <button class="btn btn-success px-3"><i class="fas fa-paper-plane mr-2"></i>Poster</button>
-         </form>
       </div>
    </div>
 {% endblock %}
