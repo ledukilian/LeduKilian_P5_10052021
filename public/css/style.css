@@ -46,3 +46,6 @@ input[type=text]
 , input[type=password] {
    color: #0F0F0F !important;
 }
+.btn-toolbar .active {
+   background: #0F0F0F !important;
+}
