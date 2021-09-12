@@ -36,6 +36,7 @@ class PostManager extends Manager {
       $post = new Post($results[0]);
       foreach ($results as $element) {
          $user = self::createUser($element);
+         //$admin = self::createAdmin($element);
          $commentData = [
             'id' => $element['comment_id'],
             'user' => $user,
@@ -67,15 +68,19 @@ class PostManager extends Manager {
       return new User($userData);
    }
 
-   public function getPagination() {
-      $post_per_page = 6;
-      $sql = "SELECT CEIL(COUNT(*)/".$post_per_page.") AS page_count
-              FROM post";
-      $result = ($this->db)->query($sql)->fetch(PDO::FETCH_ASSOC);
-      return [
-         'per_page' => $post_per_page,
-         'page_count' => $result['page_count']
+   public function createAdmin($element) {
+      $adminData = [
+         'id' => $element['comment_user_id'],
+         'username' => $element['comment_user_username'],
+         'firstname' => $element['comment_user_firstname'],
+         'lastname' => $element['comment_user_lastname'],
+         'password' => $element['comment_user_password'],
+         'email' => $element['comment_user_email'],
+         'role' => $element['comment_user_role'],
+         'created_at' => $element['comment_user_created_at'],
+         'updated_at' => $element['comment_user_updated_at'],
       ];
+      return new Admin($adminData);
    }
 
 

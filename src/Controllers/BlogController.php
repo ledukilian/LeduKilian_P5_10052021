@@ -18,11 +18,12 @@ class BlogController extends Controller {
    }
 
    public function showBlog() {
+      $pagination['per_page'] = 6;
       $postManager = new PostManager();
-      $pagination = $postManager->getPagination();
+      $pagination['page_count'] = ceil(($postManager->countElements())/$pagination['per_page']);
       $limit = $pagination['per_page'];
-      $offset = ($this->params['page']) * $pagination['per_page'] - $pagination['per_page'];
       $pagination['current'] = $this->params['page'];
+      $offset = ($this->params['page']) * $pagination['per_page'] - $pagination['per_page'];
       $posts = $postManager->findBy(
          [],
          [
