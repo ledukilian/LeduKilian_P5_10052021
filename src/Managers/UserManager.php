@@ -8,10 +8,11 @@ use PDO;
 class UserManager extends Manager {
 
    public function tryLogin() {
-      $email = $_POST['email'];
       $password = $_POST['password'];
-      $sql = "SELECT * FROM user WHERE user.email = '$email'";
-      $result = ($this->db)->query($sql)->fetch(PDO::FETCH_ASSOC);
+      $query = ($this->db)->prepare("SELECT * FROM user WHERE user.email = :email");
+      $query->bindParam(':email', $_POST['email'], PDO::PARAM_STR);
+      $query->execute();
+      $result = $query->fetch(PDO::FETCH_ASSOC);
       if (!empty($result)) {
          if ($password==$result['password']) {
             self::createSession($result);
