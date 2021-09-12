@@ -35,15 +35,6 @@ class AdminController extends Controller {
    }
 
    public function editPortfolio() {
-      // $adminManager = new AdminManager();
-      // $admin = $adminManager->findAdminBy(1);
-      // var_dump($admin);
-      // die;
-
-
-
-
-
       $this->render("@admin/pages/portfolio/edit.html.twig", []);
    }
 

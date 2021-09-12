@@ -12,7 +12,7 @@ class AccountController extends Controller {
    public function login() {
       if (isset($_POST['email'])) {
          $userManager = new UserManager();
-         if ($userManager->tryLogin()!=FALSE) {
+         if ($userManager->tryLogin()) {
             $postManager = new PostManager();
             $posts = $postManager->findBy(
                [],
@@ -28,11 +28,7 @@ class AccountController extends Controller {
       } else {
          $this->render("@client/pages/login.html.twig", []);
       }
-      // TODO : Concordance password
-      // TODO : Redirections
-      // TODO : Ajout de l'utilisateur dans TwigGlobals
-      // TODO : Adaptation des template : Lien de déconnexion, Formulaire connexion etc..
-   }
+}
 
    public function register() {
       $this->render("@client/pages/register.html.twig", []);

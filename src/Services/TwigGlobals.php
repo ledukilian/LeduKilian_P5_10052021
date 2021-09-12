@@ -16,11 +16,7 @@ class TwigGlobals {
    }
 
    public function isConnected() {
-      if (isset($_SESSION['id'])) {
-         return true;
-      } else {
-         return false;
-      }
+      return $_SESSION['id'];
    }
 
    public function getSocials() {
