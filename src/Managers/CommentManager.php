@@ -18,7 +18,7 @@ class CommentManager extends Manager {
             LEFT JOIN post ON post.id = comment.post_id
             ORDER BY comment.created_at DESC
             LIMIT 40";
-      return $results = ($this->db)->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+      return ($this->db)->query($sql)->fetchAll(PDO::FETCH_ASSOC);
    }
 
 
