@@ -68,6 +68,11 @@ login:
   controller:       AccountController
   action:           login
   parameters:       [ ]
+disconnect:
+  uri:              /deconnexion
+  controller:       AccountController
+  action:           disconnect
+  parameters:       [ ]
 register:
   uri:              /inscription
   controller:       AccountController

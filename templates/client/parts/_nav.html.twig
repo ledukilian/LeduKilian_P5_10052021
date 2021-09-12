@@ -19,15 +19,21 @@
          <li class="nav-item {% if uri == '/contact' %}active{% endif %}">
             <a class="nav-link" href="/contact">Contact</a>
          </li>
-         <li class="nav-item {% if uri == '/connexion' %}active{% endif %}">
-            <a class="nav-link" href="/connexion">Connexion</a>
-         </li>
-         <li class="nav-item {% if uri == '/inscription' %}active{% endif %}">
-            <a class="nav-link" href="/inscription">Inscription</a>
-         </li>
-         <li class="nav-item">
-            <a class="nav-link text-warning" href="/admin/">admin</a>
-         </li>
+         {% if session.logged == false %}
+            <li class="nav-item {% if uri == '/connexion' %}active{% endif %}">
+               <a class="nav-link" href="/connexion">Connexion</a>
+            </li>
+            <li class="nav-item {% if uri == '/inscription' %}active{% endif %}">
+               <a class="nav-link" href="/inscription">Inscription</a>
+            </li>
+         {% else %}
+            <li class="nav-item">
+               <a class="nav-link text-warning" href="/admin/">Admin</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link text-danger" href="/deconnexion">Déconnexion</a>
+            </li>
+         {% endif %}
       </ul>
    </div>
 </nav>

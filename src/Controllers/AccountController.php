@@ -10,29 +10,36 @@ class AccountController extends Controller {
 
 
    public function login() {
+      // session_destroy();
+      // var_dump($_SESSION);
+      // die;
       if (isset($_POST['email'])) {
          $userManager = new UserManager();
          if ($userManager->tryLogin()) {
-            $postManager = new PostManager();
-            $posts = $postManager->findBy(
-               [],
-               [
-                  'created_at' => 'DESC'
-               ],
-               3
-            );
-            $this->render("@client/pages/index.html.twig", [
-               'posts' => $posts
-            ]);
+            header('Location: /');
+            exit;
          }
       } else {
          $this->render("@client/pages/login.html.twig", []);
       }
-}
+   }
 
    public function register() {
       $this->render("@client/pages/register.html.twig", []);
    }
+
+   public function disconnect() {
+      session_destroy();
+      header('Location: /');
+      exit;
+   }
+
+
+
+
+
+
+
 
 
 }
