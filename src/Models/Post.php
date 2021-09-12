@@ -70,8 +70,6 @@ class Post extends Entity {
 
    public function setAdminId($value) {
       $this->_adminId = $value;
-      $adminManager = new AdminManager();
-      $this->setAdmin($adminManager->findAdminBy($value));
    }
 
    public function getAdmin() {
