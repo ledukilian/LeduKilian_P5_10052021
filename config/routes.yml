@@ -13,11 +13,6 @@ portfolio:
   controller:       IndexController
   action:           showPortfolio
   parameters:       [ ]
-blog:
-  uri:              /blog
-  controller:       BlogController
-  action:           showBlog
-  parameters:       [ ]
 blogPage:
   uri:              /blog/([0-9-]+)/
   controller:       BlogController

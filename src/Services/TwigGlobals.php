@@ -15,6 +15,10 @@ class TwigGlobals {
          return $_SESSION;
    }
 
+   public function isConnected() {
+      return $_SESSION['id'];
+   }
+
    public function getSocials() {
       $socialManager = new SocialManager();
       $socials = $socialManager->findBy(

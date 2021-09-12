@@ -5,6 +5,7 @@ use App\Core\Controller;
 use App\Managers\PostManager;
 use App\Managers\CommentManager;
 use App\Managers\SocialManager;
+use App\Managers\AdminManager;
 
 
 class AdminController extends Controller {
@@ -26,7 +27,11 @@ class AdminController extends Controller {
    }
 
    public function showCommentList() {
-      $this->render("@admin/pages/blog/comments.html.twig", []);
+      $commentManager = new CommentManager();
+      $comments = $commentManager->getCommentsAndInfos();
+      $this->render("@admin/pages/blog/comments.html.twig", [
+         'comments' => $comments
+      ]);
    }
 
    public function editPortfolio() {
@@ -40,7 +45,6 @@ class AdminController extends Controller {
             'id_admin' => 1
          ]
       );
-      var_dump($socials);
       $this->render("@admin/pages/portfolio/editSocials.html.twig", [
          'socials' => $socials
       ]);
