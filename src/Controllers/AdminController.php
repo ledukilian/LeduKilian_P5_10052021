@@ -26,7 +26,17 @@ class AdminController extends Controller {
    }
 
    public function showCommentList() {
-      $this->render("@admin/pages/blog/comments.html.twig", []);
+      $commentManager = new CommentManager();
+      $comments = $commentManager->findBy(
+         [],
+         [
+            'created_at' => 'DESC'
+         ],
+         20
+      );
+      $this->render("@admin/pages/blog/comments.html.twig", [
+         'comments' => $comments
+      ]);
    }
 
    public function editPortfolio() {
