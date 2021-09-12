@@ -16,7 +16,7 @@ class TwigGlobals {
    }
 
    public function isConnected() {
-      if (isset($_SESSION)) {
+      if (isset($_SESSION['id'])) {
          return true;
       } else {
          return false;
