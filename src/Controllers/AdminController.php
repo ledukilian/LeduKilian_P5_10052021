@@ -44,7 +44,6 @@ class AdminController extends Controller {
             'id_admin' => 1
          ]
       );
-      var_dump($socials);
       $this->render("@admin/pages/portfolio/editSocials.html.twig", [
          'socials' => $socials
       ]);
