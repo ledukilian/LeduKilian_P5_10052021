@@ -27,13 +27,7 @@ class AdminController extends Controller {
 
    public function showCommentList() {
       $commentManager = new CommentManager();
-      $comments = $commentManager->findBy(
-         [],
-         [
-            'created_at' => 'DESC'
-         ],
-         20
-      );
+      $comments = $commentManager->getCommentsAndInfos();
       $this->render("@admin/pages/blog/comments.html.twig", [
          'comments' => $comments
       ]);
