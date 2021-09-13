@@ -10,9 +10,6 @@ class AccountController extends Controller {
 
 
    public function login() {
-      // session_destroy();
-      // var_dump($_SESSION);
-      // die;
       if (isset($_POST['email'])) {
          $userManager = new UserManager();
          if ($userManager->tryLogin()) {
@@ -25,7 +22,20 @@ class AccountController extends Controller {
    }
 
    public function register() {
-      $this->render("@client/pages/register.html.twig", []);
+      if (isset($_POST['email'])) {
+         $userManager = new UserManager();
+         if ($userManager->createUser()) {
+            header('Location: /');
+            exit;
+         }
+
+
+
+
+
+      } else {
+         $this->render("@client/pages/register.html.twig", []);
+      }
    }
 
    public function disconnect() {
