@@ -9,7 +9,7 @@ class UserManager extends Manager {
 
    public function tryLogin() {
       $password = $_POST['password'];
-      $query = ($this->db)->prepare("SELECT * FROM user WHERE user.email = :email");
+      $query = ($this->db)->prepare("SELECT user.id, user.username, user.lastname, user.firstname, user.email, 'Hidden' AS password, user.role, user.created_at, user.updated_at FROM user WHERE user.email = :email");
       $query->bindParam(':email', $_POST['email'], PDO::PARAM_STR);
       $query->execute();
       $user = $query->fetch(PDO::FETCH_ASSOC);
