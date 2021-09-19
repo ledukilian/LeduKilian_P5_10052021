@@ -12,32 +12,11 @@ class PostManager extends Manager {
 
    // TODO : findPostWithCommentsAndAuthors
    public function findPostAndComments() {
-      $sql = "SELECT post.*, comment.id AS comment_id,
-               	comment.created_at AS comment_created_at,
-               	comment.updated_at AS comment_updated_at,
-               	comment.comment,
-               	comment.user_id AS comment_user_id,
-               	user.username AS comment_user_username,
-               	user.lastname AS comment_user_lastname,
-               	user.firstname AS comment_user_firstname,
-               	'Hidden' AS comment_user_password,
-               	user.email AS comment_user_email,
-               	user.role AS comment_user_role,
-               	user.created_at AS comment_user_created_at,
-               	user.updated_at AS comment_user_updated_at,
+      $sql = "SELECT post.*, comment.id AS comment_id, comment.created_at AS comment_created_at, comment.updated_at AS comment_updated_at, comment.comment, comment.user_id AS comment_user_id,
+               	user.username AS comment_user_username, user.lastname AS comment_user_lastname, user.firstname AS comment_user_firstname, 'Hidden' AS comment_user_password, user.email AS comment_user_email, user.role AS comment_user_role, user.created_at AS comment_user_created_at, user.updated_at AS comment_user_updated_at,
                	post.admin_id AS admin_id,
-               	admin.username AS admin_username,
-               	admin.lastname AS admin_lastname,
-               	admin.firstname AS admin_firstname,
-               	'Hidden' AS admin_password,
-               	admin.email AS admin_email,
-               	admin.role AS admin_role,
-               	admin.created_at AS admin_created_at,
-               	admin.updated_at AS admin_updated_at,
-               	portfolio.catch_phrase AS admin_catch_phrase,
-               	portfolio.avatar_url AS admin_avatar_url,
-               	portfolio.avatar_alt_url AS admin_avatar_alt_url,
-               	portfolio.url_cv AS admin_url_cv
+               	admin.username AS admin_username, admin.lastname AS admin_lastname, admin.firstname AS admin_firstname, 'Hidden' AS admin_password, admin.email AS admin_email, admin.role AS admin_role, admin.created_at AS admin_created_at, admin.updated_at AS admin_updated_at,
+               	portfolio.catch_phrase AS admin_catch_phrase, portfolio.avatar_url AS admin_avatar_url, portfolio.avatar_alt_url AS admin_avatar_alt_url, portfolio.url_cv AS admin_url_cv
                FROM post
                INNER JOIN comment ON comment.post_id = post.id AND comment.status = 1
                LEFT JOIN user ON comment.user_id = user.id
