@@ -7,13 +7,13 @@ use App\Managers\PostManager;
 
 
 class AccountController extends Controller {
-
+   private String $indexLocation = 'Location: /';
 
    public function login() {
       if (isset($_POST['email'])) {
          $userManager = new UserManager();
          if ($userManager->tryLogin()) {
-            header('Location: /');
+            header($indexLocation);
             exit;
          }
       } else {
@@ -25,7 +25,7 @@ class AccountController extends Controller {
       if (isset($_POST['email'])) {
          $userManager = new UserManager();
          if ($userManager->createUser()) {
-            header('Location: /');
+            header($indexLocation);
             exit;
          }
       } else {
@@ -35,7 +35,7 @@ class AccountController extends Controller {
 
    public function disconnect() {
       session_destroy();
-      header('Location: /');
+      header($indexLocation);
       exit;
    }
 

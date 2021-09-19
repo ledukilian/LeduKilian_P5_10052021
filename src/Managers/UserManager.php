@@ -32,7 +32,6 @@ class UserManager extends Manager {
    }
 
    public function createUser() {
-      // TODO : Méthode pour les vérifications
       $_POST['username'] = htmlspecialchars($_POST['username']);
       $_POST['email'] = htmlspecialchars($_POST['email']);
       $_POST['firstname'] = htmlspecialchars($_POST['firstname']);
@@ -48,7 +47,7 @@ class UserManager extends Manager {
    }
 
    public function checkUserInformations() {
-      // TODO
+      // Empty
    }
 
 
