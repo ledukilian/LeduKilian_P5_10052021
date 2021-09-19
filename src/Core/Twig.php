@@ -73,7 +73,6 @@ class Twig {
       $twig->addGlobal('socials', $twigGlobals->getSocials());
       $twig->addGlobal('portfolio', $twigGlobals->getPortfolio());
       $twig->addGlobal('isConnected', $twigGlobals->getPortfolio());
-      //var_dump($twigGlobals->getSocials());
    }
 
     /**

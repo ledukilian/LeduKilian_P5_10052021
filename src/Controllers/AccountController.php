@@ -7,32 +7,44 @@ use App\Managers\PostManager;
 
 
 class AccountController extends Controller {
-
+   private String $indexLocation = 'Location: /';
 
    public function login() {
       if (isset($_POST['email'])) {
          $userManager = new UserManager();
          if ($userManager->tryLogin()) {
-            $postManager = new PostManager();
-            $posts = $postManager->findBy(
-               [],
-               [
-                  'created_at' => 'DESC'
-               ],
-               3
-            );
-            $this->render("@client/pages/index.html.twig", [
-               'posts' => $posts
-            ]);
+            header($indexLocation);
+            exit;
          }
       } else {
          $this->render("@client/pages/login.html.twig", []);
       }
-}
+   }
 
    public function register() {
-      $this->render("@client/pages/register.html.twig", []);
+      if (isset($_POST['email'])) {
+         $userManager = new UserManager();
+         if ($userManager->createUser()) {
+            header($indexLocation);
+            exit;
+         }
+      } else {
+         $this->render("@client/pages/register.html.twig", []);
+      }
    }
+
+   public function disconnect() {
+      session_destroy();
+      header($indexLocation);
+      exit;
+   }
+
+
+
+
+
+
+
 
 
 }
