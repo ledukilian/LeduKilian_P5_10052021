@@ -28,11 +28,6 @@ class AccountController extends Controller {
             header('Location: /');
             exit;
          }
-
-
-
-
-
       } else {
          $this->render("@client/pages/register.html.twig", []);
       }

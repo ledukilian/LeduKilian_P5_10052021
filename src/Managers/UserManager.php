@@ -12,11 +12,10 @@ class UserManager extends Manager {
       $query = ($this->db)->prepare("SELECT * FROM user WHERE user.email = :email");
       $query->bindParam(':email', $_POST['email'], PDO::PARAM_STR);
       $query->execute();
-      $result = $query->fetch(PDO::FETCH_ASSOC);
-      if (!empty($result)) {
-         if (password_verify($password, $result['password'])) {
-         //if ($password==$result['password']) {
-            self::createSession($result);
+      $user = $query->fetch(PDO::FETCH_ASSOC);
+      if (!empty($user)) {
+         if (password_verify($password, $user['password'])) {
+            self::createSession($user);
             return true;
          } else {
             return false;
@@ -33,6 +32,7 @@ class UserManager extends Manager {
    }
 
    public function createUser() {
+      // TODO : Méthode pour les vérifications
       $_POST['username'] = htmlspecialchars($_POST['username']);
       $_POST['email'] = htmlspecialchars($_POST['email']);
       $_POST['firstname'] = htmlspecialchars($_POST['firstname']);
@@ -47,6 +47,9 @@ class UserManager extends Manager {
       return $query->execute();
    }
 
+   public function checkUserInformations() {
+      // TODO
+   }
 
 
 

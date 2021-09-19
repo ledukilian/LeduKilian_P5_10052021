@@ -27,9 +27,11 @@
                <a class="nav-link" href="/inscription">Inscription</a>
             </li>
          {% else %}
+            {% if session.user.role == "ADMIN" %}
             <li class="nav-item">
-               <a class="nav-link text-warning" href="/admin/">Admin</a>
+               <a class="nav-link text-warning" href="/admin/">Administration</a>
             </li>
+            {% endif %}
             <li class="nav-item">
                <a class="nav-link text-danger" href="/deconnexion">Déconnexion</a>
             </li>
