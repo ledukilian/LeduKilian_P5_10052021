@@ -13,7 +13,7 @@ class AccountController extends Controller {
       if (isset($_POST['email'])) {
          $userManager = new UserManager();
          if ($userManager->tryLogin()) {
-            header($indexLocation);
+            header($this->indexLocation);
             exit;
          }
       } else {
@@ -25,7 +25,7 @@ class AccountController extends Controller {
       if (isset($_POST['email'])) {
          $userManager = new UserManager();
          if ($userManager->createUser()) {
-            header($indexLocation);
+            header($this->indexLocation);
             exit;
          }
       } else {
@@ -35,11 +35,13 @@ class AccountController extends Controller {
 
    public function disconnect() {
       session_destroy();
-      header($indexLocation);
+      header($this->indexLocation);
       exit;
    }
 
-
+   public function getIndexLocation() {
+      
+   }
 
 
 
