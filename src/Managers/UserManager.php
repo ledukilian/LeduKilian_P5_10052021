@@ -15,12 +15,14 @@ class UserManager extends Manager {
       $user = $query->fetch(PDO::FETCH_ASSOC);
       if (!empty($user)) {
          if (password_verify($password, $user['password'])) {
+            $user['password'] = 'Hidden';
             self::createSession($user);
             return true;
          } else {
             return false;
          }
       } else {
+
          return null;
       }
    }

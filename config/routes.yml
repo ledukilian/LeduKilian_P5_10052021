@@ -78,16 +78,11 @@ register:
   controller:       AccountController
   action:           register
   parameters:       [ ]
-putCommentOnline:
-   uri:             /admin/comment/([a-zA-Z0-9-]+)/mettre-en-ligne/
+toggleCommentStatus:
+   uri:             /admin/commentaire/([a-zA-Z0-9-]+)/changer-statut/
    controller:      CommentController
-   action:          putOnline
+   action:          toggleCommentStatus
    parameters:      ["id"]
-putCommentOffline:
- uri:               /admin/comment/([a-zA-Z0-9-]+)/mettre-hors-ligne/
- controller:        CommentController
- action:            putOffline
- parameters:        ["id"]
 error:
  uri:              /erreur
  controller:       IndexController

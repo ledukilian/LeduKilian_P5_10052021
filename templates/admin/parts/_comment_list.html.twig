@@ -9,11 +9,14 @@
          </blockquote>
          <div class="col-12 custom-control custom-switch text-right">
             {% if comment.status == 1 %}
-               <input type="checkbox" class="custom-control-input" id="{{ comment.id }}" checked />
+               <form method="POST" action="/admin/comment/{{ comment.id }}/mettre-hors-ligne/">
+               <input type="checkbox" class="custom-control-input" id="{{ comment.id }}" checked onchange="this.form.submit()" />
             {% else %}
-               <input type="checkbox" class="custom-control-input" id="{{ comment.id }}" />
+               <form method="POST" action="/admin/comment/{{ comment.id }}/mettre-en-ligne/">
+               <input type="checkbox" class="custom-control-input" id="{{ comment.id }}" onchange="this.form.submit()" />
             {% endif %}
-           <label class="custom-control-label" for="commentaire01">Afficher</label>
+           <label class="custom-control-label" for="{{ comment.id }}">Afficher</label>
+            </form>
          </div>
       </div>
    </div>

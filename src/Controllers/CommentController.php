@@ -6,12 +6,19 @@ use App\Core\Controller;
 
 class CommentController extends Controller {
 
-   public function putOnline() {
-      echo 'Mise en ligne';
+   public function toggleCommentStatus() {
+      // TODO : Si commentaire statut = 1 On désactive
+   
+
+
+
+
+
+
    }
 
-   public function putOffline() {
-      echo 'Mise hors ligne';
-   }
+
+
+
 
 }

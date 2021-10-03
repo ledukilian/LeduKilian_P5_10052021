@@ -24,22 +24,22 @@
          <form name="contact" id="contact-form" class="d-flex flex-column form-inline">
             <div class="d-flex flex-column col-12 form-group px-5">
                <label for="contact-nom" class="text-secondary align-self-start pb-1">Nom</label>
-               <input required="required" type="text" name="nom" id="contact-nom" class="form-control w-100" minlength="1" maxlength="30"/>
+               <input required="required" type="text" name="nom" id="contact-nom" class="form-control w-100" minlength="6" maxlength="48"  required="required" />
             </div>
 
             <div class="d-flex flex-column col-12 form-group mt-2 px-5">
                <label for="contact-email" class="text-secondary align-self-start pb-1">Adresse e-mail</label>
-               <input required="required" type="email" name="email" id="contact-email" class="form-control w-100" minlength="1" maxlength="30"/>
+               <input required="required" type="email" name="email" id="contact-email" class="form-control w-100" minlength="6" maxlength="256" required="required" />
             </div>
 
             <div class="d-flex flex-column col-12 form-group mt-2 px-5">
                <label for="contact-sujet" class="text-secondary align-self-start pb-1">Sujet</label>
-               <input required="required" type="text" name="sujet" id="contact-sujet" class="form-control w-100" minlength="1" maxlength="30"/>
+               <input required="required" type="text" name="sujet" id="contact-sujet" class="form-control w-100" minlength="6" maxlength="256" required="required" />
             </div>
 
             <div class="d-flex flex-column col-12 form-group mt-2 px-5">
                <label for="contact-message" class="text-secondary align-self-start pb-1">Message</label>
-               <textarea class="form-control w-100" name="message" id="contact-message" rows="6" cols="50"></textarea>
+               <textarea class="form-control w-100" name="message" id="contact-message" rows="6" cols="50" minlength="6" maxlength="2048" required="required"></textarea>
             </div>
             <input type="submit" class="btn btn-warning mt-3" value="Envoyer mon message"/>
          </form>
