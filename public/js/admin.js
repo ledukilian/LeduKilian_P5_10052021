@@ -6,12 +6,6 @@
 
 tinymce.init({
    selector: '#contenuArticle',
-   plugins: [
-      "a11ychecker advcode casechange formatpainter",
-      "linkchecker autolink lists checklist",
-      "media mediaembed pageembed permanentpen",
-      "powerpaste table advtable tinymcespellchecker"
-   ],
    menubar: false,
    toolbar: "formatselect | fontselect | bold italic strikethrough forecolor backcolor formatpainter | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent | link insertfile image | removeformat | code | addcomment | checklist | casechange",
    height: 360,
