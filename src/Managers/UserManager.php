@@ -27,7 +27,7 @@ class UserManager extends Manager {
       }
    }
 
-   public function createSession(Array $userElements) {
+   public function createSession(User $userElements) {
       $_SESSION['user'] = $userElements;
       $_SESSION['loginDate'] = date('Y-m-d H:i:s');
       $_SESSION['logged'] = TRUE;
