@@ -1,5 +1,4 @@
 <?php
-session_start();
 use App\Core\Router;
 use App\Controllers\ErrorController;
 
@@ -8,6 +7,7 @@ define('CONF_DIR', realpath(dirname(__DIR__)) . '/config');
 define('TEMPLATE_DIR', realpath(dirname(__DIR__)) . '/templates');
 
 require_once(ROOT_DIR . '/vendor/autoload.php');
+session_start();
 
 try {
    $config = yaml_parse_file(CONF_DIR."/config.yml");
