@@ -1,0 +1,9 @@
+mailer:
+   host: smtp.example.com
+   smtp: true
+   username: user@example.com
+   password: secret
+   port: 465
+from:
+   mail: from@example.com
+   name: Guy Mauve

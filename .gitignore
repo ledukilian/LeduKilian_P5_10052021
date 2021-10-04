@@ -3,5 +3,5 @@
 .vscode/
 /vendor/
 /var/
-/config/mail.yaml
+/config/mail.yml
 /config/db-config.yml

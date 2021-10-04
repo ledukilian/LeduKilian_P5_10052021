@@ -8,18 +8,20 @@ use PHPMailer\PHPMailer\Exception;
 
 class Mailer {
    private PHPMailer $mailer;
+   private Array $config;
 
    public function __construct() {
+      $config = yaml_parse_file(CONF_DIR . '/mail.yml');
       $this->setMailer(new PHPMailer(true));
       $mail->SMTPDebug = SMTP::DEBUG_SERVER;
       $mail->isSMTP();
-      $mail->Host       = 'smtp.example.com';
-      $mail->SMTPAuth   = true;
-      $mail->Username   = 'user@example.com';
-      $mail->Password   = 'secret';
+      $mail->Host = $config['mailer']['host'];
+      $mail->SMTPAuth = $config['mailer']['smtp'];
+      $mail->Username = $config['mailer']['username'];
+      $mail->Password = $config['mailer']['password'];
       $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-      $mail->Port       = 465;
-      $mail->setFrom('from@example.com', 'Mailer');
+      $mail->Port = $config['mailer']['port'];
+      $mail->setFrom($config['from']['mail'], $config['from']['name']);
    }
 
    public function send($arrayDaya) {
