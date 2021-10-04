@@ -109,6 +109,7 @@ class Manager {
       foreach (($object->getProperties()) as $property) {
          var_dump($property);
          $method = 'get'.str_replace(' ', '', ucwords(str_replace('_', ' ', $property)));
+
          $query->bindValue(':'.str_replace('_', '', strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $property))), $object->$method(), PDO::PARAM_STR);
       }
       var_dump($query);

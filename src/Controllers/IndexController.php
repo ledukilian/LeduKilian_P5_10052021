@@ -4,9 +4,20 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Managers\PostManager;
 use App\Core\PDOFactory;
+use App\Managers\UserManager;
 
 class IndexController extends Controller {
    public function showHome() {
+      $postManager = new PostManager();
+      $testObject = $postManager->findOneBy(
+         [
+            'id' => 1
+         ]
+      );
+      $postManager->insert($testObject);
+
+
+
       $postManager = new PostManager();
       $posts = $postManager->findBy(
          [],
