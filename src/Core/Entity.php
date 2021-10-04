@@ -1,6 +1,9 @@
 <?php
 namespace App\Core;
 
+use ReflectionClass;
+use ReflectionProperty;
+
 class Entity {
    private $_id;
    private $_createdAt;
@@ -20,6 +23,23 @@ class Entity {
                $this->$method($value);
            }
       }
+   }
+
+   public function getReflectionClass() {
+      return (new ReflectionClass($this));
+   }
+
+   public function getProperties() {
+      $properties = [];
+      $attr = $this->getReflectionClass()->getProperties();
+      foreach ($attr as $attribute) {
+         $properties[] = $attribute->name;
+      }
+      $attr = $this->getReflectionClass()->getParentClass()->getProperties();
+      foreach ($attr as $attribute) {
+         $properties[] = $attribute->name;
+      }
+      return $properties;
    }
 
    public function getId() {
