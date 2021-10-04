@@ -11,7 +11,8 @@ class Mailer {
    private Array $config;
 
    public function __construct() {
-      $config = yaml_parse_file(CONF_DIR . '/mail.yml');
+      $this->setConfig(yaml_parse_file(CONF_DIR . '/mail.yml'));
+      $config = $this->getConfig();
       $this->mailer = (new PHPMailer(true));
       $this->mailer->SMTPDebug = SMTP::DEBUG_SERVER;
       $this->mailer->isSMTP();
@@ -26,6 +27,7 @@ class Mailer {
 
    public function send(array $mailData) {
       try {
+          $config = $this->getConfig();
           $this->mailer->addAddress($mailData['mail'], $mailData['name']);
           $this->mailer->addReplyTo($config['from']['mail'], $config['from']['name']);
           $this->mailer->isHTML(true);
@@ -45,6 +47,14 @@ class Mailer {
 
    public function setMailer(PHPMailer $value) {
       $this->_mailer = $value;
+   }
+
+   public function getConfig() {
+      return $this->_config;
+   }
+
+   public function setConfig(Array $value) {
+      $this->_config = $value;
    }
 
 }
