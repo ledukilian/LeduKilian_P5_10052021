@@ -4,7 +4,7 @@ namespace App\Services;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-
+use App\Services\MessageHandler;
 
 class Mailer {
    private PHPMailer $mailer;
@@ -12,30 +12,30 @@ class Mailer {
 
    public function __construct() {
       $config = yaml_parse_file(CONF_DIR . '/mail.yml');
-      $this->setMailer(new PHPMailer(true));
-      $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-      $mail->isSMTP();
-      $mail->Host = $config['mailer']['host'];
-      $mail->SMTPAuth = $config['mailer']['smtp'];
-      $mail->Username = $config['mailer']['username'];
-      $mail->Password = $config['mailer']['password'];
-      $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-      $mail->Port = $config['mailer']['port'];
-      $mail->setFrom($config['from']['mail'], $config['from']['name']);
+      $this->mailer = (new PHPMailer(true));
+      $this->mailer->SMTPDebug = SMTP::DEBUG_SERVER;
+      $this->mailer->isSMTP();
+      $this->mailer->Host = $config['mailer']['host'];
+      $this->mailer->SMTPAuth = $config['mailer']['smtp'];
+      $this->mailer->Username = $config['mailer']['username'];
+      $this->mailer->Password = $config['mailer']['password'];
+      $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+      $this->mailer->Port = $config['mailer']['port'];
+      $this->mailer->setFrom($config['from']['mail'], $config['from']['name']);
    }
 
-   public function send($arrayDaya) {
+   public function send(array $mailData) {
       try {
-          $mail->addAddress('joe@example.net', 'Joe User');
-          $mail->addReplyTo('info@example.com', 'Information');
-          $mail->isHTML(true);
-          $mail->Subject = 'Here is the subject';
-          $mail->Body = 'This is the HTML message body <b>in bold!</b>';
-          $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-          $mail->send();
-          echo 'Message has been sent';
+          $this->mailer->addAddress($mailData['mail'], $mailData['name']);
+          $this->mailer->addReplyTo($config['from']['mail'], $config['from']['name']);
+          $this->mailer->isHTML(true);
+          $this->mailer->Subject = $mailData['subject'];
+          $this->mailer->Body = $mailData['message'];
+          $this->mailer->AltBody = htmlspecialchars($mailData['message']);
+          $this->mailer->send();
+          echo MessageHandler::MAIL_SENT;
       } catch (Exception $e) {
-          echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+          echo MessageHandler::MAIL_ERROR.' Erreur : '.$this->mailer->ErrorInfo;
       }
    }
 
