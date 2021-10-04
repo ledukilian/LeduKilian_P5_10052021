@@ -9,25 +9,25 @@ class UserManager extends Manager {
 
    public function tryLogin() {
       $password = $_POST['password'];
-      $query = ($this->db)->prepare("SELECT * FROM user WHERE user.email = :email");
-      $query->bindParam(':email', $_POST['email'], PDO::PARAM_STR);
-      $query->execute();
-      $user = $query->fetch(PDO::FETCH_ASSOC);
+      $user = $this->findOneBy(
+         [
+            'email' => $_POST['email']
+         ],
+      );
       if (!empty($user)) {
-         if (password_verify($password, $user['password'])) {
-            $user['password'] = 'Hidden';
+         if (password_verify($password, $user->getPassword())) {
+            $user->setPassword('Hidden');
             self::createSession($user);
             return true;
          } else {
             return false;
          }
       } else {
-
          return null;
       }
    }
 
-   public function createSession(Array $userElements) {
+   public function createSession(User $userElements) {
       $_SESSION['user'] = $userElements;
       $_SESSION['loginDate'] = date('Y-m-d H:i:s');
       $_SESSION['logged'] = TRUE;
