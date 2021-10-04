@@ -96,6 +96,29 @@ class Manager {
       return $entities;
    }
 
+   public function insert($object) {
+      $sql = 'INSERT INTO '.$this->tableName.' (';
+      $values = '';
+      foreach (($object->getProperties()) as $property) {
+         $sql .= str_replace('At', '_at', str_replace('_', '', preg_replace('/(?<!^)[A-Z]/', '_$0', $property))).', ';
+         $values .= ':'.str_replace('_', '', strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $property))).', ';
+      }
+      $sql = substr($sql, 0, -2).') VALUES ('.substr($values, 0, -2).')';
+      var_dump($sql);
+      $query = $this->db->prepare($sql);
+      foreach (($object->getProperties()) as $property) {
+         var_dump($property);
+         $method = 'get'.str_replace(' ', '', ucwords(str_replace('_', ' ', $property)));
+         $query->bindValue(':'.str_replace('_', '', strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $property))), $object->$method(), PDO::PARAM_STR);
+      }
+      var_dump($query);
+      // if ($query->execute()) {
+      //    return true;
+      // } else {
+      //    return false;
+      // }
+   }
+
 
 
 
