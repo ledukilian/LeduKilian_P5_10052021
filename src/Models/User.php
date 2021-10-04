@@ -6,8 +6,8 @@ use App\Core\Entity;
 
 class User extends Entity {
    private $_username;
-   private $_lastName;
-   private $_firstName;
+   private $_lastname;
+   private $_firstname;
    private $_email;
    private $_password;
    private $_role;
@@ -20,20 +20,20 @@ class User extends Entity {
       $this->_username = $value;
    }
 
-   public function getLastName() {
-      return $this->_lastName;
+   public function getLastname() {
+      return $this->_lastname;
    }
 
-   public function setLastName($value) {
-      $this->_lastName = $value;
+   public function setLastname($value) {
+      $this->_lastname = $value;
    }
 
-   public function getFirstName() {
-      return $this->_firstName;
+   public function getFirstname() {
+      return $this->_firstname;
    }
 
-   public function setFirstName($value) {
-      $this->_firstName = $value;
+   public function setFirstname($value) {
+      $this->_firstname = $value;
    }
 
    public function getEmail() {
