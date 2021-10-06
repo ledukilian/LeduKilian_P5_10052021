@@ -24,7 +24,8 @@ class AccountController extends Controller {
    public function register() {
       if (isset($_POST['email'])) {
          $userManager = new UserManager();
-         if ($userManager->createUser()) {
+         $newUser = (new User())->hydrate($_POST);
+         if ($userManager->insert($newUser)) {
             header($this->indexLocation);
             exit;
          }
@@ -40,7 +41,7 @@ class AccountController extends Controller {
    }
 
    public function getIndexLocation() {
-      
+
    }
 
 

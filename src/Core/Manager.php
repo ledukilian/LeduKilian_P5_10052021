@@ -4,6 +4,7 @@ namespace App\Core;
 use App\Core\PDOFactory;
 use ReflectionClass;
 use PDO;
+use PDOStatement;
 
 class Manager {
    protected $db;
@@ -96,37 +97,39 @@ class Manager {
       return $entities;
    }
 
-   public function insert($object) {
-      $sql = 'INSERT INTO '.$this->tableName.' (';
-      $values = '';
-      foreach (($object->getProperties()) as $property) {
-         $sql .= str_replace('At', '_at', str_replace('_', '', preg_replace('/(?<!^)[A-Z]/', '_$0', $property))).', ';
-         $values .= ':'.str_replace('_', '', strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $property))).', ';
+   public function insert(Entity $object) {
+      $properties = implode(', ', $object->getProperties());
+      $values = $object->getValues();
+      var_dump($values);
+      $placeholder = $this->addPlaceholders($values);
+      $query = $this->db->prepare('INSERT INTO '.$this->tableName.' ('.$properties.') VALUES ('.$placeholder.');');
+      $query = $this->bindValues($query, $values);
+      var_dump($properties);
+      die;
+      if ($query->execute()) {
+         return true;
+      } else {
+         return false;
       }
-      $sql = substr($sql, 0, -2).') VALUES ('.substr($values, 0, -2).')';
-      var_dump($sql);
-      $query = $this->db->prepare($sql);
-      foreach (($object->getProperties()) as $property) {
-         var_dump($property);
-         $method = 'get'.str_replace(' ', '', ucwords(str_replace('_', ' ', $property)));
-
-         $query->bindValue(':'.str_replace('_', '', strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $property))), $object->$method(), PDO::PARAM_STR);
-      }
-      var_dump($query);
-      // if ($query->execute()) {
-      //    return true;
-      // } else {
-      //    return false;
-      // }
    }
 
+   protected function bindValues(PDOStatement $query, array $values) {
+        $i = 0;
+        foreach ($values as $value) {
+            ++$i;
+            $query->bindValue($i, $value, \is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR);
+        }
+        return $query;
+    }
 
-
-
-
-
-
-
+   private function addPlaceholders(array $values) {
+        $valuesPlaceholder = [];
+        $totalValues = \count($values);
+        for ($i = 0; $i < $totalValues; ++$i) {
+            $valuesPlaceholder[] = '?';
+        }
+        return implode(', ', $valuesPlaceholder);
+    }
 
 
 }

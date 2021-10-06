@@ -32,14 +32,25 @@ class Entity {
    public function getProperties() {
       $properties = [];
       $attr = $this->getReflectionClass()->getProperties();
+      var_dump($attr);
       foreach ($attr as $attribute) {
-         $properties[] = $attribute->name;
-      }
-      $attr = $this->getReflectionClass()->getParentClass()->getProperties();
-      foreach ($attr as $attribute) {
-         $properties[] = $attribute->name;
+         $properties[] = ltrim($this->camelCaseToSnakeCase($attribute->name), '_');
       }
       return $properties;
+   }
+
+   public function getValues() {
+      $properties = $this->getProperties();
+      $values = [];
+      var_dump($properties);
+      foreach ($properties as $property) {
+         $method = 'get'.ucfirst($this->snakeCaseToCamelCase($property));
+         var_dump($method);
+         if (method_exists($this, $method)) {
+            $values[] = $this->{$method}();
+         }
+      }
+      return $values;
    }
 
    public function getId() {
@@ -64,5 +75,14 @@ class Entity {
 
    public function setUpdatedAt($value) {
       $this->_updatedAt = $value;
+   }
+
+   private function camelCaseToSnakeCase(string $property) {
+        return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $property));
+   }
+
+    private function snakeCaseToCamelCase(string $property) {
+      $str = str_replace(' ', '', ucwords(str_replace('_', ' ', $property)));
+      return $str;
    }
 }
