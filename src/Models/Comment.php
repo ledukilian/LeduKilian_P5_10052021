@@ -6,7 +6,7 @@ use App\Managers\UserManager;
 
 
 class Comment extends Entity {
-   private $_user;
+   private $user;
    private $_userId;
    private $_postId;
    private $_comment;
@@ -37,11 +37,11 @@ class Comment extends Entity {
    }
 
    public function getUser() {
-      return $this->_user;
+      return $this->user;
    }
 
    public function setUser($value) {
-      $this->_user = $value;
+      $this->user = $value;
    }
 
    public function getUserId() {
