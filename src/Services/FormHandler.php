@@ -2,16 +2,20 @@
 namespace App\Services;
 
 class FormHandler {
-   const RULES = [];
 
-   public function checkNotEmpty(Array $formData) {
-      foreach ($formData as $data) {
+
+
+
+   public function checkForm($arrayData) {
+      foreach ($arrayData as $data) {
          if (empty($data)) {
             return false;
          }
       }
       return true;
    }
+
+
 
 
 
