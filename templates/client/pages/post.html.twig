@@ -30,8 +30,9 @@
          {% else %}
             <h3 class="h3 mb-3">Ajouter mon commentaire<i class="fas fa-comment-medical ml-2"></i></h3>
             <i class="fas fa-user mr-2 ml-4"></i> {{ session.user.lastname }} {{ session.user.firstname }}
-            <form action="#" method="POST" class="d-flex flex-row justify-content-end flex-wrap">
-               <textarea class="form-control my-2"></textarea>
+            <form action="/commentaire/ajouter/" method="POST" class="d-flex flex-row justify-content-end flex-wrap">
+               <textarea class="form-control my-2" id="comment" name="comment"></textarea>
+               <input type="number" class="d-none" id="postId" name="postId" readonly value="{{ post.id }}" />
                <button class="btn btn-success px-3"><i class="fas fa-paper-plane mr-2"></i>Poster</button>
             </form>
          {% endif %}
