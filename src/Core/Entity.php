@@ -32,9 +32,10 @@ class Entity {
    public function getProperties() {
       $properties = [];
       $attr = $this->getReflectionClass()->getProperties();
-      var_dump($attr);
       foreach ($attr as $attribute) {
-         $properties[] = ltrim($this->camelCaseToSnakeCase($attribute->name), '_');
+         if (($attribute->name)[0]=="_") {
+            $properties[] = ltrim($this->camelCaseToSnakeCase($attribute->name), '_');
+         }
       }
       return $properties;
    }
@@ -42,10 +43,8 @@ class Entity {
    public function getValues() {
       $properties = $this->getProperties();
       $values = [];
-      var_dump($properties);
       foreach ($properties as $property) {
          $method = 'get'.ucfirst($this->snakeCaseToCamelCase($property));
-         var_dump($method);
          if (method_exists($this, $method)) {
             $values[] = $this->{$method}();
          }

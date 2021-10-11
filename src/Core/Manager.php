@@ -100,12 +100,9 @@ class Manager {
    public function insert(Entity $object) {
       $properties = implode(', ', $object->getProperties());
       $values = $object->getValues();
-      var_dump($values);
       $placeholder = $this->addPlaceholders($values);
       $query = $this->db->prepare('INSERT INTO '.$this->tableName.' ('.$properties.') VALUES ('.$placeholder.');');
       $query = $this->bindValues($query, $values);
-      var_dump($properties);
-      die;
       if ($query->execute()) {
          return true;
       } else {
