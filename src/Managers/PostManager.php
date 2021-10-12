@@ -24,7 +24,6 @@ class PostManager extends Manager {
                LEFT JOIN admin AS portfolio ON portfolio.id_user = admin.id
                WHERE post.slug = '".$slug."'";
       $results = ($this->db)->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-      var_dump($this->transformToPostAndComments($results));
       return $this->transformToPostAndComments($results);
    }
 

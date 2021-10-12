@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Managers\UserManager;
 use App\Managers\PostManager;
+use App\Models\User;
 
 
 class AccountController extends Controller {
@@ -24,8 +25,10 @@ class AccountController extends Controller {
    public function register() {
       if (isset($_POST['email'])) {
          $userManager = new UserManager();
-         $newUser = (new User())->hydrate($_POST);
-         if ($userManager->insert($newUser)) {
+         $userToCreate = new User($_POST);
+         $userToCreate->setRole("USER");
+         $userToCreate->setPasswordHashed($userToCreate->getPassword());
+         if ($userManager->insert($userToCreate)) {
             header($this->indexLocation);
             exit;
          }

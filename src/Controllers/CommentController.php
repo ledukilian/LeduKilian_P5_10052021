@@ -26,13 +26,11 @@ public function addComment() {
          $commentManager = new CommentManager();
          $_POST['_userId'] = $_SESSION['user']->getId();
          $_POST['_status'] = 1;
-         // if ($postManager->insert(new Post($_POST))) {
-         //
-         // } else {
-         //
-         // }
-         var_dump(new Comment($_POST));
-         die;
+         if ($commentManager->insert(new Comment($_POST))) {
+            var_dump('Réussi');
+         } else {
+            var_dump('Echec');
+         }
       }
    }
 }
