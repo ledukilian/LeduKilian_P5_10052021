@@ -9,20 +9,13 @@ use App\Managers\UserManager;
 class IndexController extends Controller {
    public function showHome() {
       $postManager = new PostManager();
-      // $posts = $postManager->findBy(
-      //    [],
-      //    [
-      //       'created_at' => 'DESC'
-      //    ],
-      //    3
-      // );
-      $posts = $postManager->findOneBy(
-         ['id' => 1]
+      $posts = $postManager->findBy(
+         [],
+         [
+            'created_at' => 'DESC'
+         ],
+         3
       );
-      $posts->setTitle('Ceci n\'est pas un test');
-      $postManager->update($posts);
-      die;
-
       $this->render("@client/pages/index.html.twig", [
          'posts' => $posts
       ]);
