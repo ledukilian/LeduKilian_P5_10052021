@@ -133,6 +133,18 @@ class Manager {
       }
    }
 
+   public function delete(Entity $object) {
+
+
+
+
+      if ($query->execute()) {
+         return true;
+      } else {
+         return false;
+      }
+   }
+
    protected function bindValuesPosition(PDOStatement $query, array $values) {
         $i = 0;
         foreach ($values as $value) {
