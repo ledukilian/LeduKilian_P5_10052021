@@ -9,6 +9,21 @@ use App\Services\FormHandler;
 
 class CommentController extends Controller {
 
+   public function addComment() {
+      if (!empty($_POST)) {
+         if ((new FormHandler())->checkform($_POST)) {
+            $commentManager = new CommentManager();
+            $comment = new Comment($_POST);
+            $comment->setUserId($_SESSION['user']->getId());
+            $comment->setStatus(1);
+            if ($commentManager->insert($comment)) {
+               header('Location: /blog/'.$this->params['slug']);
+               exit;
+            }
+         }
+      }
+   }
+
    public function toggleCommentStatus() {
       // TODO : Si commentaire statut = 1 On désactive
 
@@ -19,21 +34,6 @@ class CommentController extends Controller {
 
 
    }
-
-public function addComment() {
-   if (isset($_POST)) {
-      if ((new FormHandler())->checkform($_POST)) {
-         $commentManager = new CommentManager();
-         $_POST['_userId'] = $_SESSION['user']->getId();
-         $_POST['_status'] = 1;
-         if ($commentManager->insert(new Comment($_POST))) {
-            var_dump('Réussi');
-         } else {
-            var_dump('Echec');
-         }
-      }
-   }
-}
 
 
 
