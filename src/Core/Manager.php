@@ -103,11 +103,7 @@ class Manager {
       $placeholder = $this->addPlaceholders($values);
       $query = $this->db->prepare('INSERT INTO '.$this->tableName.' ('.$properties.') VALUES ('.$placeholder.');');
       $query = $this->bindValuesPosition($query, $values);
-      if ($query->execute()) {
-         return true;
-      } else {
-         return false;
-      }
+      return $query->execute();
    }
 
    public function update(Entity $object) {
@@ -123,22 +119,13 @@ class Manager {
       $query = $this->db->prepare($query);
       $query = $this->bindValuesNamed($query, $values);
       $query->bindValue(':id', $object->getId(), PDO::PARAM_INT);
-
-      if ($query->execute()) {
-         return true;
-      } else {
-         return false;
-      }
+      return $query->execute();
    }
 
    public function delete(Entity $object) {
       $query = $this->db->prepare("DELETE FROM ".$this->tableName." WHERE id = :id");
       $query->bindValue(':id', $object->getId(), PDO::PARAM_INT);
-      if ($query->execute()) {
-         return true;
-      } else {
-         return false;
-      }
+      return $query->execute();
    }
 
    protected function bindValuesPosition(PDOStatement $query, array $values) {

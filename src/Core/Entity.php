@@ -77,11 +77,10 @@ class Entity {
    }
 
    private function camelCaseToSnakeCase(string $property) {
-        return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $property));
+      return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $property));
    }
 
-    private function snakeCaseToCamelCase(string $property) {
-      $str = str_replace(' ', '', ucwords(str_replace('_', ' ', $property)));
-      return $str;
+   private function snakeCaseToCamelCase(string $property) {
+      return str_replace(' ', '', ucwords(str_replace('_', ' ', $property)));
    }
 }
