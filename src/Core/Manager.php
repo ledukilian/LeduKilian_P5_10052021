@@ -132,10 +132,8 @@ class Manager {
    }
 
    public function delete(Entity $object) {
-
-
-
-
+      $query = $this->db->prepare("DELETE FROM ".$this->tableName." WHERE id = :id");
+      $query->bindValue(':id', $object->getId(), PDO::PARAM_INT);
       if ($query->execute()) {
          return true;
       } else {
