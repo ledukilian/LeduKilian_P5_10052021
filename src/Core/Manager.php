@@ -112,7 +112,6 @@ class Manager {
 
    public function update(Entity $object) {
       $properties = implode(', ', $object->getProperties());
-      $object->setUpdatedAt('NOW()');
       $values = $object->getValues();
       $placeholder = $this->addPlaceholders($values);
       $query = 'UPDATE '.$this->tableName.' SET ';
@@ -120,12 +119,12 @@ class Manager {
          //var_dump($query);
          $query.= $property.' = :'.$key.', ';
       }
+      $query.= ' updated_at = NOW(), ';
       $query = substr($query, 0, -2).' WHERE id = :id';
-
       $query = $this->db->prepare($query);
-
       $query = $this->bindValuesNamed($query, $values);
       $query->bindValue(':id', $object->getId(), PDO::PARAM_INT);
+
       if ($query->execute()) {
          return true;
       } else {
