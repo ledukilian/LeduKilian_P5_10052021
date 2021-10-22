@@ -116,7 +116,6 @@ class Manager {
       $placeholder = $this->addPlaceholders($values);
       $query = 'UPDATE '.$this->tableName.' SET ';
       foreach ($object->getProperties() as $key => $property) {
-         //var_dump($query);
          $query.= $property.' = :'.$key.', ';
       }
       $query.= ' updated_at = NOW(), ';
