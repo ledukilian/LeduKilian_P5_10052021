@@ -172,7 +172,19 @@ class Manager {
         return implode(', ', $valuesPlaceholder);
     }
 
-    public static function slugify($text, string $divider = '-') {
+   private function checkSlugExist($slug) {
+      $query = $this->db->prepare("SELECT COUNT(*) AS nbr
+                                    FROM ".$this->tableName."
+                                    WHERE slug LIKE CONCAT(:slug, '%');");
+      $query->bindValue(':slug', $slug, PDO::PARAM_STR);
+      if ($query->execute()) {
+         return ($query->fetch(PDO::FETCH_ASSOC))['nbr'];
+      } else {
+         return false;
+      }
+   }
+
+    public function slugify($text, string $divider = '-') {
       $text = preg_replace('~[^\pL\d]+~u', $divider, $text);
       $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
       $text = preg_replace('~[^-\w]+~', '', $text);
@@ -182,7 +194,12 @@ class Manager {
       if (empty($text)) {
         return 'n-a';
       }
-      return $text;
+      $possibleSlug = $this->checkSlugExist($text);
+      if ($possibleSlug==0) {
+            return $text;
+      } else {
+            return $text.'-'.$possibleSlug;
+      }
     }
 
 }
