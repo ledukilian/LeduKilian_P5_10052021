@@ -67,7 +67,7 @@ class AdminController extends Controller {
    }
 
    public function addPost() {
-      if (isset($_POST)) {
+      if (!empty($_POST)) {
          if ((new FormHandler())->checkform($_POST)) {
             $postManager = new PostManager();
             $_POST['_adminId'] = $_SESSION['user']->getId();
