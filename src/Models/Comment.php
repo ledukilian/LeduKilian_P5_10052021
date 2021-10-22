@@ -50,11 +50,6 @@ class Comment extends Entity {
 
    public function setUserId($value) {
       $this->_userId = $value;
-      // 1 comment = 1 request (wrong) :
-      // $userManager = new UserManager();
-      // $this->setUser($userManager->findOneBy([
-      //    'id' => $this->_userId
-      // ]));
    }
 
 }
