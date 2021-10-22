@@ -102,7 +102,7 @@ class Manager {
       $values = $object->getValues();
       $placeholder = $this->addPlaceholders($values);
       $query = $this->db->prepare('INSERT INTO '.$this->tableName.' ('.$properties.') VALUES ('.$placeholder.');');
-      $query = $this->bindValues($query, $values);
+      $query = $this->bindValuesPosition($query, $values);
       if ($query->execute()) {
          return true;
       } else {
@@ -110,11 +110,43 @@ class Manager {
       }
    }
 
-   protected function bindValues(PDOStatement $query, array $values) {
+   public function update(Entity $object) {
+      $properties = implode(', ', $object->getProperties());
+      $object->setUpdatedAt('NOW()');
+      $values = $object->getValues();
+      $placeholder = $this->addPlaceholders($values);
+      $query = 'UPDATE '.$this->tableName.' SET ';
+      foreach ($object->getProperties() as $key => $property) {
+         //var_dump($query);
+         $query.= $property.' = :'.$key.', ';
+      }
+      $query = substr($query, 0, -2).' WHERE id = :id';
+
+      $query = $this->db->prepare($query);
+
+      $query = $this->bindValuesNamed($query, $values);
+      $query->bindValue(':id', $object->getId(), PDO::PARAM_INT);
+      if ($query->execute()) {
+         return true;
+      } else {
+         return false;
+      }
+   }
+
+   protected function bindValuesPosition(PDOStatement $query, array $values) {
         $i = 0;
         foreach ($values as $value) {
             ++$i;
             $query->bindValue($i, $value, \is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR);
+        }
+        return $query;
+    }
+
+   protected function bindValuesNamed(PDOStatement $query, array $values) {
+        $i = 0;
+        foreach ($values as $value) {
+            $query->bindValue(':'.$i, $value, \is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR);
+             ++$i;
         }
         return $query;
     }
