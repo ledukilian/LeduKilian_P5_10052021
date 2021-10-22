@@ -5,6 +5,7 @@ class Controller {
    protected $action;
    protected $params;
    protected $twig;
+   private String $indexLocation = 'Location: /';
 
    public function __construct($action, $params = NULL) {
       $this->action = $action;
@@ -21,6 +22,8 @@ class Controller {
       echo $this->twig->twigRender($template, $array);
    }
 
-
+   public function getIndexLocation() {
+      return $this->indexLocation;
+   }
 
 }
