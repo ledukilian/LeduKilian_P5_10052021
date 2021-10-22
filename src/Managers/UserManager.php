@@ -33,21 +33,6 @@ class UserManager extends Manager {
       $_SESSION['logged'] = TRUE;
    }
 
-   public function createUser() {
-      $_POST['username'] = htmlspecialchars($_POST['username']);
-      $_POST['email'] = htmlspecialchars($_POST['email']);
-      $_POST['firstname'] = htmlspecialchars($_POST['firstname']);
-      $_POST['lastname'] = htmlspecialchars($_POST['lastname']);
-      $query = ($this->db)->prepare("INSERT INTO user
-         VALUES (DEFAULT, :username, :lastname, :firstname, :email, :password, 'USER', NOW(), NOW())");
-      $query->bindParam(':username', $_POST['username'], PDO::PARAM_STR);
-      $query->bindParam(':lastname', $_POST['lastname'], PDO::PARAM_STR);
-      $query->bindParam(':firstname', $_POST['firstname'], PDO::PARAM_STR);
-      $query->bindParam(':email', $_POST['email'], PDO::PARAM_STR);
-      $query->bindParam(':password', password_hash($_POST['password'], PASSWORD_DEFAULT), PDO::PARAM_STR);
-      return $query->execute();
-   }
-
    public function checkUserInformations() {
       // Empty
    }

@@ -53,6 +53,11 @@ addPost:
   controller:       AdminController
   action:           addPost
   parameters:       [ ]
+addComment:
+  uri:              /blog/([a-zA-Z0-9-]+)/commentaire/ajouter/
+  controller:       CommentController
+  action:           addComment
+  parameters:       ["slug"]
 editPost:
   uri:              /admin/blog/([a-zA-Z0-9-]+)/modifier/
   controller:       AdminController

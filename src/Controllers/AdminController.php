@@ -6,6 +6,8 @@ use App\Managers\PostManager;
 use App\Managers\CommentManager;
 use App\Managers\SocialManager;
 use App\Managers\AdminManager;
+use App\Services\FormHandler;
+use App\Models\Post;
 
 
 class AdminController extends Controller {
@@ -65,6 +67,13 @@ class AdminController extends Controller {
    }
 
    public function addPost() {
+      if (!empty($_POST) && (new FormHandler())->checkform($_POST)) {
+         $postManager = new PostManager();
+         $post = new Post($_POST);
+         $post->setAdminId($_SESSION['user']->getId());
+         $post->setSlug($postManager->slugify($_POST['title']));
+         $postManager->insert($post);
+      }
       $this->render("@admin/pages/blog/add.html.twig", []);
    }
 

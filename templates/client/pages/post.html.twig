@@ -14,7 +14,7 @@
             <i class="fas fa-arrow-circle-left mr-2"></i>Retour au blog</button>
       </a>
       <img class="card-img-top w-75 border rounded" src="../../img/articles/{{ post.coverImg }}" alt="{{ post.coverAltImg }}">
-      <small class="text-muted mb-1">Article posté le {{post.post_date|date('d/m/Y à h:i')}} par {{ post.admin.firstname }} {{ post.admin.lastname }}</small>
+      <small class="text-muted mb-1">Article posté le {{post.post_date|date('d/m/Y à H:i')}} par {{ post.admin.firstname }} {{ post.admin.lastname }}</small>
       <h1 class="col-12 mt-3">{{ post.title }}</h1>
       <h3 class="col-12 mt-1">{{ post.lead }}</h3>
       <p class="col-12">{{ post.content }}</p>
@@ -30,18 +30,19 @@
          {% else %}
             <h3 class="h3 mb-3">Ajouter mon commentaire<i class="fas fa-comment-medical ml-2"></i></h3>
             <i class="fas fa-user mr-2 ml-4"></i> {{ session.user.lastname }} {{ session.user.firstname }}
-            <form action="#" method="POST" class="d-flex flex-row justify-content-end flex-wrap">
-               <textarea class="form-control my-2"></textarea>
+            <form action="/blog/{{ post.slug }}/commentaire/ajouter/" method="POST" class="d-flex flex-row justify-content-end flex-wrap">
+               <textarea class="form-control my-2" id="comment" name="comment"></textarea>
+               <input type="number" class="d-none" id="postId" name="postId" readonly value="{{ post.id }}" />
                <button class="btn btn-success px-3"><i class="fas fa-paper-plane mr-2"></i>Poster</button>
             </form>
          {% endif %}
          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800 mx-2"><i class="fas fa-comments mr-2"></i>Commentaires</h1>
+            <h1 class="h3 mb-0 text-gray-800 mx-2"><i class="fas fa-comments mr-2"></i>Derniers commentaires</h1>
          </div>
          {% for comment in post.comments %}
          <div class="card mb-3 col-12">
             <div class="d-flex flex-row flex-wrap card-body p-2">
-               <h5 class="col-12 card-title px-0 m-0"><span class="font-weight-bold">{{ comment.user.firstname }} {{ comment.user.lastname }}</span><small class="mr-2">  le {{comment.createdAt|date('d/m/Y à h:i')}}</small></h5>
+               <h5 class="col-12 card-title px-0 m-0"><span class="font-weight-bold">{{ comment.user.firstname }} {{ comment.user.lastname }}</span><small class="mr-2">  le {{comment.createdAt|date('d/m/Y à H:i')}}</small></h5>
                  <p class="card-text text-dark col-12 px-0 mb-0 my-2">{{ comment.comment }}</p>
             </div>
          </div>

@@ -4,16 +4,16 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Managers\UserManager;
 use App\Managers\PostManager;
+use App\Models\User;
 
 
 class AccountController extends Controller {
-   private String $indexLocation = 'Location: /';
 
    public function login() {
       if (isset($_POST['email'])) {
          $userManager = new UserManager();
          if ($userManager->tryLogin()) {
-            header($this->indexLocation);
+            header($this->getIndexLocation());
             exit;
          }
       } else {
@@ -24,8 +24,11 @@ class AccountController extends Controller {
    public function register() {
       if (isset($_POST['email'])) {
          $userManager = new UserManager();
-         if ($userManager->createUser()) {
-            header($this->indexLocation);
+         $userToCreate = new User($_POST);
+         $userToCreate->setRole("USER");
+         $userToCreate->setPasswordHashed($userToCreate->getPassword());
+         if ($userManager->insert($userToCreate)) {
+            header($this->getIndexLocation());
             exit;
          }
       } else {
@@ -35,14 +38,9 @@ class AccountController extends Controller {
 
    public function disconnect() {
       session_destroy();
-      header($this->indexLocation);
+      header($this->getIndexLocation());
       exit;
    }
-
-   public function getIndexLocation() {
-      
-   }
-
 
 
 

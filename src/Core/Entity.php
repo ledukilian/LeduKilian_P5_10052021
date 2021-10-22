@@ -1,6 +1,9 @@
 <?php
 namespace App\Core;
 
+use ReflectionClass;
+use ReflectionProperty;
+
 class Entity {
    private $_id;
    private $_createdAt;
@@ -20,6 +23,33 @@ class Entity {
                $this->$method($value);
            }
       }
+   }
+
+   public function getReflectionClass() {
+      return (new ReflectionClass($this));
+   }
+
+   public function getProperties() {
+      $properties = [];
+      $attr = $this->getReflectionClass()->getProperties();
+      foreach ($attr as $attribute) {
+         if (($attribute->name)[0]=="_") {
+            $properties[] = ltrim($this->camelCaseToSnakeCase($attribute->name), '_');
+         }
+      }
+      return $properties;
+   }
+
+   public function getValues() {
+      $properties = $this->getProperties();
+      $values = [];
+      foreach ($properties as $property) {
+         $method = 'get'.ucfirst($this->snakeCaseToCamelCase($property));
+         if (method_exists($this, $method)) {
+            $values[] = $this->{$method}();
+         }
+      }
+      return $values;
    }
 
    public function getId() {
@@ -44,5 +74,13 @@ class Entity {
 
    public function setUpdatedAt($value) {
       $this->_updatedAt = $value;
+   }
+
+   private function camelCaseToSnakeCase(string $property) {
+      return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $property));
+   }
+
+   private function snakeCaseToCamelCase(string $property) {
+      return str_replace(' ', '', ucwords(str_replace('_', ' ', $property)));
    }
 }

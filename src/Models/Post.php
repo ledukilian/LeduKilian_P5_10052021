@@ -12,9 +12,9 @@ class Post extends Entity {
    private $_lead;
    private $_content;
    private $_slug;
-   private $_admin;
    private $_adminId;
-   private $_comments = [];
+   private $admin;
+   private $comments = [];
 
    public function getTitle() {
       return $this->_title;
@@ -73,19 +73,19 @@ class Post extends Entity {
    }
 
    public function getAdmin() {
-      return $this->_admin;
+      return $this->admin;
    }
 
    public function setAdmin($value) {
-      $this->_admin = $value;
+      $this->admin = $value;
    }
 
    public function getComments() {
-      return $this->_comments;
+      return $this->comments;
    }
 
    public function setComments(Array $value) {
-      $this->_comments = $value;
+      $this->comments = $value;
    }
 }
 

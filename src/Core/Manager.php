@@ -4,6 +4,7 @@ namespace App\Core;
 use App\Core\PDOFactory;
 use ReflectionClass;
 use PDO;
+use PDOStatement;
 
 class Manager {
    protected $db;
@@ -96,13 +97,90 @@ class Manager {
       return $entities;
    }
 
+   public function insert(Entity $object) {
+      $properties = implode(', ', $object->getProperties());
+      $values = $object->getValues();
+      $placeholder = $this->addPlaceholders($values);
+      $query = $this->db->prepare('INSERT INTO '.$this->tableName.' ('.$properties.') VALUES ('.$placeholder.');');
+      $query = $this->bindValuesPosition($query, $values);
+      return $query->execute();
+   }
 
+   public function update(Entity $object) {
+      $values = $object->getValues();
+      $query = 'UPDATE '.$this->tableName.' SET ';
+      foreach ($object->getProperties() as $key => $property) {
+         $query.= $property.' = :'.$key.', ';
+      }
+      $query.= ' updated_at = NOW(), ';
+      $query = substr($query, 0, -2).' WHERE id = :id';
+      $query = $this->db->prepare($query);
+      $query = $this->bindValuesNamed($query, $values);
+      $query->bindValue(':id', $object->getId(), PDO::PARAM_INT);
+      return $query->execute();
+   }
 
+   public function delete(Entity $object) {
+      $query = $this->db->prepare("DELETE FROM ".$this->tableName." WHERE id = :id");
+      $query->bindValue(':id', $object->getId(), PDO::PARAM_INT);
+      return $query->execute();
+   }
 
+   protected function bindValuesPosition(PDOStatement $query, array $values) {
+        $i = 0;
+        foreach ($values as $value) {
+            ++$i;
+            $query->bindValue($i, $value, \is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR);
+        }
+        return $query;
+    }
 
+   protected function bindValuesNamed(PDOStatement $query, array $values) {
+        $i = 0;
+        foreach ($values as $value) {
+            $query->bindValue(':'.$i, $value, \is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR);
+             ++$i;
+        }
+        return $query;
+    }
 
+   private function addPlaceholders(array $values) {
+        $valuesPlaceholder = [];
+        $totalValues = \count($values);
+        for ($i = 0; $i < $totalValues; ++$i) {
+            $valuesPlaceholder[] = '?';
+        }
+        return implode(', ', $valuesPlaceholder);
+    }
 
+   private function checkSlugExist($slug) {
+      $query = $this->db->prepare("SELECT COUNT(*) AS nbr
+                                    FROM ".$this->tableName."
+                                    WHERE slug LIKE CONCAT(:slug, '%');");
+      $query->bindValue(':slug', $slug, PDO::PARAM_STR);
+      if ($query->execute()) {
+         return ($query->fetch(PDO::FETCH_ASSOC))['nbr'];
+      } else {
+         return false;
+      }
+   }
 
-
+    public function slugify($text, string $divider = '-') {
+      $text = preg_replace('~[^\pL\d]+~u', $divider, $text);
+      $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+      $text = preg_replace('~[^-\w]+~', '', $text);
+      $text = trim($text, $divider);
+      $text = preg_replace('~-+~', $divider, $text);
+      $text = strtolower($text);
+      if (empty($text)) {
+        return 'n-a';
+      }
+      $possibleSlug = $this->checkSlugExist($text);
+      if ($possibleSlug==0) {
+            return $text;
+      } else {
+            return $text.'-'.$possibleSlug;
+      }
+    }
 
 }
