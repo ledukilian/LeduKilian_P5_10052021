@@ -22,7 +22,8 @@ class PostManager extends Manager {
                LEFT JOIN user ON comment.user_id = user.id
                LEFT JOIN user as admin ON post.admin_id = admin.id
                LEFT JOIN admin AS portfolio ON portfolio.id_user = admin.id
-               WHERE post.slug = '".$slug."'";
+               WHERE post.slug = '".$slug."'
+               ORDER BY comment_created_at DESC";
       $results = ($this->db)->query($sql)->fetchAll(PDO::FETCH_ASSOC);
       return $this->transformToPostAndComments($results);
    }
