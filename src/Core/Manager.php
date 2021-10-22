@@ -107,9 +107,7 @@ class Manager {
    }
 
    public function update(Entity $object) {
-      $properties = implode(', ', $object->getProperties());
       $values = $object->getValues();
-      $placeholder = $this->addPlaceholders($values);
       $query = 'UPDATE '.$this->tableName.' SET ';
       foreach ($object->getProperties() as $key => $property) {
          $query.= $property.' = :'.$key.', ';
