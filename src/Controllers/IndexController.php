@@ -16,11 +16,6 @@ class IndexController extends Controller {
          ],
          3
       );
-      var_dump($postManager->slugify('Ceci n\' est pas un test'));
-      die;
-
-
-
       $this->render("@client/pages/index.html.twig", [
          'posts' => $posts
       ]);
