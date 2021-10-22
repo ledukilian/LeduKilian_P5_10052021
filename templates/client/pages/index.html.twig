@@ -33,7 +33,7 @@
                <div class="card-body">
                   <h5 class="card-title text-dark mb-1">{{post.title}}</h5>
                   <p class="card-text mb-0">
-                     <small class="text-muted mb-1">Le {{post.createdAt|date('d/m/Y à h:i')}}</small>
+                     <small class="text-muted mb-1">Le {{post.createdAt|date('d/m/Y à H:i')}}</small>
                   </p>
                   <small class="card-text text-dark">{{ post.content|length > 150 ? post.content|slice(0, 150) ~ '...' : post.content  }}</small>
                </div>
