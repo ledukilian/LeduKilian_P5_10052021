@@ -70,9 +70,10 @@ class AdminController extends Controller {
       if (!empty($_POST)) {
          if ((new FormHandler())->checkform($_POST)) {
             $postManager = new PostManager();
-            $_POST['_adminId'] = $_SESSION['user']->getId();
-            $_POST['_slug'] = $postManager->slugify($_POST['title']);
-            $postManager->insert(new Post($_POST));
+            $post = new Post($_POST);
+            $post->setAdminId($_SESSION['user']->getId());
+            $post->setSlug($postManager->slugify($_POST['title']));
+            $postManager->insert($post);
          }
       }
       $this->render("@admin/pages/blog/add.html.twig", []);
