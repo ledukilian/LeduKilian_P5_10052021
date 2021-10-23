@@ -8,14 +8,9 @@
            <footer class="blockquote-footer">Le {{comment.createdAt|date('d/m/Y à h:i')}} par <span class="badge badge-secondary">{{ comment.author }}</span></footer>
          </blockquote>
          <div class="col-12 custom-control custom-switch text-right">
-            {% if comment.status == 1 %}
-               <form method="POST" action="/admin/comment/{{ comment.id }}/mettre-hors-ligne/">
-               <input type="checkbox" class="custom-control-input" id="{{ comment.id }}" checked onchange="this.form.submit()" />
-            {% else %}
-               <form method="POST" action="/admin/comment/{{ comment.id }}/mettre-en-ligne/">
-               <input type="checkbox" class="custom-control-input" id="{{ comment.id }}" onchange="this.form.submit()" />
-            {% endif %}
-           <label class="custom-control-label" for="{{ comment.id }}">Afficher</label>
+               <form method="POST" action="/admin/commentaire/{{ comment.id }}/changer-statut/">
+               <input type="checkbox" class="custom-control-input" name="{{ comment.id }}" id="{{ comment.id }}" {% if comment.status == 1 %}value="1"{% else %}value="0"{% endif %} {% if comment.status == 1 %} checked {% endif %} onchange="this.form.submit()" />
+               <label class="custom-control-label" for="{{ comment.id }}">Afficher</label>
             </form>
          </div>
       </div>

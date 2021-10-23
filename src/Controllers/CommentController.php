@@ -23,13 +23,19 @@ class CommentController extends Controller {
    }
 
    public function toggleCommentStatus() {
-      // TODO : Si commentaire statut = 1 On désactive
-
-
-
-
-
-
+      $commentManager = new CommentManager();
+      $comment = $commentManager->findOneBy([
+         "id" => $this->params['id']
+      ]);
+      if ($comment->getStatus()==1) {
+         $comment->setStatus(0);
+      } else {
+         $comment->setStatus(1);
+      }
+      if ($commentManager->update($comment)) {
+         header('Location: /admin/blog/commentaires/');
+         exit;
+      }
 
    }
 

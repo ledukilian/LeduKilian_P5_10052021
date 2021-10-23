@@ -94,12 +94,12 @@ toggleCommentStatus:
    action:          toggleCommentStatus
    parameters:      ["id"]
 error:
- uri:              /erreur
- controller:       IndexController
- action:           showError
- parameters:       [ ]
+   uri:              /erreur
+   controller:       IndexController
+   action:           showError
+   parameters:       [ ]
 errorAdmin:
- uri:              /admin/erreur
- controller:       IndexController
- action:           showError
- parameters:       [ ]
+   uri:              /admin/erreur
+   controller:       IndexController
+   action:           showError
+   parameters:       [ ]
