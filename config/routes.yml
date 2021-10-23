@@ -43,6 +43,11 @@ editSocials:
    controller:       AdminController
    action:           editSocials
    parameters:       [ ]
+addSocial:
+   uri:              /admin/reseaux/ajouter
+   controller:       AdminController
+   action:           addSocial
+   parameters:       [ ]
 listPost:
   uri:              /admin/blog/
   controller:       AdminController

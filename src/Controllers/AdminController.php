@@ -8,6 +8,7 @@ use App\Managers\SocialManager;
 use App\Managers\AdminManager;
 use App\Services\FormHandler;
 use App\Models\Post;
+use App\Models\Social;
 
 
 class AdminController extends Controller {
@@ -75,6 +76,18 @@ class AdminController extends Controller {
          $postManager->insert($post);
       }
       $this->render("@admin/pages/blog/add.html.twig", []);
+   }
+
+   public function addSocial() {
+      if (!empty($_POST) && (new FormHandler())->checkform($_POST)) {
+         $socialManager = new SocialManager();
+         $social = new Social($_POST);
+         $social->setIdAdmin($_SESSION['user']->getId());
+         if ($socialManager->insert($social)) {
+            header('Location: /admin/reseaux/');
+            exit;
+         }
+      }
    }
 
    public function editPost() {
