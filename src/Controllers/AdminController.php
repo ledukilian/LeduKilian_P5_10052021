@@ -118,7 +118,14 @@ class AdminController extends Controller {
    }
 
    public function deletePost() {
-      echo "Page de suppression d'un post";
+      if (!empty($this->params['slug'])) {
+         $postManager = new PostManager();
+         $post = $postManager->findOneBy(['slug' => $this->params['slug']]);
+         if ($postManager->delete($post)) {
+            header('Location: /admin/');
+            exit;
+         }
+      }
    }
 
    public function showError() {
