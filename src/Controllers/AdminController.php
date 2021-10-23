@@ -6,9 +6,12 @@ use App\Managers\PostManager;
 use App\Managers\CommentManager;
 use App\Managers\SocialManager;
 use App\Managers\AdminManager;
+use App\Managers\UserManager;
 use App\Services\FormHandler;
 use App\Models\Post;
 use App\Models\Social;
+use App\Models\Admin;
+use App\Models\User;
 
 
 class AdminController extends Controller {
@@ -38,6 +41,30 @@ class AdminController extends Controller {
    }
 
    public function editPortfolio() {
+      if (!empty($_POST)) {
+         $userManager = new UserManager();
+         $adminManager = new AdminManager();
+         $admin = new Admin($_POST);
+         $user = new User($_POST);
+         $admin->setId(1);
+         $user->setId(1);
+         // var_dump($admin);
+         // var_dump($user);
+         // var_dump($userManager->update($user));
+         // var_dump($adminManager->update($admin));
+         // die;
+         if ($adminManager->update($admin) && $userManager->update($user)) {
+            return true;
+         } else {
+            return false;
+         }
+      }
+
+
+
+
+
+
       $this->render("@admin/pages/portfolio/edit.html.twig", []);
    }
 

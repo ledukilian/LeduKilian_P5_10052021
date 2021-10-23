@@ -17,24 +17,24 @@
          </div>
          <div class="d-flex flex-column col-lg-12 mb-4">
 
-            <form class="card px-3 py-1" action="#">
+            <form class="card px-3 py-1" action="/admin/portfolio/" method="POST">
                <div class="form-group d-flex flex-row flex-wrap">
                   <label class="col-12 px-0 font-weight-bold text-dark mb-3" for="cvProfil">Informations générales</label>
                   <div class="form-group col-12">
                      <div class="input-group pb-2">
-                        <label class="w-100" for="leadPhrasePortfolio">Phrase d'accroche</label>
-                        <input type="text" class="form-control" id="leadPhrasePortfolio" name="leadPhrasePortfolio" value="{{ admin.catchphrase }}" />
-                        <label class="w-100 mt-2" for="emailAddressPortfolio">Adresse mail</label>
-                        <input name="email" class="form-control" type="email" id="emailAddressPortfolio" name="emailAddressPortfolio" value="{{ admin.email }}" />
+                        <label class="w-100" for="catchPhrase">Phrase d'accroche</label>
+                        <input type="text" class="form-control" id="catchPhrase" name="catchPhrase" value="{{ admin.catchphrase }}" required="required" />
+                        <label class="w-100 mt-2" for="email">Adresse mail</label>
+                        <input class="form-control" type="email" id="email" name="email" value="{{ admin.email }}" required="required" />
                         <label class="w-100 mt-2" for="lastnamePortfolio">Nom et prénom</label>
-                        <input name="nom" class="form-control" type="text" id="lastnamePortfolio" name="lastnamePortfolio" placeholder="Nom" value="{{ admin.lastname }}" />
-                        <input name="prenom" class="form-control" type="text" id="firstnamePortfolio" name="firstnamePortfolio" placeholder="Prénom" value="{{ admin.firstname }}" />
-                        <label class="w-100 mt-2" for="usernamePortfolio">Nom d'utilisateur</label>
-                        <input name="username" class="form-control" id="usernamePortfolio" name="usernamePortfolio" type="text" value="{{ admin.username }}" />
-                        <label class="w-100 mt-2" for="passwordPortfolio">Mot de passe</label>
+                        <input class="form-control" type="text" id="lastname" name="lastname" placeholder="Nom" value="{{ admin.lastname }}" required="required" />
+                        <input class="form-control" type="text" id="firstname" name="firstname" placeholder="Prénom" value="{{ admin.firstname }}" required="required" />
+                        <label class="w-100 mt-2" for="username">Nom d'utilisateur</label>
+                        <input class="form-control" id="username" name="username" type="text" value="{{ admin.username }}" required="required" />
+                        <label class="w-100 mt-2" for="password">Mot de passe</label>
                         <small class="col-12 px-0 mb-2"><i class="fas fa-info-circle mr-2"></i>Laissez vide pour ne pas changer.</small>
-                        <input name="password" class="form-control" id="passwordPortfolio" name="passwordPortfolio" type="password" />
-                        <input name="password-confirm" class="form-control" id="passwordConfirmPortfolio" name="passwordConfirmPortfolio" type="password" />
+                        <input class="form-control" id="password" name="password" type="password" />
+                        <input class="form-control" id="password-confirm" name="password-confirm" type="password" />
                      </div>
                   </div>
                </div>

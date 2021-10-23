@@ -117,6 +117,8 @@ class Manager {
       $query = $this->db->prepare($query);
       $query = $this->bindValuesNamed($query, $values);
       $query->bindValue(':id', $object->getId(), PDO::PARAM_INT);
+      var_dump($query);
+      die;
       return $query->execute();
    }
 

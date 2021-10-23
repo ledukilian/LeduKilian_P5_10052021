@@ -8,7 +8,7 @@ class Admin extends User {
    private $_avatarUrl;
    private $_avatarAltUrl;
    private $_catchPhrase;
-   private $_urlCV;
+   private $_urlCv;
 
    public function getAvatarUrl() {
       return $this->_avatarUrl;
@@ -35,11 +35,11 @@ class Admin extends User {
    }
 
    public function getUrlCV() {
-      return $this->_urlCV;
+      return $this->_urlCv;
    }
 
    public function setUrlCV($value) {
-      $this->_urlCV = $value;
+      $this->_urlCv = $value;
    }
 
 }
