@@ -16,7 +16,7 @@ class CommentController extends Controller {
          $comment->setUserId($_SESSION['user']->getId());
          $comment->setStatus(1);
          if ($commentManager->insert($comment)) {
-            header('Location: /blog/'.$this->params['slug']);
+            header('Location: /blog/'.$this->params['id']);
             exit;
          }
       }

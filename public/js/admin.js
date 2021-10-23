@@ -19,5 +19,7 @@ function showModal(element) {
    // console.log(modal.getElementsByClassName('modal-content')[0].innerHTML);
    modal.getElementsByClassName('modal-body')[0].innerHTML = data.content;
    modal.getElementsByClassName('modal-title')[0].innerHTML = data.title;
+   console.log(data);
+   $('#modalAction').attr('action', data.action);
    $('#' + data.target).modal('show');
 }

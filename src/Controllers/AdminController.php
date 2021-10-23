@@ -90,6 +90,17 @@ class AdminController extends Controller {
       }
    }
 
+   public function deleteSocial() {
+      if (!empty($this->params['id'])) {
+         $socialManager = new SocialManager();
+         $social = $socialManager->findOneBy(['id' => $this->params['id']]);
+         if ($socialManager->delete($social)) {
+            header('Location: /admin/reseaux/');
+            exit;
+         }
+      }
+   }
+
    public function editPost() {
       $slug = $this->params['slug'];
       $postManager = new PostManager();

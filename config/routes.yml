@@ -48,6 +48,11 @@ addSocial:
    controller:       AdminController
    action:           addSocial
    parameters:       [ ]
+deleteSocial:
+   uri:              /admin/reseaux/([a-zA-Z0-9-]+)/supprimer/
+   controller:       AdminController
+   action:           deleteSocial
+   parameters:       ["id"]
 listPost:
   uri:              /admin/blog/
   controller:       AdminController
@@ -62,7 +67,7 @@ addComment:
   uri:              /blog/([a-zA-Z0-9-]+)/commentaire/ajouter/
   controller:       CommentController
   action:           addComment
-  parameters:       ["slug"]
+  parameters:       ["id"]
 editPost:
   uri:              /admin/blog/([a-zA-Z0-9-]+)/modifier/
   controller:       AdminController

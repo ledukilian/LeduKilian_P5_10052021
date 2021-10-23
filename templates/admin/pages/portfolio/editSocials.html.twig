@@ -48,8 +48,6 @@
                      </tr>
                   </thead>
                   <tbody>
-
-
                      {% for social in socials %}
                      <tr id="{{ social.id }}">
                         <td class="h3 text-center">{{ social.icon | raw }}</td>
@@ -58,18 +56,14 @@
                            <a href="#" class="text-primary mx-1">
                               <i class="fas fa-eye"></i>
                            </a>
-                           <a href="#" class="text-warning mx-1">
-                              <i class="fas fa-pen"></i>
-                           </a>
-                           <a href="#" class="text-danger mx-1" data-toggle="modal" data-target="#confirmerSuppression">
+                           <a href="#" class="text-danger mx-1" onclick="showModal(this);return false;" data-toggle="modal" data-target="confirm" data-title="Supprimer" data-action="/admin/reseaux/{{ social.id }}/supprimer/" data-content="{{ "Voulez-vous vraiment supprimer le réseau "~social.name~" ?"}}">
                               <i class="fas fa-trash-alt"></i>
                            </a>
                         </tr>
                      {% endfor %}
-
-
                      </tbody>
                   </table>
+                  {% include "admin/parts/_modal.html.twig"%}
             </div>
          </div>
       </div>
