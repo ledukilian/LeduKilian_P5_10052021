@@ -62,7 +62,7 @@ class AdminController extends Controller {
       $this->render("@admin/pages/portfolio/edit.html.twig", []);
    }
 
-   public function editSocials() {
+   public function showSocialList() {
       $this->redirectIfNotAdmin();
       $socialManager = new SocialManager();
       $socials = $socialManager->findBy(
@@ -70,7 +70,7 @@ class AdminController extends Controller {
             'id_admin' => 1
          ]
       );
-      $this->render("@admin/pages/portfolio/editSocials.html.twig", [
+      $this->render("@admin/pages/portfolio/socialList.html.twig", [
          'socials' => $socials
       ]);
    }
