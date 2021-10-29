@@ -26,4 +26,11 @@ class Controller {
       return $this->indexLocation;
    }
 
+   public function redirectIfNotAdmin() {
+      if (!$_SESSION['user']->isAdmin()) {
+         header($this->getIndexLocation());
+         exit;
+      }
+   }
+
 }
