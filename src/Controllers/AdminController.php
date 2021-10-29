@@ -8,6 +8,7 @@ use App\Managers\SocialManager;
 use App\Managers\AdminManager;
 use App\Managers\UserManager;
 use App\Services\FormHandler;
+use App\Services\TwigGlobals;
 use App\Models\Post;
 use App\Models\Social;
 use App\Models\Admin;
@@ -16,6 +17,7 @@ use App\Models\User;
 
 class AdminController extends Controller {
    public function showAdmin() {
+      $this->redirectIfNotAdmin();
       $postManager = new PostManager();
       $commentManager = new CommentManager();
       $posts = $postManager->findBy(
@@ -33,6 +35,7 @@ class AdminController extends Controller {
    }
 
    public function showCommentList() {
+      $this->redirectIfNotAdmin();
       $commentManager = new CommentManager();
       $comments = $commentManager->getCommentsAndInfos();
       $this->render("@admin/pages/blog/comments.html.twig", [
@@ -41,34 +44,26 @@ class AdminController extends Controller {
    }
 
    public function editPortfolio() {
+      $this->redirectIfNotAdmin();
       if (!empty($_POST)) {
+         $twigGlobals = new TwigGlobals();
          $userManager = new UserManager();
          $adminManager = new AdminManager();
          $admin = new Admin($_POST);
          $user = new User($_POST);
-         $admin->setId(1);
-         $user->setId(1);
-         // var_dump($admin);
-         // var_dump($user);
-         // var_dump($userManager->update($user));
-         // var_dump($adminManager->update($admin));
-         // die;
+         $admin->setId($twigGlobals->getAdminId());
+         $user->setId($twigGlobals->getAdminId());
          if ($adminManager->update($admin) && $userManager->update($user)) {
             return true;
          } else {
             return false;
          }
       }
-
-
-
-
-
-
       $this->render("@admin/pages/portfolio/edit.html.twig", []);
    }
 
    public function editSocials() {
+      $this->redirectIfNotAdmin();
       $socialManager = new SocialManager();
       $socials = $socialManager->findBy(
          [
@@ -81,6 +76,7 @@ class AdminController extends Controller {
    }
 
    public function showPostList() {
+      $this->redirectIfNotAdmin();
       $postManager = new PostManager();
       $posts = $postManager->findBy(
          [],
@@ -95,6 +91,7 @@ class AdminController extends Controller {
    }
 
    public function addPost() {
+      $this->redirectIfNotAdmin();
       if (!empty($_POST) && (new FormHandler())->checkform($_POST)) {
          $postManager = new PostManager();
          $post = new Post($_POST);
@@ -106,6 +103,7 @@ class AdminController extends Controller {
    }
 
    public function addSocial() {
+      $this->redirectIfNotAdmin();
       if (!empty($_POST) && (new FormHandler())->checkform($_POST)) {
          $socialManager = new SocialManager();
          $social = new Social($_POST);
@@ -118,6 +116,7 @@ class AdminController extends Controller {
    }
 
    public function deleteSocial() {
+      $this->redirectIfNotAdmin();
       if (!empty($this->params['id'])) {
          $socialManager = new SocialManager();
          $social = $socialManager->findOneBy(['id' => $this->params['id']]);
@@ -129,6 +128,7 @@ class AdminController extends Controller {
    }
 
    public function editPost() {
+      $this->redirectIfNotAdmin();
       $slug = $this->params['slug'];
       $postManager = new PostManager();
       $post = $postManager->findBy(
@@ -145,6 +145,7 @@ class AdminController extends Controller {
    }
 
    public function deletePost() {
+      $this->redirectIfNotAdmin();
       if (!empty($this->params['slug'])) {
          $postManager = new PostManager();
          $post = $postManager->findOneBy(['slug' => $this->params['slug']]);
@@ -156,10 +157,12 @@ class AdminController extends Controller {
    }
 
    public function showError() {
+      $this->redirectIfNotAdmin();
       $this->render("@admin/errors/error.html.twig", []);
    }
 
    public function show404() {
+      $this->redirectIfNotAdmin();
       $this->render("@admin/errors/404.html.twig", []);
    }
 
