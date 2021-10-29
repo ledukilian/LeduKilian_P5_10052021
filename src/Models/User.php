@@ -64,4 +64,12 @@ class User extends Entity {
       $this->_role = $value;
    }
 
+   public function isAdmin() {
+      if (($this->_role)=='ADMIN') {
+         return true;
+      } else {
+         return false;
+      }
+   }
+
 }
