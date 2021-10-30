@@ -23,3 +23,12 @@ function showModal(element) {
    $('#modalAction').attr('action', data.action);
    $('#' + data.target).modal('show');
 }
+
+function loadForm(element) {
+   data = element.dataset;
+   $('#name').val(data.name);
+   $('#link').val(data.link);
+   $('#icon').val(data.icon);
+   $('#formSocial').attr('action', '/admin/reseaux/'+data.id+'/edit/')
+   $('#submitSocial').html('<i class="fas fa-pen mr-2"></i>Modifier')
+}
