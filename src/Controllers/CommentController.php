@@ -5,6 +5,7 @@ use App\Core\Controller;
 use App\Managers\CommentManager;
 use App\Models\Comment;
 use App\Services\FormHandler;
+use App\Services\MessageHandler;
 
 
 class CommentController extends Controller {
@@ -24,12 +25,15 @@ class CommentController extends Controller {
 
    public function toggleCommentStatus() {
       $commentManager = new CommentManager();
+      $messageHandler = new MessageHandler();
       $comment = $commentManager->findOneBy([
          "id" => $this->params['id']
       ]);
       if ($comment->getStatus()==1) {
+         $messageHandler->setMessage('success', 'Le commentaire a bien été désactivé');
          $comment->setStatus(0);
       } else {
+         $messageHandler->setMessage('success', 'Le commentaire a bien été activé');
          $comment->setStatus(1);
       }
       if ($commentManager->update($comment)) {
