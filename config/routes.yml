@@ -8,11 +8,6 @@ contact:
   controller:       IndexController
   action:           showContact
   parameters:       [ ]
-portfolio:
-  uri:              /portfolio
-  controller:       IndexController
-  action:           showPortfolio
-  parameters:       [ ]
 blogPage:
   uri:              /blog/([0-9-]+)/
   controller:       BlogController
@@ -33,10 +28,10 @@ listComments:
    controller:       AdminController
    action:           showCommentList
    parameters:       [ ]
-editPortfolio:
-   uri:              /admin/portfolio/
+editInformations:
+   uri:              /admin/informations/
    controller:       AdminController
-   action:           editPortfolio
+   action:           editInformations
    parameters:       [ ]
 showSocialList:
    uri:              /admin/reseaux/
