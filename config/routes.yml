@@ -48,6 +48,11 @@ deleteSocial:
    controller:       AdminController
    action:           deleteSocial
    parameters:       ["id"]
+editSocial:
+   uri:              /admin/reseaux/([a-zA-Z0-9-]+)/edit/
+   controller:       AdminController
+   action:           editSocial
+   parameters:       ["id"]
 listPost:
   uri:              /admin/blog/
   controller:       AdminController
