@@ -2,12 +2,17 @@
 namespace App\Services;
 
 class MessageHandler {
-   const string MAIL_MISSING_CONFIG = "Le fichier de configuration des mails est inexistant";
-   const string MAIL_SENT = "Le mail a bien été envoyé !";
-   const string MAIL_ERROR = "Une erreur est survenue lors de l'envoi du mail !";
 
-
-
+   public function setMessage($type, $message) {
+      $_SESSION['message']['show'] = true;
+      if (in_array($type, ['success', 'warning', 'danger', 'primary'])) {
+         $_SESSION['message']['type'] = $type;
+      } else {
+         $_SESSION['message']['type'] = 'primary';
+      }
+      $_SESSION['message']['text'] = $message;
+      return true;
+   }
 
 
 
