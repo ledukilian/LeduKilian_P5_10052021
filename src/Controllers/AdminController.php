@@ -17,6 +17,7 @@ use App\Models\User;
 
 
 class AdminController extends Controller {
+
    public function showAdmin() {
       $this->redirectIfNotAdmin();
       $postManager = new PostManager();
@@ -57,10 +58,8 @@ class AdminController extends Controller {
          $user = $userManager->findOneBy([
             'id' => $twigGlobals->getAdminId()
          ]);
-         var_dump(new Admin($_POST));
-         var_dump($admin);
-         var_dump($adminManager->update($admin));
-         die;
+         $user->hydrate($_POST);
+         $admin->hydrate($_POST);
          if ($adminManager->update($admin) && $userManager->update($user)) {
             $messageHandler->setMessage('success', 'Les informations ont bien été mise à jour');
             header('Location: /admin/');
@@ -136,18 +135,21 @@ class AdminController extends Controller {
       }
    }
 
-   public function deleteSocial() {
+   public function editSocial() {
       $this->redirectIfNotAdmin();
-      if (!empty($this->params['id'])) {
-         $socialManager = new SocialManager();
+      if (!empty($_POST)) {
          $messageHandler = new MessageHandler();
-         $social = $socialManager->findOneBy(['id' => $this->params['id']]);
-         if ($socialManager->delete($social)) {
-            $messageHandler->setMessage('success', 'Le réseau social a bien été supprimé');
+         $socialManager = new SocialManager();
+         $social = $socialManager->findOneBy([
+            'id' => $this->params['id']
+         ]);
+         $social->hydrate($_POST);
+         if ($socialManager->update($social)) {
+            $messageHandler->setMessage('success', 'Le réseau social a bien été mis à jour');
             header('Location: /admin/reseaux/');
             exit;
          } else {
-            $messageHandler->setMessage('danger', 'Une erreur est survenue lors de la suppression du réseau social');
+            $messageHandler->setMessage('danger', 'Une erreur est survenue lors de la mise à jour du réseau social');
          }
       }
    }
@@ -167,6 +169,22 @@ class AdminController extends Controller {
       $this->render("@admin/pages/blog/edit.html.twig", [
          'post' => $post[0]
       ]);
+   }
+
+   public function deleteSocial() {
+      $this->redirectIfNotAdmin();
+      if (!empty($this->params['id'])) {
+         $socialManager = new SocialManager();
+         $messageHandler = new MessageHandler();
+         $social = $socialManager->findOneBy(['id' => $this->params['id']]);
+         if ($socialManager->delete($social)) {
+            $messageHandler->setMessage('success', 'Le réseau social a bien été supprimé');
+            header('Location: /admin/reseaux/');
+            exit;
+         } else {
+            $messageHandler->setMessage('danger', 'Une erreur est survenue lors de la suppression du réseau social');
+         }
+      }
    }
 
    public function deletePost() {
