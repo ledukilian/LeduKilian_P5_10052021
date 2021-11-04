@@ -58,6 +58,9 @@ class AdminController extends Controller {
          $user = $userManager->findOneBy([
             'id' => $twigGlobals->getAdminId()
          ]);
+         if (empty(trim($_POST['password']))) {
+            unset($_POST['password']);
+         }
          $user->hydrate($_POST);
          $admin->hydrate($_POST);
          if ($adminManager->update($admin) && $userManager->update($user)) {

@@ -15,6 +15,9 @@ class UserManager extends Manager {
          ],
       );
       if (!empty($user)) {
+         var_dump($password);
+         var_dump($user->getPassword());
+         var_dump(password_verify($password, $user->getPassword()));
          if (password_verify($password, $user->getPassword())) {
             $user->setPassword('Hidden');
             self::createSession($user);

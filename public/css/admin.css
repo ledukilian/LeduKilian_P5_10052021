@@ -11516,10 +11516,6 @@ body.sidebar-toggled footer.sticky-footer {
    border-left: 12px solid;
    opacity: 1;
 }
-.alert:hover {
-   transition: 0.4s;
-   opacity: 0.80;
-}
 .alert-primary {
    border-color: #008aff;
    color: #008aff;

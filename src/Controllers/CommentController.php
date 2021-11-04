@@ -13,10 +13,12 @@ class CommentController extends Controller {
    public function addComment() {
       if (!empty($_POST) && (new FormHandler())->checkform($_POST)) {
          $commentManager = new CommentManager();
+         $messageHandler = new MessageHandler();
          $comment = new Comment($_POST);
          $comment->setUserId($_SESSION['user']->getId());
          $comment->setStatus(0);
          if ($commentManager->insert($comment)) {
+            $messageHandler->setMessage('success', 'Votre commentaire a bien été pris en compte, il sera traité prochainement');
             header('Location: /blog/'.$this->params['id']);
             exit;
          }

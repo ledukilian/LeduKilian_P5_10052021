@@ -21,9 +21,8 @@ class AccountController extends Controller {
          } else {
             $messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'authentification.');
          }
-      } else {
-         $this->render("@client/pages/login.html.twig", []);
       }
+      $this->render("@client/pages/login.html.twig", []);
    }
 
    public function register() {
@@ -32,7 +31,6 @@ class AccountController extends Controller {
          $userManager = new UserManager();
          $userToCreate = new User($_POST);
          $userToCreate->setRole("USER");
-         $userToCreate->setPasswordHashed($userToCreate->getPassword());
          if ($userManager->insert($userToCreate)) {
             $messageHandler->setMessage('success', 'Création de compte réussie, veuillez vous connecter.');
             header($this->getIndexLocation());
@@ -40,9 +38,8 @@ class AccountController extends Controller {
          } else {
             $messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'inscription.');
          }
-      } else {
-         $this->render("@client/pages/register.html.twig", []);
       }
+      $this->render("@client/pages/register.html.twig", []);
    }
 
    public function disconnect() {
