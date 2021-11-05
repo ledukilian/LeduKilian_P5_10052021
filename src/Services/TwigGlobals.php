@@ -15,17 +15,6 @@ class TwigGlobals {
       return 1;
    }
 
-   public function getMessage() {
-      if (!isset($_SESSION['message'])) {
-         $_SESSION['message']['show'] = false;
-      }
-      return $_SESSION['message'];
-   }
-
-   public function cleanMessage() {
-      return $_SESSION['message']['show'] = false;
-   }
-
    public function getSession() {
       return $_SESSION;
    }
