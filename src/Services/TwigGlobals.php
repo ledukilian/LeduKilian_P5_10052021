@@ -38,8 +38,7 @@ class TwigGlobals {
 
    public function getPortfolio() {
       $adminManager = new AdminManager();
-      $portfolio = $adminManager->findAdminBy($this->getAdminId());
-      return $portfolio;
+      return $adminManager->findAdminBy($this->getAdminId());
    }
 
 
