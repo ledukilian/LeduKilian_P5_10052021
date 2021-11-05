@@ -48,8 +48,12 @@ class User extends Entity {
       return $this->_password;
    }
 
-   public function setPassword($value) {
+   public function setPasswordHashed($value) {
       $this->_password = password_hash($value, PASSWORD_DEFAULT);
+   }
+
+   public function setPassword($value) {
+      $this->_password = $value;
    }
 
    public function getRole() {
