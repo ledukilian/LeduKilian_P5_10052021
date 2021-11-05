@@ -31,6 +31,7 @@ class AccountController extends Controller {
          $userManager = new UserManager();
          $userToCreate = new User($_POST);
          $userToCreate->setRole("USER");
+         $userToCreate->setPasswordHashed($userToCreate->getPassword());
          if ($userManager->insert($userToCreate)) {
             $messageHandler->setMessage('success', 'Création de compte réussie, veuillez vous connecter.');
             header($this->getIndexLocation());
