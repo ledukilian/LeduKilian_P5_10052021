@@ -14,33 +14,34 @@ class ValidatorConstraint {
       }
    }
 
-   public function required($key) {
-
-   }
-
-   public function notEmpty($key) {
-
-   }
-
-   public function unique($key) {
-
-   }
-
-   public function length($key, $min, $max) {
-
-   }
-
-   public function email($key) {
-
-   }
-
-   public function password($key) {
-
-   }
-
-   public function slug($key) {
-
-   }
+   // public function required($key) {
+   //    // À faire
+   // }
+   //
+   // public function notEmpty($key) {
+   //    // À faire
+   // }
+   //
+   // public function unique($key) {
+   //    // À faire
+   // }
+   //
+   // public function length($key, $min, $max) {
+   //    // À faire
+   // }
+   //
+   // public function email($key) {
+   //    // À faire
+   // }
+   //
+   // public function password($key) {
+   //    // À faire
+   //
+   // }
+   //
+   // public function slug($key) {
+   //    // À faire
+   // }
 
 
 

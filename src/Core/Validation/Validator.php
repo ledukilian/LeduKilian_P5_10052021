@@ -11,11 +11,11 @@ class Validator {
       $this->validator = new ValidatorConstraint($this->data, $manager);
    }
 
-   // TODO : Validation de base, fonction basicValidation
-   // TODO : 1 fonction par formulaire
+   // Validation de base, fonction basicValidation
+   // 1 fonction par formulaire
 
    public function basicValidation() {
-      
+      // Fonction de validation de base
    }
 
    public function checkAdminForm() {
