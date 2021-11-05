@@ -22,8 +22,7 @@ class AccountController extends Controller {
       if (isset($_POST['email'])) {
          if ($this->userManager->tryLogin()) {
             $this->messageHandler->setMessage('success', 'Connexion réussie ! Vous êtes maintenant connecté.');
-            header($this->getIndexLocation());
-            exit;
+            $this->redirectToIndex();
          } else {
             $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'authentification.');
          }
@@ -33,13 +32,12 @@ class AccountController extends Controller {
 
    public function register() {
       if (isset($_POST['email'])) {
-         $userToCreate = new User($_POST);
-         $userToCreate->setRole("USER");
-         $userToCreate->setPasswordHashed($userToCreate->getPassword());
-         if ($this->userManager->insert($userToCreate)) {
+         $user = new User($_POST);
+         $user->setRole("USER");
+         $user->setPasswordHashed($user->getPassword());
+         if ($this->userManager->insert($user)) {
             $this->messageHandler->setMessage('success', 'Création de compte réussie, veuillez vous connecter.');
-            header($this->getIndexLocation());
-            exit;
+            $this->redirectToIndex();
          } else {
             $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'inscription.');
          }
@@ -48,10 +46,8 @@ class AccountController extends Controller {
    }
 
    public function disconnect() {
-      $this->messageHandler->setMessage('success', 'Déconnexion réussie, vous êtes bien déconnecté');
       session_destroy();
-      header($this->getIndexLocation());
-      exit;
+      $this->redirectToIndex();
    }
 
 
