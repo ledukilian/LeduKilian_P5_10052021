@@ -9,16 +9,22 @@ use App\Services\MessageHandler;
 
 
 class CommentController extends Controller {
+   protected MessageHandler $messageHandler;
+   protected CommentManager $commentManager;
+
+   public function __construct($action, $params = NULL) {
+      parent::__construct($action, $params);
+      $this->messageHandler = new MessageHandler();
+      $this->commentManager = new CommentManager();
+   }
 
    public function addComment() {
       if (!empty($_POST) && (new FormHandler())->checkform($_POST)) {
-         $commentManager = new CommentManager();
-         $messageHandler = new MessageHandler();
          $comment = new Comment($_POST);
          $comment->setUserId($_SESSION['user']->getId());
          $comment->setStatus(0);
-         if ($commentManager->insert($comment)) {
-            $messageHandler->setMessage('success', 'Votre commentaire a bien été pris en compte, il sera traité prochainement');
+         if ($this->commentManager->insert($comment)) {
+            $this->messageHandler->setMessage('success', 'Votre commentaire a bien été pris en compte, il sera traité prochainement');
             header('Location: /blog/'.$this->params['id']);
             exit;
          }
@@ -26,19 +32,17 @@ class CommentController extends Controller {
    }
 
    public function toggleCommentStatus() {
-      $commentManager = new CommentManager();
-      $messageHandler = new MessageHandler();
-      $comment = $commentManager->findOneBy([
+      $comment = $this->commentManager->findOneBy([
          "id" => $this->params['id']
       ]);
       if ($comment->getStatus()==1) {
-         $messageHandler->setMessage('success', 'Le commentaire a bien été désactivé');
+         $this->messageHandler->setMessage('success', 'Le commentaire a bien été désactivé');
          $comment->setStatus(0);
       } else {
-         $messageHandler->setMessage('success', 'Le commentaire a bien été activé');
+         $this->messageHandler->setMessage('success', 'Le commentaire a bien été activé');
          $comment->setStatus(1);
       }
-      if ($commentManager->update($comment)) {
+      if ($this->commentManager->update($comment)) {
          header('Location: /admin/blog/commentaires/');
          exit;
       }
