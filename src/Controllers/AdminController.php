@@ -63,11 +63,15 @@ class AdminController extends Controller {
    public function editInformations() {
       $this->redirectIfNotAdmin();
       if (!empty($_POST)) {
-         if (empty(trim($_POST['password']))) {
-            unset($_POST['password']);
-         }
-         $admin = $this->hydrateAdminFromPost($_POST);
-         $user = $this->hydrateUserFromPost($_POST);
+         $admin = $this->adminManager->findOneBy([
+            'id' => $this->twigGlobals->getAdminId()
+         ]);
+         $user = $this->userManager->findOneBy([
+            'id' => $this->twigGlobals->getAdminId()
+         ]);
+         $user->hydrate($_POST);
+         $admin->hydrate($_POST);
+         $user->setPasswordHashed($user->getPassword());
          if ($this->adminManager->update($admin) && $this->userManager->update($user)) {
             $this->messageHandler->setMessage('success', 'Les informations ont bien été mise à jour');
             $this->redirectToAdmin();
@@ -76,23 +80,6 @@ class AdminController extends Controller {
          }
       }
       $this->render("@admin/pages/informations/edit.html.twig", []);
-   }
-
-   public function hydrateUserFromPost($data) {
-      $user = $this->userManager->findOneBy([
-         'id' => $this->twigGlobals->getAdminId()
-      ]);
-      $user->hydrate($_POST);
-      $user->setPasswordHashed($user->getPassword());
-      return $user;
-   }
-
-   public function hydrateAdminFromPost($data) {
-      $admin = $this->adminManager->findOneBy([
-         'id' => $this->twigGlobals->getAdminId()
-      ]);
-      $admin->hydrate($_POST);
-      return $admin;
    }
 
    public function showSocialList() {

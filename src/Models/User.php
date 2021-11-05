@@ -53,7 +53,9 @@ class User extends Entity {
    }
 
    public function setPassword($value) {
-      $this->_password = $value;
+      if (!empty(trim($value))) {
+         $this->_password = $value;
+      }
    }
 
    public function getRole() {
