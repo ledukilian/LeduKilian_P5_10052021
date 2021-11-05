@@ -36,11 +36,6 @@ class TwigGlobals {
       return $socials;
    }
 
-   public function getPortfolio() {
-      $adminManager = new AdminManager();
-      return $adminManager->findAdminBy($this->getAdminId());
-   }
-
 
 
 
