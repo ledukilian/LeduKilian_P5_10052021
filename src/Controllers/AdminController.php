@@ -17,6 +17,16 @@ use App\Models\User;
 
 
 class AdminController extends Controller {
+   private String $socialPath = '/admin/reseaux/';
+   private String $adminPath = '/admin/';
+
+   public function getSocialPath() {
+      return $this->socialPath;
+   }
+
+   public function getAdminPath() {
+      return $this->adminPath;
+   }
 
    public function showAdmin() {
       $this->redirectIfNotAdmin();
@@ -65,7 +75,7 @@ class AdminController extends Controller {
          $admin->hydrate($_POST);
          if ($adminManager->update($admin) && $userManager->update($user)) {
             $messageHandler->setMessage('success', 'Les informations ont bien été mise à jour');
-            header('Location: /admin/');
+            header('Location: '.$this->getAdminPath());
             exit;
          } else {
             $messageHandler->setMessage('danger', 'Une erreur est survenue lors de la mise à jour des informations');
@@ -112,7 +122,7 @@ class AdminController extends Controller {
          $post->setSlug($postManager->slugify($_POST['title']));
          if ($postManager->insert($post)) {
             $messageHandler->setMessage('success', 'Le nouveau post a bien été ajouté');
-            header('Location: /admin/');
+            header('Location: '.$this->getAdminPath());
             exit;
          } else {
             $messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'ajout du post');
@@ -130,7 +140,7 @@ class AdminController extends Controller {
          $social->setIdAdmin($_SESSION['user']->getId());
          if ($socialManager->insert($social)) {
             $messageHandler->setMessage('success', 'Le nouveau réseau social a bien été ajouté');
-            header('Location: /admin/reseaux/');
+            header('Location: '.$this->getSocialPath());
             exit;
          } else {
             $messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'ajout du réseau social');
@@ -149,7 +159,7 @@ class AdminController extends Controller {
          $social->hydrate($_POST);
          if ($socialManager->update($social)) {
             $messageHandler->setMessage('success', 'Le réseau social a bien été mis à jour');
-            header('Location: /admin/reseaux/');
+            header('Location: '.$this->getSocialPath());
             exit;
          } else {
             $messageHandler->setMessage('danger', 'Une erreur est survenue lors de la mise à jour du réseau social');
@@ -182,7 +192,7 @@ class AdminController extends Controller {
          $social = $socialManager->findOneBy(['id' => $this->params['id']]);
          if ($socialManager->delete($social)) {
             $messageHandler->setMessage('success', 'Le réseau social a bien été supprimé');
-            header('Location: /admin/reseaux/');
+            header('Location: '.$this->getSocialPath());
             exit;
          } else {
             $messageHandler->setMessage('danger', 'Une erreur est survenue lors de la suppression du réseau social');
@@ -198,7 +208,7 @@ class AdminController extends Controller {
          $post = $postManager->findOneBy(['slug' => $this->params['slug']]);
          if ($postManager->delete($post)) {
             $messageHandler->setMessage('success', 'Le post de blog a bien été supprimé');
-            header('Location: /admin/');
+            header('Location: '.$this->getAdminPath());
             exit;
          } else {
             $messageHandler->setMessage('danger', 'Une erreur est survenue lors de la suppression du post');

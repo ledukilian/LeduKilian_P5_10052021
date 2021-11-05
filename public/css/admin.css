@@ -4983,7 +4983,6 @@ a.badge-dark.focus, a.badge-dark:focus {
    position: relative;
    padding: .75rem 1.25rem;
    margin-bottom: 1rem;
-   border: 1px solid transparent;
    border-radius: .35rem;
    transition: 0.4s;
    border: none;
@@ -11511,31 +11510,4 @@ footer.sticky-footer .copyright {
 
 body.sidebar-toggled footer.sticky-footer {
    width: 100%
-}
-
-.alert {
-   transition: 0.4s;
-   border: none;
-   border-left: 12px solid;
-   opacity: 1;
-}
-.alert-primary {
-   border-color: #008aff;
-   color: #008aff;
-   background-color: #d7ebff;
-}
-.alert-success {
-   border-color: #00b907;
-   color: #00b907;
-   background-color: #e2ffe9;
-}
-.alert-warning {
-   border-color: #fda300;
-   color: #fda300;
-   background-color: #fff4cf;
-}
-.alert-danger {
-   border-color: #f62035;
-   color: #f62035;
-   background-color: #ffdee1;
 }
