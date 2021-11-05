@@ -17,14 +17,28 @@ use App\Models\User;
 
 
 class AdminController extends Controller {
-   const socialPath = 'Location: /admin/reseaux/';
-   const adminPath = 'Location: /admin/';
+   protected MessageHandler $messageHandler;
+   protected TwigGlobals $twigGlobals;
+   protected UserManager $userManager;
+   protected AdminManager $adminManager;
+   protected PostManager $postManager;
+   protected CommentManager $commentManager;
+   protected SocialManager $socialManager;
+
+   public function __construct($action, $params = NULL) {
+      parent::__construct($action, $params);
+      $this->messageHandler = new MessageHandler();
+      $this->twigGlobals = new TwigGlobals();
+      $this->userManager = new UserManager();
+      $this->adminManager = new AdminManager();
+      $this->postManager = new PostManager();
+      $this->commentManager = new CommentManager();
+      $this->socialManager = new SocialManager();
+   }
 
    public function showAdmin() {
       $this->redirectIfNotAdmin();
-      $postManager = new PostManager();
-      $commentManager = new CommentManager();
-      $posts = $postManager->findBy(
+      $posts = $this->postManager->findBy(
          [],
          [
             'created_at' => 'DESC'
@@ -33,15 +47,14 @@ class AdminController extends Controller {
       );
       $this->render("@admin/pages/index.html.twig", [
          'posts' => $posts,
-         'articles_count' => $postManager->countElements(),
-         'comments_count' => $commentManager->countElements()
+         'articles_count' => $this->postManager->countElements(),
+         'comments_count' => $this->commentManager->countElements()
       ]);
    }
 
    public function showCommentList() {
       $this->redirectIfNotAdmin();
-      $commentManager = new CommentManager();
-      $comments = $commentManager->getCommentsAndInfos();
+      $comments = $this->commentManager->getCommentsAndInfos();
       $this->render("@admin/pages/blog/comments.html.twig", [
          'comments' => $comments
       ]);
@@ -50,15 +63,11 @@ class AdminController extends Controller {
    public function editInformations() {
       $this->redirectIfNotAdmin();
       if (!empty($_POST)) {
-         $messageHandler = new MessageHandler();
-         $twigGlobals = new TwigGlobals();
-         $userManager = new UserManager();
-         $adminManager = new AdminManager();
-         $admin = $adminManager->findOneBy([
-            'id' => $twigGlobals->getAdminId()
+         $admin = $this->adminManager->findOneBy([
+            'id' => $this->twigGlobals->getAdminId()
          ]);
-         $user = $userManager->findOneBy([
-            'id' => $twigGlobals->getAdminId()
+         $user = $this->userManager->findOneBy([
+            'id' => $this->twigGlobals->getAdminId()
          ]);
          if (empty(trim($_POST['password']))) {
             unset($_POST['password']);
@@ -66,12 +75,11 @@ class AdminController extends Controller {
          $user->hydrate($_POST);
          $admin->hydrate($_POST);
          $user->setPasswordHashed($user->getPassword());
-         if ($adminManager->update($admin) && $userManager->update($user)) {
-            $messageHandler->setMessage('success', 'Les informations ont bien été mise à jour');
-            header($this::adminPath);
-            exit;
+         if ($this->adminManager->update($admin) && $this->userManager->update($user)) {
+            $this->messageHandler->setMessage('success', 'Les informations ont bien été mise à jour');
+            $this->redirectToAdmin();
          } else {
-            $messageHandler->setMessage('danger', 'Une erreur est survenue lors de la mise à jour des informations');
+            $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de la mise à jour des informations');
          }
       }
       $this->render("@admin/pages/informations/edit.html.twig", []);
@@ -79,8 +87,7 @@ class AdminController extends Controller {
 
    public function showSocialList() {
       $this->redirectIfNotAdmin();
-      $socialManager = new SocialManager();
-      $socials = $socialManager->findBy(
+      $socials = $this->socialManager->findBy(
          [
             'id_admin' => 1
          ]
@@ -92,8 +99,7 @@ class AdminController extends Controller {
 
    public function showPostList() {
       $this->redirectIfNotAdmin();
-      $postManager = new PostManager();
-      $posts = $postManager->findBy(
+      $posts = $this->postManager->findBy(
          [],
          [
             'created_at' => 'DESC'
@@ -108,17 +114,14 @@ class AdminController extends Controller {
    public function addPost() {
       $this->redirectIfNotAdmin();
       if (!empty($_POST) && (new FormHandler())->checkform($_POST)) {
-         $messageHandler = new MessageHandler();
-         $postManager = new PostManager();
          $post = new Post($_POST);
          $post->setAdminId($_SESSION['user']->getId());
-         $post->setSlug($postManager->slugify($_POST['title']));
-         if ($postManager->insert($post)) {
-            $messageHandler->setMessage('success', 'Le nouveau post a bien été ajouté');
-            header($this::adminPath);
-            exit;
+         $post->setSlug($this->postManager->slugify($_POST['title']));
+         if ($this->postManager->insert($post)) {
+            $this->messageHandler->setMessage('success', 'Le nouveau post a bien été ajouté');
+            $this->redirectToAdmin();
          } else {
-            $messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'ajout du post');
+            $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'ajout du post');
          }
       }
       $this->render("@admin/pages/blog/add.html.twig", []);
@@ -127,16 +130,13 @@ class AdminController extends Controller {
    public function addSocial() {
       $this->redirectIfNotAdmin();
       if (!empty($_POST) && (new FormHandler())->checkform($_POST)) {
-         $messageHandler = new MessageHandler();
-         $socialManager = new SocialManager();
          $social = new Social($_POST);
          $social->setIdAdmin($_SESSION['user']->getId());
-         if ($socialManager->insert($social)) {
-            $messageHandler->setMessage('success', 'Le nouveau réseau social a bien été ajouté');
-            header($this::socialPath);
-            exit;
+         if ($this->socialManager->insert($social)) {
+            $this->messageHandler->setMessage('success', 'Le nouveau réseau social a bien été ajouté');
+            $this->redirectToSocial();
          } else {
-            $messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'ajout du réseau social');
+            $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'ajout du réseau social');
          }
       }
    }
@@ -144,18 +144,15 @@ class AdminController extends Controller {
    public function editSocial() {
       $this->redirectIfNotAdmin();
       if (!empty($_POST)) {
-         $messageHandler = new MessageHandler();
-         $socialManager = new SocialManager();
-         $social = $socialManager->findOneBy([
+         $social = $this->socialManager->findOneBy([
             'id' => $this->params['id']
          ]);
          $social->hydrate($_POST);
-         if ($socialManager->update($social)) {
-            $messageHandler->setMessage('success', 'Le réseau social a bien été mis à jour');
-            header($this::socialPath);
-            exit;
+         if ($this->socialManager->update($social)) {
+            $this->messageHandler->setMessage('success', 'Le réseau social a bien été mis à jour');
+            $this->redirectToSocial();
          } else {
-            $messageHandler->setMessage('danger', 'Une erreur est survenue lors de la mise à jour du réseau social');
+            $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de la mise à jour du réseau social');
          }
       }
    }
@@ -163,8 +160,7 @@ class AdminController extends Controller {
    public function editPost() {
       $this->redirectIfNotAdmin();
       $slug = $this->params['slug'];
-      $postManager = new PostManager();
-      $post = $postManager->findBy(
+      $post = $this->postManager->findBy(
          [
             'slug' => $slug
          ],
@@ -180,15 +176,12 @@ class AdminController extends Controller {
    public function deleteSocial() {
       $this->redirectIfNotAdmin();
       if (!empty($this->params['id'])) {
-         $socialManager = new SocialManager();
-         $messageHandler = new MessageHandler();
-         $social = $socialManager->findOneBy(['id' => $this->params['id']]);
-         if ($socialManager->delete($social)) {
-            $messageHandler->setMessage('success', 'Le réseau social a bien été supprimé');
-            header($this::socialPath);
-            exit;
+         $social = $this->socialManager->findOneBy(['id' => $this->params['id']]);
+         if ($this->socialManager->delete($social)) {
+            $this->messageHandler->setMessage('success', 'Le réseau social a bien été supprimé');
+            $this->redirectToSocial();
          } else {
-            $messageHandler->setMessage('danger', 'Une erreur est survenue lors de la suppression du réseau social');
+            $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de la suppression du réseau social');
          }
       }
    }
@@ -196,15 +189,12 @@ class AdminController extends Controller {
    public function deletePost() {
       $this->redirectIfNotAdmin();
       if (!empty($this->params['slug'])) {
-         $messageHandler = new MessageHandler();
-         $postManager = new PostManager();
-         $post = $postManager->findOneBy(['slug' => $this->params['slug']]);
-         if ($postManager->delete($post)) {
-            $messageHandler->setMessage('success', 'Le post de blog a bien été supprimé');
-            header($this::adminPath);
-            exit;
+         $post = $this->postManager->findOneBy(['slug' => $this->params['slug']]);
+         if ($this->postManager->delete($post)) {
+            $this->messageHandler->setMessage('success', 'Le post de blog a bien été supprimé');
+            $this->redirectToAdmin();
          } else {
-            $messageHandler->setMessage('danger', 'Une erreur est survenue lors de la suppression du post');
+            $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de la suppression du post');
          }
       }
    }

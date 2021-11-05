@@ -5,7 +5,6 @@ class Controller {
    protected $action;
    protected $params;
    protected $twig;
-   private String $indexLocation = 'Location: /';
 
    public function __construct($action, $params = NULL) {
       $this->action = $action;
@@ -22,13 +21,24 @@ class Controller {
       echo $this->twig->twigRender($template, $array);
    }
 
-   public function getIndexLocation() {
-      return $this->indexLocation;
+   public function redirectToIndex() {
+      header('Location: /');
+      exit;
+   }
+
+   public function redirectToAdmin() {
+      header('Location: /admin/');
+      exit;
+   }
+
+   public function redirectToSocial() {
+      header('Location: /admin/reseaux/');
+      exit;
    }
 
    public function redirectIfNotAdmin() {
       if (!$_SESSION['user']->isAdmin()) {
-         header($this->getIndexLocation());
+         header('Location: /');
          exit;
       }
    }
