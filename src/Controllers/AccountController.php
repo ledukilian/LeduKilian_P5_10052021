@@ -9,17 +9,23 @@ use App\Services\MessageHandler;
 
 
 class AccountController extends Controller {
+   protected MessageHandler $messageHandler;
+   protected UserManager $userManager;
+
+   public function __construct($action, $params = NULL) {
+      parent::__construct($action, $params);
+      $this->messageHandler = new MessageHandler();
+      $this->userManager = new UserManager();
+   }
 
    public function login() {
       if (isset($_POST['email'])) {
-         $messageHandler = new MessageHandler();
-         $userManager = new UserManager();
-         if ($userManager->tryLogin()) {
-            $messageHandler->setMessage('success', 'Connexion réussie ! Vous êtes maintenant connecté.');
+         if ($this->userManager->tryLogin()) {
+            $this->messageHandler->setMessage('success', 'Connexion réussie ! Vous êtes maintenant connecté.');
             header($this->getIndexLocation());
             exit;
          } else {
-            $messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'authentification.');
+            $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'authentification.');
          }
       }
       $this->render("@client/pages/login.html.twig", []);
@@ -27,25 +33,22 @@ class AccountController extends Controller {
 
    public function register() {
       if (isset($_POST['email'])) {
-         $messageHandler = new MessageHandler();
-         $userManager = new UserManager();
          $userToCreate = new User($_POST);
          $userToCreate->setRole("USER");
          $userToCreate->setPasswordHashed($userToCreate->getPassword());
-         if ($userManager->insert($userToCreate)) {
-            $messageHandler->setMessage('success', 'Création de compte réussie, veuillez vous connecter.');
+         if ($this->userManager->insert($userToCreate)) {
+            $this->messageHandler->setMessage('success', 'Création de compte réussie, veuillez vous connecter.');
             header($this->getIndexLocation());
             exit;
          } else {
-            $messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'inscription.');
+            $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'inscription.');
          }
       }
       $this->render("@client/pages/register.html.twig", []);
    }
 
    public function disconnect() {
-      $messageHandler = new MessageHandler();
-      $messageHandler->setMessage('success', 'Déconnexion réussie, vous êtes bien déconnecté');
+      $this->messageHandler->setMessage('success', 'Déconnexion réussie, vous êtes bien déconnecté');
       session_destroy();
       header($this->getIndexLocation());
       exit;
