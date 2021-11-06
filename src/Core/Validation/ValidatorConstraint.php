@@ -1,5 +1,5 @@
 <?php
-
+namespace App\Core\Validation;
 
 
 class ValidatorConstraint {
@@ -15,52 +15,72 @@ class ValidatorConstraint {
    }
 
    public function required($key) {
-      if (key_exists($key, $this->data)) {
+      if (!key_exists($key, $this->data)) {
          $this->addError($key, 'required');
       }
       return $this;
    }
 
-   public function allRequired($keys) {
-      foreach ($keys as $key) {
+   public function allRequired() {
+      foreach ($this->data as $key => $value) {
          $this->required($key);
       }
       return $this;
    }
 
    public function notEmpty($key) {
-      if (empty($this->data[$key]) || $this->data[$key]==null) {
+      if (empty($this->data[$key]) || $this->data[$key]===null) {
          $this->addError($key, 'not_empty');
       }
       return $this;
    }
 
-   public function allNotEmpty($keys) {
-      foreach ($keys as $key) {
+   public function allNotEmpty() {
+      foreach ($this->data as $key => $value) {
          $this->notEmpty($key);
       }
       return $this;
    }
 
-   public function unique($key) {
-      // À faire
-   }
-
-   public function length($key, $min, $max) {
-      // À faire
-   }
-
    public function email($key) {
-      // À faire
+      if (!filter_var($this->data[$key], FILTER_VALIDATE_EMAIL)) {
+         $this->addError($key, 'email');
+      }
+      return $this;
    }
 
    public function password($key) {
-      // À faire
+      return $this->length($key, 8, 255)
+                  ->containsNumber($key)
+                  ->containsAlphabet($key);
+   }
 
+   public function containsAlphabet($key) {
+      if (!preg_match('~[a-zA-Z]+~', $this->data[$key])) {
+         $this->addError($key, 'alphabet');
+      }
+      return $this;
+   }
+
+   public function containsNumber($key) {
+      if (!preg_match('~[0-9]+~', $this->data[$key])) {
+         $this->addError($key, 'number');
+      }
+      return $this;
    }
 
    public function slug($key) {
       // À faire
+   }
+
+   public function unique($key) {
+      // À faire
+      return $this;
+   }
+
+   public function length($key, $min, $max) {
+      // À faire
+      return $this;
    }
 
    public function addError(String $key, String $error) {
