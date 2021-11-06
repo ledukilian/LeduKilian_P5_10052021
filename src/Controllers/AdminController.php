@@ -185,9 +185,8 @@ class AdminController extends Controller {
 
    public function deletePost() {
       $this->redirectIfNotAdmin();
-      if (!empty($this->params['slug'])) {
-         $post = $this->postManager->findOneBy(['slug' => $this->params['slug']]);
-         if ($this->postManager->delete($post)) {
+      $post = $this->postManager->findOneBy(['slug' => $this->params['slug']]);
+      if ($this->deleteElement($this->postManager, $post, $this->params['slug']))
             $this->messageHandler->setMessage('success', 'Le post de blog a bien été supprimé');
             $this->redirectToAdmin();
          } else {
@@ -195,6 +194,42 @@ class AdminController extends Controller {
          }
       }
    }
+
+   public function deleteElement($manager, $element, $param) {
+      if (!empty($param)) {
+         if ($manager->delete($element)) {
+            return true;
+         } else {
+            return false;
+         }
+      }
+   }
+
+   // public function deleteSocial() {
+   //    $this->redirectIfNotAdmin();
+   //    if (!empty($this->params['id'])) {
+   //       $social = $this->socialManager->findOneBy(['id' => $this->params['id']]);
+   //       if ($this->socialManager->delete($social)) {
+   //          $this->messageHandler->setMessage('success', 'Le réseau social a bien été supprimé');
+   //          $this->redirectToSocial();
+   //       } else {
+   //          $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de la suppression du réseau social');
+   //       }
+   //    }
+   // }
+   //
+   // public function deletePost() {
+   //    $this->redirectIfNotAdmin();
+   //    if (!empty($this->params['slug'])) {
+   //       $post = $this->postManager->findOneBy(['slug' => $this->params['slug']]);
+   //       if ($this->postManager->delete($post)) {
+   //          $this->messageHandler->setMessage('success', 'Le post de blog a bien été supprimé');
+   //          $this->redirectToAdmin();
+   //       } else {
+   //          $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de la suppression du post');
+   //       }
+   //    }
+   // }
 
    public function showError() {
       $this->redirectIfNotAdmin();
