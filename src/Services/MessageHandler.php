@@ -2,27 +2,31 @@
 namespace App\Services;
 
 class MessageHandler {
-
-   public function setMessage($type, $message) {
-      $_SESSION['message']['show'] = true;
-      if (in_array($type, ['success', 'warning', 'danger', 'primary'])) {
-         $_SESSION['message']['type'] = $type;
-      } else {
-         $_SESSION['message']['type'] = 'primary';
+   public function setMessage($type, $text) {
+      if (!isset($_SESSION['messages'])) {
+         $_SESSION['messages'] = [];
       }
-      $_SESSION['message']['text'] = $message;
+      $message = [];
+      if (in_array($type, ['success', 'warning', 'danger', 'primary'])) {
+         $message['type'] = $type;
+      } else {
+         $message['type'] = 'primary';
+      }
+      $message['text'] = $text;
+
+      array_push($_SESSION['messages'], $message);
       return true;
    }
 
-   public function getMessage() {
-      if (!isset($_SESSION['message'])) {
-         $_SESSION['message']['show'] = false;
+   public function getMessages() {
+      if (!isset($_SESSION['messages'])) {
+         return false;
       }
-      return $_SESSION['message'];
+      return $_SESSION['messages'];
    }
 
-   public function cleanMessage() {
-      return $_SESSION['message']['show'] = false;
+   public function cleanMessages() {
+      unset($_SESSION['messages']);
    }
 
 

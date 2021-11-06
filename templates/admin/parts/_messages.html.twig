@@ -1,36 +1,33 @@
-{% if message.show == true %}
-<div id="alert-area" class="col-sm-12 offset-md-1 col-md-8">
-   {% if message.type == 'success' %}
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-         {{ message.text }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-   {% elseif message.type == 'warning' %}
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-         {{ message.text }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-   {% elseif message.type == 'danger' %}
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+<div id="alert-area" class="col-sm-12 offset-md-2 col-md-8">
+   {% for message in messages %}
+      {% if message.type == 'success' %}
+         <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message.text }}
+           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+      {% elseif message.type == 'warning' %}
+         <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message.text }}
+           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+      {% elseif message.type == 'danger' %}
+         <div class="alert alert-danger alert-dismissible fade show" role="alert">
+           {{ message.text }}
+           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+      {% elseif message.type == 'primary' %}
+      <div class="alert alert-primary alert-dismissible fade show" role="alert">
         {{ message.text }}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-   {% elseif message.type == 'primary' %}
-   <div class="alert alert-primary alert-dismissible fade show" role="alert">
-     {{ message.text }}
-     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-       <span aria-hidden="true">&times;</span>
-     </button>
-   </div>
-   {% endif %}
-{% endif %}
-
-
-
+      {% endif %}
+   {% endfor %}
 </div>
