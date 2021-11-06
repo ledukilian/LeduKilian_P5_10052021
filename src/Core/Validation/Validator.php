@@ -15,7 +15,8 @@ class Validator {
    // 1 fonction par formulaire
 
    public function basicValidation() {
-      // Fonction de validation de base
+      $this->validator->allNotEmpty($keys)
+                      ->allRequired($keys);
    }
 
    public function checkAdminForm() {
