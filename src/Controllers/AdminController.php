@@ -184,12 +184,11 @@ class AdminController extends Controller {
    public function deletePost() {
       $this->redirectIfNotAdmin();
       $post = $this->postManager->findOneBy(['slug' => $this->params['slug']]);
-      if ($this->deleteElement($this->postManager, $post, $this->params['slug']))
-            $this->messageHandler->setMessage('success', 'Le post de blog a bien été supprimé');
-            $this->redirectToAdmin();
-         } else {
-            $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de la suppression du post');
-         }
+      if ($this->deleteElement($this->postManager, $post, $this->params['slug'])) {
+         $this->messageHandler->setMessage('success', 'Le post de blog a bien été supprimé');
+         $this->redirectToAdmin();
+      } else {
+         $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de la suppression du post');
       }
    }
 
