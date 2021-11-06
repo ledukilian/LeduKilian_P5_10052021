@@ -54,7 +54,12 @@ class Manager {
    }
 
    public function findOneBy(array $where = [], array $order = [], int $offset = null) {
-      return $this->findBy($where, $order, 1, $offset)[0];
+      $element = $this->findBy($where, $order, 1, $offset);
+      if (sizeof($element)>0) {
+         return $element[0];
+      } else {
+         return false;
+      }
    }
 
    public function setWhere(array $where, string $sql) {

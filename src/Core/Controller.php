@@ -26,6 +26,11 @@ class Controller {
       exit;
    }
 
+   public function redirectToLogin() {
+      header('Location: /connexion');
+      exit;
+   }
+
    public function redirectToAdmin() {
       header('Location: /admin/');
       exit;

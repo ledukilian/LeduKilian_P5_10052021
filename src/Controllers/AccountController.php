@@ -20,11 +20,13 @@ class AccountController extends Controller {
 
    public function login() {
       if (isset($_POST['email'])) {
-         if ($this->userManager->tryLogin()) {
+         $try = $this->userManager->tryLogin();
+         if (is_object($try)) {
             $this->messageHandler->setMessage('success', 'Connexion réussie ! Vous êtes maintenant connecté.');
             $this->redirectToIndex();
          } else {
-            $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'authentification.');
+            $this->messageHandler->setMessage('danger', $try);
+            $this->redirectToLogin();
          }
       }
       $this->render("@client/pages/login.html.twig", []);
