@@ -50,7 +50,7 @@ class ValidatorConstraint {
    }
 
    public function password($key) {
-      return $this->length($key, 8, 255)
+      return $this->length($key, 6, 256)
                   ->containsNumber($key)
                   ->containsAlphabet($key);
    }
@@ -71,15 +71,30 @@ class ValidatorConstraint {
 
    public function slug($key) {
       // À faire
+      // $this->addError($key, 'slug');
    }
 
    public function unique($key) {
       // À faire
+      // $this->addError($key, 'unique');
       return $this;
    }
 
    public function length($key, $min, $max) {
+      return $this;
+      return $this->minLength($key, $min)
+                  ->maxLength($key, $max);
+   }
+
+   public function minLength($key, $min) {
       // À faire
+      // $this->addError($key, 'min_length');
+      return $this;
+   }
+
+   public function maxLength($key, $max) {
+      // À faire
+      // $this->addError($key, 'max_length');
       return $this;
    }
 

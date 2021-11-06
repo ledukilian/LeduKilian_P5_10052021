@@ -8,11 +8,24 @@ class Validator {
    protected MessageHandler $messageHandler;
    private ValidatorConstraint $validator;
    protected Array $data;
-   public static $TEXTS = [
-      'number' => ' doit comporter au moins un caractère numérique'
+   public static $errors = [
+      'alphabet' => ' doit comporter des lettres',
+      'number' => ' doit comporter au moins un caractère numérique',
+      'not_empty' => ' ne doit pas être vide',
+      'required' => ' est requis',
+      'email' => ' doit correspondre à un format d\'email valide',
+      'slug' => ' n\'est pas un format de slug valide',
+      'unique' => ' existe déjà',
+      'min_length' => ' ne contient pas assez de caractères',
+      'max_length' => ' comporte trop de caractères'
    ];
-   public static $FIELDS = [
-      'password' => ' mot de passe '
+   public static $fields = [
+      'email' => ' adresse mail ',
+      'username' => ' nom d\'utilisateur ',
+      'firstname' => ' prénom ',
+      'lastname' => ' nom ',
+      'password' => ' mot de passe ',
+      'password-confirm' => ' confirmation de mot de passe '
    ];
 
    public function __construct(Array $data, $manager = null) {
@@ -43,7 +56,11 @@ class Validator {
            ->email('email')
            ->password('password')
            ->containsAlphabet('lastname')
-           ->containsAlphabet('firstname');
+           ->length('lastname', 6, 48)
+           ->containsAlphabet('firstname')
+           ->length('firstname', 6, 48)
+           ->containsAlphabet('username')
+           ->length('username', 6, 48);
       $this->showMessagesFromErrors();
       return $this;
    }
@@ -58,7 +75,7 @@ class Validator {
 
    public function showMessagesFromErrors() {
       foreach ($this->getErrors() as $key => $value) {
-         $this->messageHandler->setMessage('danger', 'Le champ '.self::$FIELDS[$key].self::$TEXTS[$value]);
+         $this->messageHandler->setMessage('danger', 'Le champ '.self::$fields[$key].self::$errors[$value]);
       }
    }
 
