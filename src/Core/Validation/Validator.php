@@ -66,9 +66,7 @@ class Validator {
    }
 
    public function checkLogin() {
-      $this->basicValidation()
-           ->email('email')
-           ->password('password');
+      $this->basicValidation();
       $this->showMessagesFromErrors();
       return $this;
    }

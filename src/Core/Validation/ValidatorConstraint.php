@@ -75,7 +75,8 @@ class ValidatorConstraint {
    }
 
    public function unique($key) {
-      // À faire
+      // À faire : Interrogation base avec WHERE
+      // $this->manager
       // $this->addError($key, 'unique');
       return $this;
    }
