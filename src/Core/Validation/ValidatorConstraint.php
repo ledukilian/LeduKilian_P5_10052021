@@ -5,7 +5,7 @@ namespace App\Core\Validation;
 class ValidatorConstraint {
    protected Array $data;
    protected Array $errors = [];
-   protected Manager $manager;
+   protected $manager;
 
    public function __construct(Array $data, $manager = null) {
       $this->data = $data;

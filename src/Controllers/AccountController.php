@@ -40,7 +40,7 @@ class AccountController extends Controller {
 
    public function register() {
       if (!empty($_POST['email'])) {
-         $this->validator = new Validator($_POST);
+         $this->validator = new Validator($_POST, new UserManager());
          if ($this->validator->checkRegister()->isValid()) {
             $user = new User($_POST);
             $user->setRole("USER");

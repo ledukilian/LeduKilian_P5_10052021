@@ -54,13 +54,15 @@ class Validator {
    public function checkRegister() {
       $this->basicValidation()
            ->email('email')
+           ->unique('email')
            ->password('password')
            ->containsAlphabet('lastname')
            ->length('lastname', 6, 48)
            ->containsAlphabet('firstname')
            ->length('firstname', 6, 48)
            ->containsAlphabet('username')
-           ->length('username', 6, 48);
+           ->length('username', 6, 48)
+           ->unique('username');
       $this->showMessagesFromErrors();
       return $this;
    }
