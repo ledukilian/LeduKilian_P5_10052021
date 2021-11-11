@@ -91,9 +91,13 @@ class ValidatorConstraint {
    }
 
    public function unique($key) {
-      // À faire : Interrogation base avec WHERE
-      // $this->manager
-      // $this->addError($key, 'unique');
+      $already_exist = $this->manager->findOneBy([
+         $key => $this->data[$key]
+      ]);
+      if ($already_exist) {
+         $this->addError($key, 'unique');
+
+      };
       return $this;
    }
 
