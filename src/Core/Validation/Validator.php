@@ -39,11 +39,7 @@ class Validator {
    }
 
    public function isValid() {
-      if (sizeof($this->getErrors())==0) {
-         return true;
-      } else {
-         return false;
-      }
+      return sizeof($this->getErrors())==0;
    }
 
    public function basicValidation() {
