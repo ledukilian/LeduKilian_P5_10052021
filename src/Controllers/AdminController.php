@@ -194,11 +194,7 @@ class AdminController extends Controller {
 
    public function deleteElement($manager, $element, $param) {
       if (!empty($param)) {
-         if ($manager->delete($element)) {
-            return true;
-         } else {
-            return false;
-         }
+         return $manager->delete($element);
       }
    }
 
