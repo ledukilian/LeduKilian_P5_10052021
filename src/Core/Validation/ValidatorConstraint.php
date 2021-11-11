@@ -96,8 +96,7 @@ class ValidatorConstraint {
       ]);
       if ($already_exist) {
          $this->addError($key, 'unique');
-
-      };
+      }
       return $this;
    }
 
