@@ -55,7 +55,7 @@ class Manager {
 
    public function findOneBy(array $where = [], array $order = [], int $offset = null) {
       $element = $this->findBy($where, $order, 1, $offset);
-      if (sizeof($element)>0) {
+      if (!empty($element)) {
          return $element[0];
       } else {
          return false;
