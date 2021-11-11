@@ -47,6 +47,8 @@ class AccountController extends Controller {
             $user->setPasswordHashed($user->getPassword());
             if ($this->userManager->insert($user)) {
                $this->messageHandler->setMessage('success', 'Création de compte réussie, veuillez vous connecter.');
+               $mailer = new Mailer();
+               $mailer->registered($user);
                $this->redirectToIndex();
             } else {
                $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'inscription.');

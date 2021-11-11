@@ -23,6 +23,15 @@ class Mailer {
       $this->mailer->setFrom($config['from']['mail'], $config['from']['name']);
    }
 
+   public function registered(User $user) {
+      return $this->send([
+         'mail' => $user->getEmail(),
+         'name' => $user->getFirstname().' '.$user->getLastname(),
+         'subject' => 'Inscription à KLD Blog',
+         'message' => 'Bonjour '.$user->getFirstname().',\r\n Vous venez de vous inscrire sur KLD Blog.\r\n A bientôt.'
+      ]);
+   }
+
    public function send(array $mailData) {
       try {
           $config = yaml_parse_file(CONF_DIR . '/mail.yml');
@@ -33,9 +42,9 @@ class Mailer {
           $this->mailer->Body = $mailData['message'];
           $this->mailer->AltBody = htmlspecialchars($mailData['message']);
           $this->mailer->send();
-          echo MessageHandler::MAIL_SENT;
+          return true;
       } catch (Exception $e) {
-          echo MessageHandler::MAIL_ERROR.' Erreur : '.$this->mailer->ErrorInfo;
+         return false;
       }
    }
 
