@@ -198,32 +198,6 @@ class AdminController extends Controller {
       }
    }
 
-   // public function deleteSocial() {
-   //    $this->redirectIfNotAdmin();
-   //    if (!empty($this->params['id'])) {
-   //       $social = $this->socialManager->findOneBy(['id' => $this->params['id']]);
-   //       if ($this->socialManager->delete($social)) {
-   //          $this->messageHandler->setMessage('success', 'Le réseau social a bien été supprimé');
-   //          $this->redirectToSocial();
-   //       } else {
-   //          $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de la suppression du réseau social');
-   //       }
-   //    }
-   // }
-   //
-   // public function deletePost() {
-   //    $this->redirectIfNotAdmin();
-   //    if (!empty($this->params['slug'])) {
-   //       $post = $this->postManager->findOneBy(['slug' => $this->params['slug']]);
-   //       if ($this->postManager->delete($post)) {
-   //          $this->messageHandler->setMessage('success', 'Le post de blog a bien été supprimé');
-   //          $this->redirectToAdmin();
-   //       } else {
-   //          $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de la suppression du post');
-   //       }
-   //    }
-   // }
-
    public function showError() {
       $this->redirectIfNotAdmin();
       $this->render("@admin/errors/error.html.twig", []);
