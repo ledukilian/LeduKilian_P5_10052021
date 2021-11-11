@@ -69,9 +69,25 @@ class ValidatorConstraint {
       return $this;
    }
 
+   public function minLength($key, $min) {
+      if (strlen($this->data[$key])<$min) {
+         $this->addError($key, 'min_length');
+      }
+      return $this;
+   }
+
+   public function maxLength($key, $max) {
+      if (strlen($this->data[$key])>$max) {
+         $this->addError($key, 'max_length');
+      }
+      return $this;
+   }
+
    public function slug($key) {
-      // À faire
-      // $this->addError($key, 'slug');
+      if(!preg_match('/^[a-z][-a-z0-9]*$/', $this->data[$key])){
+         $this->addError($key, 'slug');
+      }
+      return $this;
    }
 
    public function unique($key) {
@@ -82,21 +98,8 @@ class ValidatorConstraint {
    }
 
    public function length($key, $min, $max) {
-      return $this;
       return $this->minLength($key, $min)
                   ->maxLength($key, $max);
-   }
-
-   public function minLength($key, $min) {
-      // À faire
-      // $this->addError($key, 'min_length');
-      return $this;
-   }
-
-   public function maxLength($key, $max) {
-      // À faire
-      // $this->addError($key, 'max_length');
-      return $this;
    }
 
    public function addError(String $key, String $error) {
