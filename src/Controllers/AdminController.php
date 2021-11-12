@@ -166,16 +166,18 @@ class AdminController extends Controller {
    }
 
    public function editPost() {
-      $this->redirectIfNotAdmin();
-      $slug = $this->params['slug'];
-      $post = $this->postManager->findBy(
-         [
-            'slug' => $slug
-         ],
-         [
-            'created_at' => 'DESC'
-         ]
-      );
+      if ((new Validator($_POST, $this->userManager))->checkPost()) {
+         $this->redirectIfNotAdmin();
+         $slug = $this->params['slug'];
+         $post = $this->postManager->findBy(
+            [
+               'slug' => $slug
+            ],
+            [
+               'created_at' => 'DESC'
+            ]
+         );
+      }
       $this->render("@admin/pages/blog/edit.html.twig", [
          'post' => $post[0]
       ]);
