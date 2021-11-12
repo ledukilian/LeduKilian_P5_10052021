@@ -107,6 +107,13 @@ class ValidatorConstraint {
       return $this;
    }
 
+   public function compare($key1, $key2) {
+      if ($key1!=$key2) {
+         $this->addError($key1.' et '.$key2, 'compare');
+      }
+      return $this;
+   }
+
    public function length($key, $min, $max) {
       return $this->minLength($key, $min)
                   ->maxLength($key, $max);
