@@ -5,6 +5,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 use App\Services\MessageHandler;
+use App\Models\User;
 
 class Mailer {
    private PHPMailer $mailer;
@@ -32,7 +33,7 @@ class Mailer {
          'reply-mail' => $this->config['contact-to']['mail'],
          'reply-name' => $this->config['contact-to']['name'],
          'subject' => 'KLD Blog - Inscription',
-         'message' => 'Bonjour '.$user->getFirstname().',\r\n Vous venez de vous inscrire sur KLD Blog.\r\n A bientôt.'
+         'message' => 'Bonjour '.$user->getFirstname().', Vous venez de vous inscrire sur KLD Blog.'
       ]);
    }
 
