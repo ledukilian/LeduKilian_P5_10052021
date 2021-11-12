@@ -4,8 +4,8 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Managers\CommentManager;
 use App\Models\Comment;
-use App\Services\FormHandler;
 use App\Services\MessageHandler;
+use App\Core\Validation\Validator;
 
 
 class CommentController extends Controller {
@@ -19,15 +19,17 @@ class CommentController extends Controller {
    }
 
    public function addComment() {
-      if (!empty($_POST) && (new FormHandler())->checkform($_POST)) {
-         $comment = new Comment($_POST);
-         $comment->setUserId($_SESSION['user']->getId());
-         $comment->setStatus(0);
-         if ($this->commentManager->insert($comment)) {
-            $this->messageHandler->setMessage('success', 'Votre commentaire a bien été pris en compte, il sera traité prochainement');
-            header('Location: /blog/'.$this->params['id']);
-            exit;
+      if (!empty($_POST)) {
+         if ((new Validator($_POST))->checkComment()) {
+            $comment = new Comment($_POST);
+            $comment->setUserId($_SESSION['user']->getId());
+            $comment->setStatus(0);
+            if ($this->commentManager->insert($comment)) {
+               $this->messageHandler->setMessage('success', 'Votre commentaire a bien été pris en compte, il sera traité prochainement');
+            }
          }
+         header('Location: /blog/'.$this->params['id']);
+         exit;
       }
    }
 
