@@ -14,6 +14,10 @@ class ValidatorConstraint {
       }
    }
 
+   public function updateData(Array $data) {
+      $this->data = $data;
+   }
+
    public function required($key) {
       if (!key_exists($key, $this->data)) {
          $this->addError($key, 'required');
