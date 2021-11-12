@@ -90,6 +90,13 @@ class ValidatorConstraint {
       return $this;
    }
 
+   public function link($key) {
+      if (filter_var($this->data[$key], FILTER_VALIDATE_URL) === FALSE) {
+         $this->addError($key, 'link');
+      }
+      return $this;
+   }
+
    public function unique($key) {
       $already_exist = $this->manager->findOneBy([
          $key => $this->data[$key]
