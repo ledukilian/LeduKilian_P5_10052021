@@ -82,6 +82,19 @@ class Validator {
       return $this;
    }
 
+   public function checkSocial() {
+      $this->basicValidation()
+           ->containsAlphabet('name')
+           ->length('name', 6, 48)
+           ->containsAlphabet('icon')
+           ->length('icon', 6, 48)
+           ->containsAlphabet('link')
+           ->length('link', 6, 256)
+           ->link('link');
+      $this->showMessagesFromErrors();
+      return $this;
+   }
+
    public function showMessagesFromErrors() {
       foreach ($this->getErrors() as $key => $value) {
          $this->messageHandler->setMessage('danger', 'Le champ '.self::$fields[$key].self::$errors[$value]);

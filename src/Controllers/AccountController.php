@@ -7,6 +7,7 @@ use App\Managers\PostManager;
 use App\Models\User;
 use App\Services\MessageHandler;
 use App\Core\Validation\Validator;
+use App\Services\Mailer;
 
 class AccountController extends Controller {
    protected MessageHandler $messageHandler;
@@ -21,27 +22,25 @@ class AccountController extends Controller {
 
    public function login() {
       if (!empty($_POST['email'])) {
-         $this->validator = new Validator($_POST);
-         if ($this->validator->checkLogin()->isValid()) {
+         if ((new Validator($_POST))->checkLogin()) {
             $try = $this->userManager->tryLogin();
             if (is_object($try)) {
                $this->messageHandler->setMessage('success', 'Connexion réussie ! Vous êtes maintenant connecté.');
                $this->redirectToIndex();
             } else {
                $this->messageHandler->setMessage('danger', $try);
-               $this->redirectToLogin();
+               $this->redirectToSelf();
             }
          } else {
-            $this->redirectToLogin();
+            $this->redirectToSelf();
          }
       }
-      $this->render("@client/pages/login.html.twig", []);
-   }
+         $this->render("@client/pages/login.html.twig", []);
+      }
 
    public function register() {
       if (!empty($_POST['email'])) {
-         $this->validator = new Validator($_POST, new UserManager());
-         if ($this->validator->checkRegister()->isValid()) {
+         if ((new Validator($_POST, new UserManager()))->checkRegister()) {
             $user = new User($_POST);
             $user->setRole("USER");
             $user->setPasswordHashed($user->getPassword());
@@ -51,7 +50,10 @@ class AccountController extends Controller {
                $this->redirectToIndex();
             } else {
                $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'inscription.');
+               $this->redirectToSelf();
             }
+         } else {
+            $this->redirectToSelf();
          }
       }
       $this->render("@client/pages/register.html.twig", []);
