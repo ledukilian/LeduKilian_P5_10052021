@@ -111,16 +111,19 @@ class AdminController extends Controller {
 
    public function addPost() {
       $this->redirectIfNotAdmin();
-      if (!empty($_POST) && (new FormHandler())->checkform($_POST)) {
-         $post = new Post($_POST);
-         $post->setAdminId($_SESSION['user']->getId());
-         $post->setSlug($this->postManager->slugify($_POST['title']));
-         if ($this->postManager->insert($post)) {
-            $this->messageHandler->setMessage('success', 'Le nouveau post a bien été ajouté');
-            $this->redirectToAdmin();
-         } else {
-            $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'ajout du post');
+      if (!empty($_POST)) {
+         if ((new Validator($_POST, $this->userManager))->checkPost()) {
+            $post = new Post($_POST);
+            $post->setAdminId($_SESSION['user']->getId());
+            $post->setSlug($this->postManager->slugify($_POST['title']));
+            if ($this->postManager->insert($post)) {
+               $this->messageHandler->setMessage('success', 'Le nouveau post a bien été ajouté');
+               $this->redirectToAdmin();
+            } else {
+               $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'ajout du post');
+            }
          }
+         $this->redirectToSelf();
       }
       $this->render("@admin/pages/blog/add.html.twig", []);
    }
