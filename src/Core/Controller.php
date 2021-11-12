@@ -1,15 +1,19 @@
 <?php
 namespace App\Core;
 
+use App\Services\MessageHandler;
+
 class Controller {
    protected $action;
    protected $params;
    protected $twig;
+   protected MessageHandler $messageHandler;
 
    public function __construct($action, $params = NULL) {
       $this->action = $action;
       $this->params = $params;
       $this->twig = new Twig();
+      $this->messageHandler = new MessageHandler();
    }
 
    public function execute() {
@@ -38,6 +42,11 @@ class Controller {
 
    public function redirectToSocial() {
       header('Location: /admin/reseaux/');
+      exit;
+   }
+
+   public function redirectToContact() {
+      header('Location: /contact');
       exit;
    }
 
