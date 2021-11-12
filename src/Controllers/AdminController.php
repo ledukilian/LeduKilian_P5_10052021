@@ -7,9 +7,9 @@ use App\Managers\CommentManager;
 use App\Managers\SocialManager;
 use App\Managers\AdminManager;
 use App\Managers\UserManager;
-use App\Services\FormHandler;
 use App\Services\TwigGlobals;
 use App\Services\MessageHandler;
+use App\Core\Validation\Validator;
 use App\Models\Post;
 use App\Models\Social;
 use App\Models\Admin;
@@ -24,6 +24,7 @@ class AdminController extends Controller {
    protected PostManager $postManager;
    protected CommentManager $commentManager;
    protected SocialManager $socialManager;
+   protected Validator $validator;
 
    public function __construct($action, $params = NULL) {
       parent::__construct($action, $params);
@@ -126,31 +127,35 @@ class AdminController extends Controller {
 
    public function addSocial() {
       $this->redirectIfNotAdmin();
-      if (!empty($_POST) && (new FormHandler())->checkform($_POST)) {
-         $social = new Social($_POST);
-         $social->setIdAdmin($_SESSION['user']->getId());
-         if ($this->socialManager->insert($social)) {
-            $this->messageHandler->setMessage('success', 'Le nouveau réseau social a bien été ajouté');
-            $this->redirectToSocial();
-         } else {
-            $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'ajout du réseau social');
+      if (!empty($_POST)) {
+         if ((new Validator($_POST))->checkSocial()) {
+            $social = new Social($_POST);
+            $social->setIdAdmin($_SESSION['user']->getId());
+            if ($this->socialManager->insert($social)) {
+               $this->messageHandler->setMessage('success', 'Le nouveau réseau social a bien été ajouté');
+            } else {
+               $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'ajout du réseau social');
+            }
          }
+         $this->redirectToSocial();
       }
    }
 
    public function editSocial() {
       $this->redirectIfNotAdmin();
       if (!empty($_POST)) {
-         $social = $this->socialManager->findOneBy([
-            'id' => $this->params['id']
-         ]);
-         $social->hydrate($_POST);
-         if ($this->socialManager->update($social)) {
-            $this->messageHandler->setMessage('success', 'Le réseau social a bien été mis à jour');
-            $this->redirectToSocial();
-         } else {
-            $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de la mise à jour du réseau social');
+         if ((new Validator($_POST))->checkSocial()) {
+            $social = $this->socialManager->findOneBy([
+               'id' => $this->params['id']
+            ]);
+            $social->hydrate($_POST);
+            if ($this->socialManager->update($social)) {
+               $this->messageHandler->setMessage('success', 'Le réseau social a bien été mis à jour');
+            } else {
+               $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de la mise à jour du réseau social');
+            }
          }
+         $this->redirectToSocial();
       }
    }
 
