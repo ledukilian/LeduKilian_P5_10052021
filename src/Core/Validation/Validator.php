@@ -63,6 +63,19 @@ class Validator {
       return $this;
    }
 
+   public function checkContact() {
+      $this->basicValidation()
+           ->email('email')
+           ->containsAlphabet('name')
+           ->length('name', 6, 48)
+           ->containsAlphabet('subject')
+           ->length('subject', 6, 48)
+           ->containsAlphabet('message')
+           ->length('message', 6, 512);
+      $this->showMessagesFromErrors();
+      return $this;
+   }
+
    public function checkLogin() {
       $this->basicValidation();
       $this->showMessagesFromErrors();
