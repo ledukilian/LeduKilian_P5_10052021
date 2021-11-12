@@ -2,8 +2,11 @@ mailer:
    host: smtp-vpk.alwaysdata.net
    smtp: true
    username: p5.ocr@ledukilian.fr
-   password: password
+   password: sekrai
    port: 465
 from:
    mail: p5.ocr@ledukilian.fr
    name: Contact LDK Blog
+contact-to:
+   mail: ledu.kilian@gmail.com
+   name: LE DU Kilian
