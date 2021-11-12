@@ -20,20 +20,16 @@ class AccountController extends Controller {
    }
 
    public function login() {
-      if (!empty($_POST['email'])) {
-         $this->validator = new Validator($_POST);
-         if ($this->validator->checkLogin()->isValid()) {
-            $try = $this->userManager->tryLogin();
-            if (is_object($try)) {
-               $this->messageHandler->setMessage('success', 'Connexion réussie ! Vous êtes maintenant connecté.');
-               $this->redirectToIndex();
-            } else {
-               $this->messageHandler->setMessage('danger', $try);
-               $this->redirectToLogin();
-            }
+      if ($this->checkForm($_POST['email'], 'checkLogin')) {
+         if (is_object($this->userManager->tryLogin())) {
+            $this->messageHandler->setMessage('success', 'Connexion réussie ! Vous êtes maintenant connecté.');
+            $this->redirectToIndex();
          } else {
+            $this->messageHandler->setMessage('danger', $try);
             $this->redirectToLogin();
          }
+      } else {
+         $this->redirectToLogin();
       }
       $this->render("@client/pages/login.html.twig", []);
    }
@@ -47,8 +43,7 @@ class AccountController extends Controller {
             $user->setPasswordHashed($user->getPassword());
             if ($this->userManager->insert($user)) {
                $this->messageHandler->setMessage('success', 'Création de compte réussie, veuillez vous connecter.');
-               $mailer = new Mailer();
-               $mailer->registered($user);
+               $mailer = (new Mailer())->registered($user);
                $this->redirectToIndex();
             } else {
                $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'inscription.');

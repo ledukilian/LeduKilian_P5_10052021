@@ -2,12 +2,14 @@
 namespace App\Core;
 
 use App\Services\MessageHandler;
+use App\Core\Validation\Validator;
 
 class Controller {
    protected $action;
    protected $params;
    protected $twig;
    protected MessageHandler $messageHandler;
+   protected Validator $validator;
 
    public function __construct($action, $params = NULL) {
       $this->action = $action;
@@ -23,6 +25,16 @@ class Controller {
 
    public function render($template, $array) {
       echo $this->twig->twigRender($template, $array);
+   }
+
+   public function checkForm(String $field, String $formName) {
+      if (!empty($field)) {
+         $this->validator = new Validator($_POST);
+         if ($this->validator->$form()->isValid()) {
+            return true;
+         }
+      }
+      return false;
    }
 
    public function redirectToIndex() {
