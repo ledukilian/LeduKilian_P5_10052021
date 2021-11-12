@@ -26,7 +26,12 @@ class Controller {
    public function render($template, $array) {
       echo $this->twig->twigRender($template, $array);
    }
-   
+
+   public function redirectToSelf() {
+      header('Location: '.$_SERVER[REQUEST_URI]);
+      exit;
+   }
+
    public function redirectToIndex() {
       header('Location: /');
       exit;
