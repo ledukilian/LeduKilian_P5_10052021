@@ -64,21 +64,24 @@ class AdminController extends Controller {
    public function editInformations() {
       $this->redirectIfNotAdmin();
       if (!empty($_POST)) {
-         $admin = $this->adminManager->findOneBy([
-            'id' => $this->twigGlobals->getAdminId()
-         ]);
-         $user = $this->userManager->findOneBy([
-            'id' => $this->twigGlobals->getAdminId()
-         ]);
-         $user->hydrate($_POST);
-         $admin->hydrate($_POST);
-         $user->setPasswordHashed($user->getPassword());
-         if ($this->adminManager->update($admin) && $this->userManager->update($user)) {
-            $this->messageHandler->setMessage('success', 'Les informations ont bien été mise à jour');
-            $this->redirectToAdmin();
-         } else {
-            $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de la mise à jour des informations');
+         if ((new Validator($_POST, $this->userManager))->checkInformations()) {
+            $admin = $this->adminManager->findOneBy([
+               'id' => $this->twigGlobals->getAdminId()
+            ]);
+            $user = $this->userManager->findOneBy([
+               'id' => $this->twigGlobals->getAdminId()
+            ]);
+            $user->hydrate($_POST);
+            $admin->hydrate($_POST);
+            $user->setPasswordHashed($user->getPassword());
+            if ($this->adminManager->update($admin) && $this->userManager->update($user)) {
+               $this->messageHandler->setMessage('success', 'Les informations ont bien été mise à jour');
+               $this->redirectToAdmin();
+            } else {
+               $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de la mise à jour des informations');
+            }
          }
+         $this->redirectToSelf();
       }
       $this->render("@admin/pages/informations/edit.html.twig", []);
    }
