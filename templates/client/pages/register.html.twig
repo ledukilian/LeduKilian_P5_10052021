@@ -9,7 +9,7 @@
 
 {% block main %}
    <div class="container mt-6 p-5">
-      <div class="card col-12 col-md-6 offset-md-3">
+      <div class="card col-12 col-md-8 offset-md-2">
          <article class="card-body">
             <h4 class="card-title text-center mb-4 mt-1">Inscription</h4>
             <hr>
@@ -31,7 +31,7 @@
                         </span>
                      </div>
                      <label for="lastname" class="d-none">Nom</label>
-                     <input name="lastname" id="lastname" minlenght="6" maxlenght="48" class="form-control" placeholder="Nom" type="text" required="required" />
+                     <input name="lastname" id="lastname" minlenght="2" maxlenght="48" class="form-control" placeholder="Nom" type="text" required="required" />
                   </div>
                   <div class="input-group pb-2">
                      <div class="input-group-prepend">
@@ -40,7 +40,7 @@
                         </span>
                      </div>
                      <label for="firstname" class="d-none">Prénom</label>
-                     <input name="firstname" id="firstname" minlenght="6" maxlenght="48" class="form-control" placeholder="Prénom" type="text" required="required" />
+                     <input name="firstname" id="firstname" minlenght="2" maxlenght="48" class="form-control" placeholder="Prénom" type="text" required="required" />
                   </div>
                   <div class="input-group pb-2">
                      <div class="input-group-prepend">
@@ -49,7 +49,7 @@
                         </span>
                      </div>
                      <label for="username" class="d-none">Nom d'utilisateur</label>
-                     <input name="username" id="username" minlenght="6" maxlenght="48" class="form-control" placeholder="Nom d'utilisateur" type="text" required="required" />
+                     <input name="username" id="username" minlenght="2" maxlenght="48" class="form-control" placeholder="Nom d'utilisateur" type="text" required="required" />
                   </div>
                   <div class="input-group pb-2">
                      <div class="input-group-prepend">
@@ -58,7 +58,8 @@
                         </span>
                      </div>
                      <label for="password" class="d-none">Mot de passe</label>
-                     <input name="password" id="password" minlenght="6" maxlenght="256" class="form-control" placeholder="Mot de passe" type="password" required="required" />
+                     <input name="password" id="password" minlenght="2" maxlenght="256" class="form-control" placeholder="Mot de passe" type="password" required="required" />
+                     <small class="col-12 px-2 mb-2 text-secondary"><i class="fas fa-info-circle mr-2"></i>Doit contenir au moins 6 caractères, un caractère numérique et un caractère alphabétique.</small>
                   </div>
                   <div class="input-group pb-2">
                      <div class="input-group-prepend">
@@ -67,7 +68,7 @@
                         </span>
                      </div>
                      <label for="password-confirm" class="d-none">Confirmation mot de passe</label>
-                     <input name="password-confirm" id="password-confirm" minlenght="6" maxlenght="256" class="form-control" placeholder="Confirmation mot de passe" type="password" required="required" />
+                     <input name="password-confirm" id="password-confirm" minlenght="2" maxlenght="256" class="form-control" placeholder="Confirmation mot de passe" type="password" required="required" />
                   </div>
                </div>
                <div class="form-group">
