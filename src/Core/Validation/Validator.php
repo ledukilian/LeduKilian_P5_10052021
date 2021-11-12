@@ -18,7 +18,8 @@ class Validator {
       'unique' => ' existe déjà',
       'link' => ' n\'est pas un format de lien valide',
       'min_length' => ' ne contient pas assez de caractères',
-      'max_length' => ' comporte trop de caractères'
+      'max_length' => ' comporte trop de caractères',
+      'compare' => ' ne correspondent pas entre eux'
    ];
    public static $fields = [
       'email' => ' adresse mail ',
@@ -30,6 +31,10 @@ class Validator {
       'name' => ' nom ',
       'subject' => ' sujet ',
       'message' => ' message ',
+      'title' => ' titre de l\'article ',
+      'content' => ' contenu de l\'article ',
+      'coverAltImg' => ' texte de l\'image de l\'article ',
+      'lead' => ' phrase d\'accroche ',
       'icon' => ' icône ',
       'link' => ' lien ',
       'comment' => ' commentaire '
@@ -108,6 +113,49 @@ class Validator {
            ->length('comment', 2, 512);
       $this->showMessagesFromErrors();
       return $this->isValid();
+   }
+
+   public function checkPost() {
+      $this->basicValidation()
+           ->containsAlphabet('title')
+           ->length('title', 2, 512)
+           ->containsAlphabet('lead')
+           ->length('lead', 2, 512)
+           ->containsAlphabet('coverAltImg')
+           ->length('coverAltImg', 2, 512)
+           ->containsAlphabet('content')
+           ->length('content', 2, 512);
+
+
+
+
+      $this->showMessagesFromErrors();
+      return $this->isValid();
+   }
+
+   public function checkInformations() {
+      if (key_exists('password', $this->data) && !empty($this->data['password'])) {
+         $this->password('password')
+              ->password('password-confirm')
+              ->compare('password', 'password-confirm');
+      } else {
+         unset($this->data['password']);
+         unset($this->data['password-confirm']);
+         $this->validator->updateData($this->data);
+      }
+      $this->basicValidation()
+           ->containsAlphabet('catchPhrase')
+           ->length('catchPhrase', 2, 512)
+           ->email('email')
+           ->containsAlphabet('lastname')
+           ->length('lastname', 2, 48)
+           ->containsAlphabet('firstname')
+           ->length('firstname', 2, 48)
+           ->containsAlphabet('username')
+           ->length('username', 2, 48);
+      $this->showMessagesFromErrors();
+      return $this->isValid();
+
    }
 
    public function showMessagesFromErrors() {
