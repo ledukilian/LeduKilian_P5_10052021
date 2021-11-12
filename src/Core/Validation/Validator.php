@@ -16,6 +16,7 @@ class Validator {
       'email' => ' doit correspondre à un format d\'email valide',
       'slug' => ' n\'est pas un format de slug valide',
       'unique' => ' existe déjà',
+      'link' => ' n\'est pas un format de lien valide',
       'min_length' => ' ne contient pas assez de caractères',
       'max_length' => ' comporte trop de caractères'
    ];
@@ -25,7 +26,13 @@ class Validator {
       'firstname' => ' prénom ',
       'lastname' => ' nom ',
       'password' => ' mot de passe ',
-      'password-confirm' => ' confirmation de mot de passe '
+      'password-confirm' => ' confirmation de mot de passe ',
+      'name' => ' nom ',
+      'subject' => ' sujet ',
+      'message' => ' message ',
+      'icon' => ' icône ',
+      'link' => ' lien ',
+      'comment' => ' commentaire '
    ];
 
    public function __construct(Array $data, $manager = null) {
@@ -53,33 +60,33 @@ class Validator {
            ->unique('email')
            ->password('password')
            ->containsAlphabet('lastname')
-           ->length('lastname', 6, 48)
+           ->length('lastname', 2, 48)
            ->containsAlphabet('firstname')
-           ->length('firstname', 6, 48)
+           ->length('firstname', 2, 48)
            ->containsAlphabet('username')
-           ->length('username', 6, 48)
+           ->length('username', 2, 48)
            ->unique('username');
       $this->showMessagesFromErrors();
-      return $this;
+      return $this->isValid();
    }
 
    public function checkContact() {
       $this->basicValidation()
            ->email('email')
            ->containsAlphabet('name')
-           ->length('name', 6, 48)
+           ->length('name', 2, 48)
            ->containsAlphabet('subject')
-           ->length('subject', 6, 48)
+           ->length('subject', 2, 48)
            ->containsAlphabet('message')
-           ->length('message', 6, 512);
+           ->length('message', 2, 512);
       $this->showMessagesFromErrors();
-      return $this;
+      return $this->isValid();
    }
 
    public function checkLogin() {
       $this->basicValidation();
       $this->showMessagesFromErrors();
-      return $this;
+      return $this->isValid();
    }
 
    public function checkSocial() {
@@ -92,7 +99,15 @@ class Validator {
            ->length('link', 6, 256)
            ->link('link');
       $this->showMessagesFromErrors();
-      return $this;
+      return $this->isValid();
+   }
+
+   public function checkComment() {
+      $this->basicValidation()
+           ->containsAlphabet('comment')
+           ->length('comment', 2, 512);
+      $this->showMessagesFromErrors();
+      return $this->isValid();
    }
 
    public function showMessagesFromErrors() {
