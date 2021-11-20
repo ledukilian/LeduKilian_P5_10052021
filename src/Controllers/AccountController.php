@@ -22,41 +22,49 @@ class AccountController extends Controller {
 
    public function login() {
       if (!empty($_POST['email'])) {
-         if ((new Validator($_POST))->checkLogin()) {
+         $messages = (new Validator($_POST))->checkLogin();
+         if (count($messages)==0) {
             $try = $this->userManager->tryLogin();
             if (is_object($try)) {
-               $this->messageHandler->setMessage('success', 'Connexion réussie ! Vous êtes maintenant connecté.');
-               $this->redirectToIndex();
+               $this->messageHandler->addMessage('success', 'Connexion réussie ! Vous êtes maintenant connecté.');
             } else {
-               $this->messageHandler->setMessage('danger', $try);
-               $this->redirectToSelf();
+               $this->messageHandler->addMessage('danger', $try);
             }
-         } else {
-            $this->redirectToSelf();
          }
       }
-         $this->render("@client/pages/login.html.twig", []);
+      var_dump($messages);
+      $this->render("@client/pages/login.html.twig", [
+         'messages' => $this->messageHandler,
+         'values' => $_POST
+      ]);
       }
 
-   public function register() {
+      public function register() {
+         $this->messageHandler->addMessages((new Validator($_POST, new UserManager()))->checkRegister());
+
+         var_dump();
+      }
+
+   public function register2() {
+      $messages = [];
       if (!empty($_POST['email'])) {
-         if ((new Validator($_POST, new UserManager()))->checkRegister()) {
+         $messages = (new Validator($_POST, new UserManager()))->checkRegister();
+         if (count($messages)==0) {
             $user = new User($_POST);
             $user->setRole("USER");
             $user->setPasswordHashed($user->getPassword());
+            exit;
             if ($this->userManager->insert($user)) {
                $this->messageHandler->setMessage('success', 'Création de compte réussie, veuillez vous connecter.');
                $mailer = (new Mailer())->registered($user);
                $this->redirectToIndex();
-            } else {
-               $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'inscription.');
-               $this->redirectToSelf();
             }
-         } else {
-            $this->redirectToSelf();
          }
       }
-      $this->render("@client/pages/register.html.twig", []);
+      $this->render("@client/pages/register.html.twig", [
+         'messages' => $messages,
+         'values' => $_POST
+      ]);
    }
 
    public function disconnect() {

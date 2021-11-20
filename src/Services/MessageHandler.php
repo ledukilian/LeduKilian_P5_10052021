@@ -2,6 +2,12 @@
 namespace App\Services;
 
 class MessageHandler {
+   private Array $messages;
+
+   public function __construct() {
+
+   }
+
    public function setMessage($type, $text) {
       if (!isset($_SESSION['messages'])) {
          $_SESSION['messages'] = [];
@@ -18,15 +24,27 @@ class MessageHandler {
       return true;
    }
 
-   public function getMessages() {
-      if (!isset($_SESSION['messages'])) {
-         return false;
+   public function addMessages(Array $messages) {
+      foreach ($messages as $message) {
+         $this->addMessage($message['type'], $message['text'], $message['field']);
       }
-      return $_SESSION['messages'];
    }
 
-   public function cleanMessages() {
-      unset($_SESSION['messages']);
+   public function addMessage(String $type, String $text, String $field = 'global') {
+         array_push($this->messages, [
+            'type' => $type,
+            'field' => $field,
+            'text' => $text
+         ]);
+         return true;
+   }
+
+   public function getMessages() {
+      return $this->messages;
+   }
+
+   public function resetMessages() {
+      $this->messages = [];
    }
 
 

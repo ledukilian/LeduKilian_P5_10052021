@@ -22,22 +22,22 @@ class Validator {
       'compare' => ' ne correspondent pas entre eux'
    ];
    public static $fields = [
-      'email' => ' adresse mail ',
-      'username' => ' nom d\'utilisateur ',
-      'firstname' => ' prénom ',
-      'lastname' => ' nom ',
-      'password' => ' mot de passe ',
-      'password-confirm' => ' confirmation de mot de passe ',
-      'name' => ' nom ',
-      'subject' => ' sujet ',
-      'message' => ' message ',
-      'title' => ' titre de l\'article ',
-      'content' => ' contenu de l\'article ',
-      'coverAltImg' => ' texte de l\'image de l\'article ',
-      'lead' => ' phrase d\'accroche ',
-      'icon' => ' icône ',
-      'link' => ' lien ',
-      'comment' => ' commentaire '
+      'email' => 'adresse mail',
+      'username' => 'nom d\'utilisateur',
+      'firstname' => 'prénom',
+      'lastname' => 'nom',
+      'password' => 'mot de passe',
+      'password-confirm' => 'confirmation de mot de passe',
+      'name' => 'nom',
+      'subject' => 'sujet',
+      'message' => 'message',
+      'title' => 'titre de l\'article',
+      'content' => 'contenu de l\'article',
+      'coverAltImg' => 'texte de l\'image de l\'article',
+      'lead' => 'phrase d\'accroche',
+      'icon' => 'icône',
+      'link' => 'lien',
+      'comment' => 'commentaire'
    ];
 
    public function __construct(Array $data, $manager = null) {
@@ -71,8 +71,7 @@ class Validator {
            ->containsAlphabet('username')
            ->length('username', 2, 48)
            ->unique('username');
-      $this->showMessagesFromErrors();
-      return $this->isValid();
+      return $this->getMessagesFromErrors();
    }
 
    public function checkContact() {
@@ -90,8 +89,7 @@ class Validator {
 
    public function checkLogin() {
       $this->basicValidation();
-      $this->showMessagesFromErrors();
-      return $this->isValid();
+      return $this->getMessagesFromErrors();
    }
 
    public function checkSocial() {
@@ -125,10 +123,6 @@ class Validator {
            ->length('coverAltImg', 2, 512)
            ->containsAlphabet('content')
            ->length('content', 2, 512);
-
-
-
-
       $this->showMessagesFromErrors();
       return $this->isValid();
    }
@@ -156,6 +150,18 @@ class Validator {
       $this->showMessagesFromErrors();
       return $this->isValid();
 
+   }
+
+   public function getMessagesFromErrors() {
+      $messages = [];
+      foreach ($this->getErrors() as $key => $value) {
+         array_push($messages, [
+               'type' => 'danger',
+               'text' => 'Le champ '.self::$fields[$key].self::$errors[$value],
+               'field' => $key
+         ]);
+      }
+      return $messages;
    }
 
    public function showMessagesFromErrors() {

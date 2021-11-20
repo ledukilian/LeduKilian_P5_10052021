@@ -72,9 +72,6 @@ class Twig {
       $twig->addGlobal('admin', $twigGlobals->getAdmin());
       $twig->addGlobal('session', $twigGlobals->getSession());
       $twig->addGlobal('socials', $twigGlobals->getSocials());
-      $messageHandler = new MessageHandler();
-      $twig->addGlobal('messages', $messageHandler->getMessages());
-      $messageHandler->cleanMessages();
    }
 
     /**
