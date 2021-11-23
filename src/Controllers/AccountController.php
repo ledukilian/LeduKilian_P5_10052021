@@ -18,6 +18,7 @@ class AccountController extends Controller {
       parent::__construct($action, $params);
       $this->messageHandler = new MessageHandler();
       $this->userManager = new UserManager();
+      $this->validator = new Validator($_POST);
    }
 
    public function login() {
@@ -32,28 +33,24 @@ class AccountController extends Controller {
             }
          }
       }
-      var_dump($messages);
       $this->render("@client/pages/login.html.twig", [
          'messages' => $this->messageHandler,
          'values' => $_POST
       ]);
-      }
+   }
 
-      public function register() {
-         $this->messageHandler->addMessages((new Validator($_POST, new UserManager()))->checkRegister());
+   public function register() {
 
-         var_dump();
-      }
+      // $test = new MessageHandler();
+      // $test->setMessage('success', 'Ceci est un test, évidemment.');
+      // $this->redirectToIndex();
 
-   public function register2() {
-      $messages = [];
+
       if (!empty($_POST['email'])) {
-         $messages = (new Validator($_POST, new UserManager()))->checkRegister();
-         if (count($messages)==0) {
+         $this->validator = new Validator($_POST, new UserManager());
+         if ($this->validator->checkRegister()) {
             $user = new User($_POST);
-            $user->setRole("USER");
-            $user->setPasswordHashed($user->getPassword());
-            exit;
+            $user->setDefaultRegistered();
             if ($this->userManager->insert($user)) {
                $this->messageHandler->setMessage('success', 'Création de compte réussie, veuillez vous connecter.');
                $mailer = (new Mailer())->registered($user);
@@ -62,8 +59,7 @@ class AccountController extends Controller {
          }
       }
       $this->render("@client/pages/register.html.twig", [
-         'messages' => $messages,
-         'values' => $_POST
+         'messages' => $this->validator->getMessages()
       ]);
    }
 

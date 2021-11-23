@@ -5,4 +5,10 @@
          {% include "client/parts/_message.html.twig" %}
       {% endif %}
    {% endfor %}
+   {% if _session.messages is defined %}
+      {% for message in _session.messages %}
+            {% include "client/parts/_message.html.twig" with {'message': message.text, 'type': message.type} %}
+      {% endfor %}
+   {% endif %}
+
 </div>

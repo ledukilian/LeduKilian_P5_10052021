@@ -71,7 +71,8 @@ class Validator {
            ->containsAlphabet('username')
            ->length('username', 2, 48)
            ->unique('username');
-      return $this->getMessagesFromErrors();
+      $this->setMessagesFromErrors();
+      return $this->isValid();
    }
 
    public function checkContact() {
@@ -89,7 +90,7 @@ class Validator {
 
    public function checkLogin() {
       $this->basicValidation();
-      return $this->getMessagesFromErrors();
+      return $this->getErrorsFromFields();
    }
 
    public function checkSocial() {
@@ -152,16 +153,17 @@ class Validator {
 
    }
 
-   public function getMessagesFromErrors() {
+   public function getMessages() {
+      return $this->messageHandler->getMessages();;
+   }
+
+   public function setMessagesFromErrors() {
       $messages = [];
       foreach ($this->getErrors() as $key => $value) {
-         array_push($messages, [
-               'type' => 'danger',
-               'text' => 'Le champ '.self::$fields[$key].self::$errors[$value],
-               'field' => $key
-         ]);
+         $messages[$key] = 'Le champ '.self::$fields[$key].self::$errors[$value];
       }
-      return $messages;
+      $this->messageHandler->setMessages($messages);
+      return true;
    }
 
    public function showMessagesFromErrors() {

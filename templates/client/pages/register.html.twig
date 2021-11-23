@@ -7,14 +7,6 @@
    {{parent()}}
 {% endblock %}
 
-{% if values is not defined %}
-   {% set values = {
-      'email': '',
-      'firstname': '',
-      'lastname': '',
-      'username': ''
-   } %}
-{% endif %}
 
 {% block main %}
    <div class="container mt-6 p-5">
@@ -31,27 +23,11 @@
                         </span>
                      </div>
                      <label for="email" class="d-none">Adresse e-mail</label>
-                     <input name="email" id="email" class="form-control" placeholder="Adresse e-mail" type="email" value="{{ values.email }}" required="required" />
+                     <input name="email" id="email" class="form-control" placeholder="Adresse e-mail" type="email" value="{{ _post.email }}" required="required" />
                   </div>
-                  {% for message in messages %}
-                     {% if message.field == 'email' %}
-                        {% include "client/parts/_message.html.twig" %}
-                     {% endif %}
-                  {% endfor %}
-                  <div class="input-group pb-2">
-                     <div class="input-group-prepend">
-                        <span class="input-group-text">
-                           <i class="fas fa-font"></i>
-                        </span>
-                     </div>
-                     <label for="lastname" class="d-none">Nom</label>
-                     <input name="lastname" id="lastname" minlenght="2" maxlenght="48" class="form-control" value="{{ values.lastname }}" placeholder="Nom" type="text" required="required" />
-                  </div>
-                  {% for message in messages %}
-                     {% if message.field == 'lastname' %}
-                        {% include "client/parts/_message.html.twig" %}
-                     {% endif %}
-                  {% endfor %}
+                  {% if messages.email is defined %}
+                     {% include "client/parts/_message.html.twig" with {'message': messages.email} %}
+                  {% endif %}
                   <div class="input-group pb-2">
                      <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -59,13 +35,23 @@
                         </span>
                      </div>
                      <label for="firstname" class="d-none">Prénom</label>
-                     <input name="firstname" id="firstname" minlenght="2" maxlenght="48" class="form-control" value="{{ values.firstname }}" placeholder="Prénom" type="text" required="required" />
+                     <input name="firstname" id="firstname" minlenght="2" maxlenght="48" class="form-control" value="{{ _post.firstname }}" placeholder="Prénom" type="text" required="required" />
                   </div>
-                  {% for message in messages %}
-                     {% if message.field == 'firstname' %}
-                        {% include "client/parts/_message.html.twig" %}
-                     {% endif %}
-                  {% endfor %}
+                  {% if messages.firstname is defined %}
+                     {% include "client/parts/_message.html.twig" with {'message': messages.firstname} %}
+                  {% endif %}
+                  <div class="input-group pb-2">
+                     <div class="input-group-prepend">
+                        <span class="input-group-text">
+                           <i class="fas fa-font"></i>
+                        </span>
+                     </div>
+                     <label for="lastname" class="d-none">Nom</label>
+                     <input name="lastname" id="lastname" minlenght="2" maxlenght="48" class="form-control" value="{{ _post.lastname }}" placeholder="Nom" type="text" required="required" />
+                  </div>
+                  {% if messages.lastname is defined %}
+                     {% include "client/parts/_message.html.twig" with {'message': messages.lastname} %}
+                  {% endif %}
                   <div class="input-group pb-2">
                      <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -73,13 +59,11 @@
                         </span>
                      </div>
                      <label for="username" class="d-none">Nom d'utilisateur</label>
-                     <input name="username" id="username" minlenght="2" maxlenght="48" class="form-control" value="{{ values.username }}" placeholder="Nom d'utilisateur" type="text" required="required" />
+                     <input name="username" id="username" minlenght="2" maxlenght="48" class="form-control" value="{{ _post.username }}" placeholder="Nom d'utilisateur" type="text" required="required" />
                   </div>
-                  {% for message in messages %}
-                     {% if message.field == 'username' %}
-                        {% include "client/parts/_message.html.twig" %}
-                     {% endif %}
-                  {% endfor %}
+                  {% if messages.username is defined %}
+                     {% include "client/parts/_message.html.twig" with {'message': messages.username} %}
+                  {% endif %}
                   <div class="input-group pb-2">
                      <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -87,14 +71,12 @@
                         </span>
                      </div>
                      <label for="password" class="d-none">Mot de passe</label>
-                     <input name="password" id="password" minlenght="2" maxlenght="256" class="form-control" placeholder="Mot de passe" type="password" required="required" />
+                     <input name="password" id="password" minlenght="2" maxlenght="256" class="form-control" value="{{ _post.password }}" placeholder="Mot de passe" type="password" required="required" />
                      <small class="col-12 px-2 mb-2 text-secondary"><i class="fas fa-info-circle mr-2"></i>Doit contenir au moins 6 caractères, un caractère numérique et un caractère alphabétique.</small>
                   </div>
-                  {% for message in messages %}
-                     {% if message.field == 'password' %}
-                        {% include "client/parts/_message.html.twig" %}
-                     {% endif %}
-                  {% endfor %}
+                  {% if messages.password is defined %}
+                     {% include "client/parts/_message.html.twig" with {'message': messages.password} %}
+                  {% endif %}
                   <div class="input-group pb-2">
                      <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -104,11 +86,6 @@
                      <label for="password-confirm" class="d-none">Confirmation mot de passe</label>
                      <input name="password-confirm" id="password-confirm" minlenght="2" maxlenght="256" class="form-control" placeholder="Confirmation mot de passe" type="password" required="required" />
                   </div>
-                  {% for message in messages %}
-                     {% if message.field == 'password-confirm' %}
-                        {% include "client/parts/_message.html.twig" %}
-                     {% endif %}
-                  {% endfor %}
                </div>
                <div class="form-group">
                   <button type="submit" class="btn btn-warning btn-block">

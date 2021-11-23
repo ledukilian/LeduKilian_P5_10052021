@@ -5,7 +5,15 @@ class MessageHandler {
    private Array $messages;
 
    public function __construct() {
+      $this->messages = [];
+   }
 
+   public function getMessages() {
+      return $this->messages;
+   }
+
+   public function setMessages(Array $value) {
+      $this->messages = $value;
    }
 
    public function setMessage($type, $text) {
@@ -39,12 +47,8 @@ class MessageHandler {
          return true;
    }
 
-   public function getMessages() {
-      return $this->messages;
-   }
-
    public function resetMessages() {
-      $this->messages = [];
+      unset($_SESSION['messages']);
    }
 
 
