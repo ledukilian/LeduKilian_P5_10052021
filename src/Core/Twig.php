@@ -72,6 +72,11 @@ class Twig {
       $twig->addGlobal('admin', $twigGlobals->getAdmin());
       $twig->addGlobal('session', $twigGlobals->getSession());
       $twig->addGlobal('socials', $twigGlobals->getSocials());
+      $twig->addGlobal('_session', $_SESSION);
+      $twig->addGlobal('_post', $_POST);
+      $twig->addGlobal('_get', $_GET);
+      $messageHandler = new MessageHandler();
+      $messageHandler->resetMessages();
    }
 
     /**
