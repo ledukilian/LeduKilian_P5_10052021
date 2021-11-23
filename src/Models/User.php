@@ -70,4 +70,9 @@ class User extends Entity {
       return ($this->_role)=='ADMIN';
    }
 
+   public function setDefaultRegistered() {
+      $this->setRole("USER");
+      $this->setPasswordHashed($this->getPassword());
+   }
+
 }
