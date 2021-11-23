@@ -10,7 +10,6 @@ use App\Models\User;
 class Mailer {
    private PHPMailer $mailer;
    private $config;
-   private static $owner;
 
    public function __construct() {
       $this->config = yaml_parse_file(CONF_DIR . '/mail.yml');

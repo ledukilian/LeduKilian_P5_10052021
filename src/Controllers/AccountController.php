@@ -10,15 +10,11 @@ use App\Core\Validation\Validator;
 use App\Services\Mailer;
 
 class AccountController extends Controller {
-   protected MessageHandler $messageHandler;
    protected UserManager $userManager;
-   protected Validator $validator;
 
    public function __construct($action, $params = NULL) {
       parent::__construct($action, $params);
-      $this->messageHandler = new MessageHandler();
       $this->userManager = new UserManager();
-      $this->validator = new Validator($_POST);
    }
 
    public function login() {
@@ -40,12 +36,6 @@ class AccountController extends Controller {
    }
 
    public function register() {
-
-      // $test = new MessageHandler();
-      // $test->setMessage('success', 'Ceci est un test, évidemment.');
-      // $this->redirectToIndex();
-
-
       if (!empty($_POST['email'])) {
          $this->validator = new Validator($_POST, new UserManager());
          if ($this->validator->checkRegister()) {

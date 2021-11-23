@@ -22,25 +22,38 @@
             <i class="fas fa-envelope custom-icon-color"></i>
             Contactez-nous</h2>
          <form action="/contact" method="post" name="contact" id="contact-form" class="d-flex flex-column form-inline">
-            <div class="d-flex flex-column col-12 form-group px-5">
+            <div class="d-flex flex-column col-12 form-group">
                <label for="contact-nom" class="text-secondary align-self-start pb-1">Nom</label>
-               <input required="required" type="text" name="name" id="contact-name" class="form-control w-100" minlength="6" maxlength="48"  required="required" />
+               <input required="required" type="text" name="name" id="contact-name" class="form-control w-100" value="{{ _post.name }}" minlength="6" maxlength="48" required="required" />
             </div>
+            {% if messages.name is defined %}
+               {% include "client/parts/_message.html.twig" with {'message': messages.name} %}
+            {% endif %}
 
-            <div class="d-flex flex-column col-12 form-group mt-2 px-5">
+            <div class="d-flex flex-column col-12 form-group mt-2">
                <label for="contact-email" class="text-secondary align-self-start pb-1">Adresse e-mail</label>
-               <input required="required" type="email" name="email" id="contact-email" class="form-control w-100" minlength="6" maxlength="256" required="required" />
+               <input required="required" type="email" name="email" id="contact-email" class="form-control w-100" value="{{ _post.email }}" minlength="6" maxlength="256" required="required" />
             </div>
+            {% if messages.email is defined %}
+               {% include "client/parts/_message.html.twig" with {'message': messages.email} %}
+            {% endif %}
 
-            <div class="d-flex flex-column col-12 form-group mt-2 px-5">
+            <div class="d-flex flex-column col-12 form-group mt-2">
                <label for="contact-sujet" class="text-secondary align-self-start pb-1">Sujet</label>
-               <input required="required" type="text" name="subject" id="contact-subject" class="form-control w-100" minlength="6" maxlength="256" required="required" />
+               <input required="required" type="text" name="subject" id="contact-subject" class="form-control w-100" value="{{ _post.subject }}" minlength="6" maxlength="256" required="required" />
             </div>
+            {% if messages.subject is defined %}
+               {% include "client/parts/_message.html.twig" with {'message': messages.subject} %}
+            {% endif %}
 
-            <div class="d-flex flex-column col-12 form-group mt-2 px-5">
+            <div class="d-flex flex-column col-12 form-group mt-2">
                <label for="contact-message" class="text-secondary align-self-start pb-1">Message</label>
-               <textarea class="form-control w-100" name="message" id="contact-message" rows="6" cols="50" minlength="6" maxlength="2048" required="required"></textarea>
+               <textarea class="form-control w-100" name="message" id="contact-message" rows="6" cols="50" minlength="6" maxlength="2048" required="required">{{ _post.message }}</textarea>
             </div>
+            {% if messages.message is defined %}
+               {% include "client/parts/_message.html.twig" with {'message': messages.message} %}
+            {% endif %}
+
             <input type="submit" class="btn btn-warning mt-3" value="Envoyer mon message"/>
          </form>
       </section>

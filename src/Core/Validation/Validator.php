@@ -84,13 +84,14 @@ class Validator {
            ->length('subject', 2, 48)
            ->containsAlphabet('message')
            ->length('message', 2, 512);
-      $this->showMessagesFromErrors();
+      $this->setMessagesFromErrors();
       return $this->isValid();
    }
 
    public function checkLogin() {
       $this->basicValidation();
-      return $this->getErrorsFromFields();
+      $this->setMessagesFromErrors();
+      return $this->isValid();
    }
 
    public function checkSocial() {
@@ -102,7 +103,7 @@ class Validator {
            ->containsAlphabet('link')
            ->length('link', 6, 256)
            ->link('link');
-      $this->showMessagesFromErrors();
+      $this->setMessagesFromErrors();
       return $this->isValid();
    }
 
@@ -110,7 +111,7 @@ class Validator {
       $this->basicValidation()
            ->containsAlphabet('comment')
            ->length('comment', 2, 512);
-      $this->showMessagesFromErrors();
+      $this->setMessagesFromErrors();
       return $this->isValid();
    }
 
@@ -124,7 +125,7 @@ class Validator {
            ->length('coverAltImg', 2, 512)
            ->containsAlphabet('content')
            ->length('content', 2, 512);
-      $this->showMessagesFromErrors();
+      $this->setMessagesFromErrors();
       return $this->isValid();
    }
 
@@ -154,7 +155,7 @@ class Validator {
    }
 
    public function getMessages() {
-      return $this->messageHandler->getMessages();;
+      return $this->messageHandler->getMessages();
    }
 
    public function setMessagesFromErrors() {

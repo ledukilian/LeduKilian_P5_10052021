@@ -16,6 +16,7 @@ class Controller {
       $this->params = $params;
       $this->twig = new Twig();
       $this->messageHandler = new MessageHandler();
+      $this->validator = new Validator($_POST);
    }
 
    public function execute() {

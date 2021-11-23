@@ -6,9 +6,11 @@ use App\Managers\PostManager;
 use App\Core\PDOFactory;
 use App\Managers\UserManager;
 use App\Services\Mailer;
-
+use App\Core\Validation\Validator;
+use App\Services\MessageHandler;
 
 class IndexController extends Controller {
+
    public function showHome() {
       $postManager = new PostManager();
       $posts = $postManager->findBy(
@@ -25,7 +27,7 @@ class IndexController extends Controller {
 
    public function showContact() {
       if (!empty($_POST['email'])) {
-         if ((new Validator($_POST))->checkContact()) {
+         if ($this->validator->checkContact()) {
             $mailer = new Mailer();
             if ($mailer->contact($_POST)) {
                $this->messageHandler->setMessage('success', 'Votre message a bien été envoyé');
@@ -35,7 +37,9 @@ class IndexController extends Controller {
             $this->redirectToContact();
          }
       }
-      $this->render("@client/pages/contact.html.twig", []);
+      $this->render("@client/pages/contact.html.twig", [
+         'messages' => $this->validator->getMessages()
+      ]);
    }
 
    public function showPortfolio() {
