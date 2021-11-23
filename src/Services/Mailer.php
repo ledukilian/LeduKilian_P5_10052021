@@ -52,7 +52,7 @@ class Mailer {
       try {
           $this->mailer->addAddress($mailData['mail'], $mailData['name']);
           $this->mailer->addReplyTo($mailData['reply-mail'], $mailData['reply-name']);
-          $this->mailer->AddBCC($this->config['contact-to']['mail'], $this->config['contact-to']['name'])
+          $this->mailer->AddBCC($this->config['contact-to']['mail'], $this->config['contact-to']['name']);
           $this->mailer->isHTML(true);
           $this->mailer->Subject = $mailData['subject'];
           $this->mailer->Body = $mailData['message'];
