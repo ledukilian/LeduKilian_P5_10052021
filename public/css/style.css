@@ -88,14 +88,9 @@ form .alert {
    padding: 8px;
    padding-left: 14px;
 }
-
-
-
-
-
-
-
-
+form .alert-dismissible .close {
+   display: none;
+}
 
 
 
