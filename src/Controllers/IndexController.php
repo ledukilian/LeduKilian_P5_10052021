@@ -26,19 +26,18 @@ class IndexController extends Controller {
    }
 
    public function showContact() {
-      if (!empty($_POST['email'])) {
-         if ($this->validator->checkContact()) {
-            $mailer = new Mailer();
-            if ($mailer->contact($_POST)) {
-               $this->messageHandler->setMessage('success', 'Votre message a bien été envoyé');
-            } else {
-               $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'envoi de votre message');
-            }
-            $this->redirectToContact();
+      if (!empty($_POST['email']) && $this->validator->checkContact()) {
+         $mailer = new Mailer();
+         if ($mailer->contact($_POST)) {
+            $this->messageHandler->setMessage('success', 'Votre message a bien été envoyé');
+         } else {
+            $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'envoi de votre message');
          }
+         $this->redirectToContact();
       }
+      $this->messageHandler->addMessages($this->validator->getMessages());
       $this->render("@client/pages/contact.html.twig", [
-         'messages' => $this->validator->getMessages()
+         'messages' => $this->messageHandler->getMessages()
       ]);
    }
 

@@ -4,53 +4,45 @@
          <img id="logo" src="{{ assets_directory }}img/logo.png" alt="KLD Blog">
       </div>
    </a>
-   <hr class="sidebar-divider my-0">
    <li class="nav-item {% if uri == '/admin/' %}active{% endif %}">
       <a class="nav-link" href="/admin/">
-         <i class="fas fa-fw fa-tachometer-alt"></i>
+         <i class="fas fa-fw fa-tachometer-alt text-warning"></i>
          <span>Accueil</span></a>
    </li>
-   <hr class="sidebar-divider">
-   <div class="sidebar-heading">
+   <div class="sidebar-heading mt-4">
       Blog
    </div>
    <li class="nav-item {% if uri == '/admin/blog/ajouter/' %}active{% endif %}">
       <a class="nav-link" href="/admin/blog/ajouter/">
-         <i class="fas fa-plus-circle"></i>
+         <i class="fas fa-plus-circle text-warning"></i>
          <span>Ajouter un article</span></a>
    </li>
    <li class="nav-item {% if uri == '/admin/blog/' %}active{% endif %}">
       <a class="nav-link" href="/admin/blog/">
-         <i class="fas fa-th-list"></i>
+         <i class="fas fa-th-list text-warning"></i>
          <span>Articles</span></a>
    </li>
    <li class="nav-item {% if uri == '/admin/blog/commentaires/' %}active{% endif %}">
       <a class="nav-link" href="/admin/blog/commentaires/">
-         <i class="fas fa-comments"></i>
+         <i class="fas fa-comments text-warning"></i>
          <span>Commentaires</span></a>
    </li>
-   <hr class="sidebar-divider">
-   <div class="sidebar-heading">
+   <div class="sidebar-heading mt-4">
       Portfolio
    </div>
    <li class="nav-item {% if uri == '/admin/informations/' %}active{% endif %}">
       <a class="nav-link" href="/admin/informations/">
-         <i class="fas fa-edit"></i>
+         <i class="fas fa-edit text-warning"></i>
          <span>Modifier les informations</span></a>
    </li>
    <li class="nav-item {% if uri == '/admin/reseaux/' %}active{% endif %}">
       <a class="nav-link" href="/admin/reseaux/">
-         <i class="fas fa-hashtag"></i>
+         <i class="fas fa-hashtag text-warning"></i>
          <span>Réseaux sociaux</span></a>
    </li>
-
-
-
-
-   <hr class="sidebar-divider d-none d-md-block">
-   <li class="nav-item">
-      <a class="nav-link" href="{{ assets_directory }}../">
-         <i class="fas fa-arrow-circle-left"></i>
+   <li class="nav-item mt-5">
+      <a class="nav-link text-danger" href="{{ assets_directory }}../">
+         <i class="fas fa-arrow-circle-left text-danger"></i>
          <span>Retour au site</span></a>
    </li>
 </ul>

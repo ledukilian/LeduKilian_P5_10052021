@@ -9,12 +9,10 @@ use App\Core\Validation\Validator;
 
 
 class CommentController extends Controller {
-   protected MessageHandler $messageHandler;
    protected CommentManager $commentManager;
 
    public function __construct($action, $params = NULL) {
       parent::__construct($action, $params);
-      $this->messageHandler = new MessageHandler();
       $this->commentManager = new CommentManager();
    }
 
@@ -38,10 +36,10 @@ class CommentController extends Controller {
          "id" => $this->params['id']
       ]);
       if ($comment->getStatus()==1) {
-         $this->messageHandler->setMessage('success', 'Le commentaire a bien été désactivé');
+         $this->messageHandler->setMessage('danger', 'Le commentaire numéro '.$comment->getStatus().' ne sera plus affiché');
          $comment->setStatus(0);
       } else {
-         $this->messageHandler->setMessage('success', 'Le commentaire a bien été activé');
+         $this->messageHandler->setMessage('success', 'Le commentaire numéro '.$comment->getStatus().' sera maintenant affiché');
          $comment->setStatus(1);
       }
       if ($this->commentManager->update($comment)) {

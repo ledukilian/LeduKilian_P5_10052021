@@ -48,6 +48,7 @@ class AdminController extends Controller {
       );
       $this->render("@admin/pages/index.html.twig", [
          'posts' => $posts,
+         'users_count' => $this->userManager->countElements(),
          'articles_count' => $this->postManager->countElements(),
          'comments_count' => $this->commentManager->countElements()
       ]);
@@ -57,11 +58,16 @@ class AdminController extends Controller {
       $this->redirectIfNotAdmin();
       $comments = $this->commentManager->getCommentsAndInfos();
       $this->render("@admin/pages/blog/comments.html.twig", [
-         'comments' => $comments
+         'comments' => $comments,
+         'messages' => $this->messageHandler->getMessages()
       ]);
    }
 
    public function editInformations() {
+      // var_dump($_POST);
+      // var_dump($_FILES);
+      // die;
+
       $this->redirectIfNotAdmin();
       if (!empty($_POST)) {
          if ((new Validator($_POST, $this->userManager))->checkInformations()) {

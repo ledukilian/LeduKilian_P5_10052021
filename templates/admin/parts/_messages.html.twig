@@ -1,33 +1,11 @@
+
 <div id="alert-area" class="col-sm-12 offset-md-1 col-md-8">
-   {% for message in messages %}
-      {% if message.type == 'success' %}
-         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ message.text }}
-           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-             <span aria-hidden="true">&times;</span>
-           </button>
-         </div>
-      {% elseif message.type == 'warning' %}
-         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            {{ message.text }}
-           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-             <span aria-hidden="true">&times;</span>
-           </button>
-         </div>
-      {% elseif message.type == 'danger' %}
-         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-           {{ message.text }}
-           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-             <span aria-hidden="true">&times;</span>
-           </button>
-         </div>
-      {% elseif message.type == 'primary' %}
-      <div class="alert alert-primary alert-dismissible fade show" role="alert">
-        {{ message.text }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+      {% if messages.global is defined %}
+         {% include "client/parts/_message.html.twig" with {'message': messages.global.message, 'type': messages.global.type} %}
       {% endif %}
-   {% endfor %}
+   {% if session.messages is defined %}
+      {% for message in session.messages %}
+            {% include "client/parts/_message.html.twig" with {'message': message.text, 'type': message.type} %}
+      {% endfor %}
+   {% endif %}
 </div>

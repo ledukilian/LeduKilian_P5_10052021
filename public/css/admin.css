@@ -3532,8 +3532,8 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 
 .custom-control-input:checked~.custom-control-label::before {
    color: #fff;
-   border-color: #4e73df;
-   background-color: #4e73df
+   border-color: #f6c23e;
+   background-color: #f6c23e
 }
 
 .custom-control-input:focus~.custom-control-label::before {
@@ -10305,11 +10305,13 @@ a:focus {
 
 .sidebar .nav-item .nav-link .img-profile, .topbar .nav-item .nav-link .img-profile {
    height: 2rem;
-   width: 2rem
+   width: 2rem;
+   border: 1.5px solid #5F5F5F;
 }
 
 .topbar {
-   height: 4.375rem
+   height: 3.675rem;
+   background: #171717 !important;
 }
 
 .topbar #sidebarToggleTop {
@@ -10585,7 +10587,7 @@ a:focus {
 }
 
 .sidebar .sidebar-brand {
-   height: 4.375rem;
+   height: 6.375rem;
    text-decoration: none;
    font-size: 1rem;
    font-weight: 800;
@@ -10867,7 +10869,8 @@ a:focus {
 }
 
 .sidebar-dark .nav-item.active .nav-link {
-   color: #fff
+   color: #fff;
+   border-right: 8px solid #ffc107;
 }
 
 .sidebar-dark .nav-item.active .nav-link i {

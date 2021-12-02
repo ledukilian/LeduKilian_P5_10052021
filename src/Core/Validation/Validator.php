@@ -5,7 +5,6 @@ use App\Core\Validation\ValidatorConstraint;
 use App\Services\MessageHandler;
 
 class Validator {
-   protected MessageHandler $messageHandler;
    private ValidatorConstraint $validator;
    protected Array $data;
    public static $errors = [
@@ -41,7 +40,6 @@ class Validator {
    ];
 
    public function __construct(Array $data, $manager = null) {
-      $this->messageHandler = new MessageHandler();
       $this->data = $data;
       $this->validator = new ValidatorConstraint($this->data, $manager);
    }
@@ -71,7 +69,6 @@ class Validator {
            ->containsAlphabet('username')
            ->length('username', 2, 48)
            ->unique('username');
-      $this->setMessagesFromErrors();
       return $this->isValid();
    }
 
@@ -84,13 +81,12 @@ class Validator {
            ->length('subject', 2, 48)
            ->containsAlphabet('message')
            ->length('message', 2, 512);
-      $this->setMessagesFromErrors();
       return $this->isValid();
    }
 
    public function checkLogin() {
-      $this->basicValidation();
-      $this->setMessagesFromErrors();
+      $this->basicValidation()
+           ->email('email');
       return $this->isValid();
    }
 
@@ -103,7 +99,6 @@ class Validator {
            ->containsAlphabet('link')
            ->length('link', 6, 256)
            ->link('link');
-      $this->setMessagesFromErrors();
       return $this->isValid();
    }
 
@@ -111,7 +106,6 @@ class Validator {
       $this->basicValidation()
            ->containsAlphabet('comment')
            ->length('comment', 2, 512);
-      $this->setMessagesFromErrors();
       return $this->isValid();
    }
 
@@ -125,7 +119,6 @@ class Validator {
            ->length('coverAltImg', 2, 512)
            ->containsAlphabet('content')
            ->length('content', 2, 512);
-      $this->setMessagesFromErrors();
       return $this->isValid();
    }
 
@@ -149,49 +142,20 @@ class Validator {
            ->length('firstname', 2, 48)
            ->containsAlphabet('username')
            ->length('username', 2, 48);
-      $this->showMessagesFromErrors();
       return $this->isValid();
 
    }
 
    public function getMessages() {
-      return $this->messageHandler->getMessages();
-   }
-
-   public function setMessagesFromErrors() {
       $messages = [];
       foreach ($this->getErrors() as $key => $value) {
-         $messages[$key] = 'Le champ '.self::$fields[$key].self::$errors[$value];
+         $messages[$key] = [
+            'type' => 'danger',
+            'message' => 'Le champ '.self::$fields[$key].self::$errors[$value]
+            ];
       }
-      $this->messageHandler->setMessages($messages);
-      return true;
+      return $messages;
    }
-
-   public function showMessagesFromErrors() {
-      foreach ($this->getErrors() as $key => $value) {
-         $this->messageHandler->setMessage('danger', 'Le champ '.self::$fields[$key].self::$errors[$value]);
-      }
-   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

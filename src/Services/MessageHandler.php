@@ -11,7 +11,6 @@ class MessageHandler {
    public function getMessages() {
       return $this->messages;
    }
-
    public function setMessages(Array $value) {
       $this->messages = $value;
    }
@@ -33,18 +32,17 @@ class MessageHandler {
    }
 
    public function addMessages(Array $messages) {
-      foreach ($messages as $message) {
-         $this->addMessage($message['type'], $message['text'], $message['field']);
+      foreach ($messages as $key => $value) {
+         $this->addMessage($value['type'], $value['message'], $key);
       }
    }
 
    public function addMessage(String $type, String $text, String $field = 'global') {
-         array_push($this->messages, [
-            'type' => $type,
-            'field' => $field,
-            'text' => $text
-         ]);
-         return true;
+      $this->messages[$field] = [
+         'type' => $type,
+         'message' => $text
+      ];
+      return true;
    }
 
    public function resetMessages() {

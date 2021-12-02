@@ -10,6 +10,11 @@
                      </a>
                   {% endfor %}
                </div>
+               {% if session.logged == true %}
+                     {% if session.user.role == "ADMIN" %}
+                        <a class="nav-link mt-4 text-secondary" href="/admin/">Accéder à l'administration</a>
+                     {% endif %}
+               {% endif %}
             </div>
          </div>
       </div>

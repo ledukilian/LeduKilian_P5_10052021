@@ -1,3 +1,6 @@
+body {
+   font-family: 'Outfit', sans-serif !important;
+}
 a:hover {
    text-decoration: none;
 }
@@ -14,15 +17,30 @@ a:hover {
    background-color: rgba(0, 0, 0, 0.9) !important;
 }
 #logo {
+   transition: 0.4s;
    height: 100%;
    width: auto;
-   max-height: 40px;
+   max-height: 60px;
+   margin-top: 10px;
+   margin-bottom: 10px;
+}
+#logo:hover {
+   transition: 0.4s;
+   transform: scale(1.1);
+}
+.comment-disabled {
+   transition: 0.4s;
+   opacity: 0.4;
+}
+.comment-disabled:hover {
+   transition: 0.4s;
+   opacity: 1;
 }
 .navbar {
    padding: 10px 5px;
 }
 .nav-item {
-   padding: 0px 10px;
+   padding: 0px 0px 0px 10px;
 }
 .mt-6 {
    margin-top: 6em !important;
@@ -39,7 +57,7 @@ a:hover {
    transform: scale(1);
 }
 #accordion-sidebar {
-   background: #0F0F0F;
+   background: #171717;
 }
 input[type=text]
 , input[type=email]
@@ -47,11 +65,12 @@ input[type=text]
    color: #0F0F0F !important;
 }
 .btn-toolbar .active {
-   background: #0F0F0F !important;
+   background: #171717 !important;
 }
 #alert-area {
    position: fixed;
    top: 16%;
+   z-index: 3;
 }
 .alert {
    transition: 0.4s;
@@ -87,14 +106,24 @@ form .alert {
    margin-top: 8px;
    padding: 8px;
    padding-left: 14px;
-   width: 90%;
+   width: 100%;
    text-align: left;
 }
 form .alert-dismissible .close {
    display: none;
 }
-
-
+.social-icon {
+   font-size: 1.3em;
+   color: #f6c23e;
+   margin-right: 6px;
+}
+.zoom-effect {
+   transition: 0.4s;
+}
+.zoom-effect:hover {
+   transition: 0.4s;
+   transform: scale(1.03);
+}
 
 
 

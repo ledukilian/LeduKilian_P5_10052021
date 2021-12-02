@@ -15,23 +15,22 @@ class AccountController extends Controller {
    public function __construct($action, $params = NULL) {
       parent::__construct($action, $params);
       $this->userManager = new UserManager();
+      $this->validator = new Validator($_POST);
    }
 
    public function login() {
-      if (!empty($_POST['email'])) {
-         $messages = (new Validator($_POST))->checkLogin();
-         if (count($messages)==0) {
-            $try = $this->userManager->tryLogin();
-            if (is_object($try)) {
-               $this->messageHandler->addMessage('success', 'Connexion réussie ! Vous êtes maintenant connecté.');
-            } else {
-               $this->messageHandler->addMessage('danger', $try);
-            }
+      if (!empty($_POST['email']) && $this->validator->checkLogin()) {
+         $try = $this->userManager->tryLogin();
+         if (is_object($try)) {
+            $this->messageHandler->setMessage('success', 'Connexion réussie, bon retour parmi nous '.$try->getFirstName().' !');
+            $this->redirectToIndex();
+         } else {
+            $this->messageHandler->setMessage('danger', $try);
          }
       }
+      $this->messageHandler->addMessages($this->validator->getMessages());
       $this->render("@client/pages/login.html.twig", [
-         'messages' => $this->messageHandler,
-         'values' => $_POST
+         'messages' => $this->messageHandler->getMessages()
       ]);
    }
 
@@ -39,8 +38,7 @@ class AccountController extends Controller {
       if (!empty($_POST['email'])) {
          $this->validator = new Validator($_POST, new UserManager());
          if ($this->validator->checkRegister()) {
-            $user = new User($_POST);
-            $user->setDefaultRegistered();
+            $user = (new User($_POST))->setDefaultRegistered();
             if ($this->userManager->insert($user)) {
                $this->messageHandler->setMessage('success', 'Création de compte réussie, veuillez vous connecter.');
                $mailer = (new Mailer())->registered($user);
