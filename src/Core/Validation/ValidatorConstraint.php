@@ -18,7 +18,7 @@ class ValidatorConstraint {
       $this->data = $data;
    }
 
-   public function required($key) {
+   public function required(String $key) {
       if (!key_exists($key, $this->data)) {
          $this->addError($key, 'required');
       }
@@ -32,7 +32,7 @@ class ValidatorConstraint {
       return $this;
    }
 
-   public function notEmpty($key) {
+   public function notEmpty(String $key) {
       if (empty($this->data[$key]) || $this->data[$key]===null) {
          $this->addError($key, 'not_empty');
       }
@@ -46,62 +46,62 @@ class ValidatorConstraint {
       return $this;
    }
 
-   public function email($key) {
+   public function email(String $key) {
       if (!filter_var($this->data[$key], FILTER_VALIDATE_EMAIL)) {
          $this->addError($key, 'email');
       }
       return $this;
    }
 
-   public function password($key) {
+   public function password(String $key) {
       return $this->length($key, 6, 256)
                   ->containsNumber($key)
                   ->containsAlphabet($key);
    }
 
-   public function containsAlphabet($key) {
+   public function containsAlphabet(String $key) {
       if (!preg_match('~[a-zA-Z]+~', $this->data[$key])) {
          $this->addError($key, 'alphabet');
       }
       return $this;
    }
 
-   public function containsNumber($key) {
+   public function containsNumber(String $key) {
       if (!preg_match('~[0-9]+~', $this->data[$key])) {
          $this->addError($key, 'number');
       }
       return $this;
    }
 
-   public function minLength($key, $min) {
+   public function minLength(String $key, $min) {
       if (strlen($this->data[$key])<$min) {
          $this->addError($key, 'min_length');
       }
       return $this;
    }
 
-   public function maxLength($key, $max) {
+   public function maxLength(String $key, $max) {
       if (strlen($this->data[$key])>$max) {
          $this->addError($key, 'max_length');
       }
       return $this;
    }
 
-   public function slug($key) {
+   public function slug(String $key) {
       if(!preg_match('/^[a-z][-a-z0-9]*$/', $this->data[$key])){
          $this->addError($key, 'slug');
       }
       return $this;
    }
 
-   public function link($key) {
+   public function link(String $key) {
       if (filter_var($this->data[$key], FILTER_VALIDATE_URL) === FALSE) {
          $this->addError($key, 'link');
       }
       return $this;
    }
 
-   public function unique($key) {
+   public function unique(String $key) {
       $already_exist = $this->manager->findOneBy([
          $key => $this->data[$key]
       ]);
@@ -111,14 +111,41 @@ class ValidatorConstraint {
       return $this;
    }
 
-   public function compare($key1, $key2) {
-      if ($key1!=$key2) {
-         $this->addError($key1.' et '.$key2, 'compare');
+   public function file(String $key) {
+      if (!key_exists($key, $_FILES)) {
+         $this->addError($key, 'file');
       }
       return $this;
    }
 
-   public function length($key, $min, $max) {
+   public function size(String $key, Int $max_weight) {
+      if ($_FILES[$key]['size'] > $max_weight) {
+         $this->addError($key, 'size');
+      }
+      $fileSize = filesize($_FILES[$key]['tmp_name']);
+      if ($fileSize > $max_weight) {
+         $this->addError($key, 'size');
+      }
+      return $this;
+   }
+
+   public function type(String $key, Array $formats) {
+      $fileInfos = finfo_open(FILEINFO_MIME_TYPE);
+      $fileType = finfo_file($fileInfos, $_FILES[$key]['tmp_name']);
+      if (!in_array($fileType, array_keys($formats))) {
+         $this->addError($key, 'type');
+      }
+      return $this;
+   }
+
+   public function compare(String $key1, String $key2) {
+      if ($this->data[$key1]!=$this->data[$key2]) {
+         $this->addError($key1, 'compare');
+      }
+      return $this;
+   }
+
+   public function length(String $key, Int $min, Int $max) {
       return $this->minLength($key, $min)
                   ->maxLength($key, $max);
    }

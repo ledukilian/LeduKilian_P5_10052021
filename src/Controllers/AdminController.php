@@ -9,6 +9,7 @@ use App\Managers\AdminManager;
 use App\Managers\UserManager;
 use App\Services\TwigGlobals;
 use App\Services\MessageHandler;
+use App\Services\FileHandler;
 use App\Core\Validation\Validator;
 use App\Models\Post;
 use App\Models\Social;
@@ -25,6 +26,7 @@ class AdminController extends Controller {
    protected CommentManager $commentManager;
    protected SocialManager $socialManager;
    protected Validator $validator;
+   protected FileHandler $fileHandler;
 
    public function __construct($action, $params = NULL) {
       parent::__construct($action, $params);
@@ -44,7 +46,7 @@ class AdminController extends Controller {
          [
             'created_at' => 'DESC'
          ],
-         10
+         3
       );
       $this->render("@admin/pages/index.html.twig", [
          'posts' => $posts,
@@ -63,14 +65,19 @@ class AdminController extends Controller {
       ]);
    }
 
-   public function editInformations() {
-      // var_dump($_POST);
-      // var_dump($_FILES);
-      // die;
-
+   public function showEditInformations() {
       $this->redirectIfNotAdmin();
+      $this->messageHandler->addMessages($this->validator->getMessages());
+      $this->render("@admin/pages/informations/edit.html.twig", [
+         'messages' => $this->messageHandler->getMessages()
+      ]);
+
+   }
+
+   public function editInformations() {
       if (!empty($_POST)) {
-         if ((new Validator($_POST, $this->userManager))->checkInformations()) {
+         $this->validator = new Validator($_POST, $this->userManager);
+         if ($this->validator->checkInformations()) {
             $admin = $this->adminManager->findOneBy([
                'id' => $this->twigGlobals->getAdminId()
             ]);
@@ -79,17 +86,48 @@ class AdminController extends Controller {
             ]);
             $user->hydrate($_POST);
             $admin->hydrate($_POST);
-            $user->setPasswordHashed($user->getPassword());
+            if (key_exists('password', $_POST) && !empty($_POST['password'])) {
+               $user->setPasswordHashed($user->getPassword());
+            }
             if ($this->adminManager->update($admin) && $this->userManager->update($user)) {
-               $this->messageHandler->setMessage('success', 'Les informations ont bien été mise à jour');
+               $this->messageHandler->addMessage('success', 'Les informations ont bien été mise à jour');
                $this->redirectToAdmin();
             } else {
-               $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de la mise à jour des informations');
+               $this->messageHandler->addMessage('danger', 'Une erreur est survenue lors de la mise à jour des informations');
             }
          }
-         $this->redirectToSelf();
       }
-      $this->render("@admin/pages/informations/edit.html.twig", []);
+      $this->showEditInformations();
+   }
+
+   public function editCV() {
+      if ($this->validator->checkCV()) {
+         $this->fileHandler = new FileHandler('urlCv');
+         if ($this->fileHandler->uploadCV()) {
+            $this->messageHandler->addMessage('success', 'Le CV a bien été mis à jour');
+         } else {
+            $this->messageHandler->addMessage('danger', 'Une erreur est survenue lors de la mise à jour du CV');
+         }
+      }
+      $this->showEditInformations();
+   }
+
+   public function editProfileImg() {
+      if ($this->validator->checkProfileImg()) {
+         $this->fileHandler = new FileHandler('avatarUrl');
+
+         $admin = $this->adminManager->findOneBy([
+            'id' => $this->twigGlobals->getAdminId()
+         ]);
+         $admin->hydrate($_POST);
+         $admin->setAvatarUrl('/img/'.$_FILES['avatarUrl']['name']);
+         if ($this->fileHandler->uploadProfileImg() && $this->adminManager->update($admin)) {
+            $this->messageHandler->addMessage('success', 'La photo de profil a bien été mis à jour');
+         } else {
+            $this->messageHandler->addMessage('danger', 'Une erreur est survenue lors de la mise à jour de la photo de profil');
+         }
+      }
+      $this->showEditInformations();
    }
 
    public function showSocialList() {
@@ -99,8 +137,10 @@ class AdminController extends Controller {
             'id_admin' => 1
          ]
       );
+      $this->messageHandler->addMessages($this->validator->getMessages());
       $this->render("@admin/pages/informations/socialList.html.twig", [
-         'socials' => $socials
+         'socials' => $socials,
+         'messages' => $this->messageHandler->getMessages()
       ]);
    }
 
@@ -121,35 +161,43 @@ class AdminController extends Controller {
    public function addPost() {
       $this->redirectIfNotAdmin();
       if (!empty($_POST)) {
-         if ((new Validator($_POST, $this->userManager))->checkPost()) {
+         $this->validator = new Validator($_POST, $this->postManager);
+         var_dump($this->validator->checkPost());
+         var_dump($this->validator->getMessages());
+         die;
+         if ($this->validator->checkPost()) {
             $post = new Post($_POST);
             $post->setAdminId($_SESSION['user']->getId());
             $post->setSlug($this->postManager->slugify($_POST['title']));
             if ($this->postManager->insert($post)) {
-               $this->messageHandler->setMessage('success', 'Le nouveau post a bien été ajouté');
+               $this->messageHandler->addMessage('success', 'Le nouveau post a bien été ajouté');
                $this->redirectToAdmin();
             } else {
-               $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'ajout du post');
+               $this->messageHandler->addMessage('danger', 'Une erreur est survenue lors de l\'ajout du post');
             }
          }
          $this->redirectToSelf();
       }
-      $this->render("@admin/pages/blog/add.html.twig", []);
+      $this->messageHandler->addMessages($this->validator->getMessages());
+      $this->render("@admin/pages/blog/add.html.twig", [
+         'messages' => $this->messageHandler->getMessages()
+      ]);
    }
 
    public function addSocial() {
       $this->redirectIfNotAdmin();
       if (!empty($_POST)) {
-         if ((new Validator($_POST))->checkSocial()) {
+         $this->validator->checkSocial();
+         if ($this->validator->checkSocial()) {
             $social = new Social($_POST);
             $social->setIdAdmin($_SESSION['user']->getId());
             if ($this->socialManager->insert($social)) {
-               $this->messageHandler->setMessage('success', 'Le nouveau réseau social a bien été ajouté');
+               $this->messageHandler->addMessage('success', 'Le nouveau réseau social a bien été ajouté');
             } else {
-               $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de l\'ajout du réseau social');
+               $this->messageHandler->addMessage('danger', 'Une erreur est survenue lors de l\'ajout du réseau social');
             }
          }
-         $this->redirectToSocial();
+         $this->showSocialList();
       }
    }
 

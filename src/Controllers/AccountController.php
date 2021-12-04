@@ -26,6 +26,8 @@ class AccountController extends Controller {
             $this->redirectToIndex();
          } else {
             $this->messageHandler->setMessage('danger', $try);
+            header('Location: /connexion');
+            exit;
          }
       }
       $this->messageHandler->addMessages($this->validator->getMessages());

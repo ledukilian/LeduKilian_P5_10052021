@@ -28,10 +28,25 @@ listComments:
    controller:       AdminController
    action:           showCommentList
    parameters:       [ ]
-editInformations:
+showEditInformations:
    uri:              /admin/informations/
    controller:       AdminController
+   action:           showEditInformations
+   parameters:       [ ]
+editInformations:
+   uri:              /admin/informations/changer_informations/
+   controller:       AdminController
    action:           editInformations
+   parameters:       [ ]
+editCV:
+   uri:              /admin/informations/changer_cv/
+   controller:       AdminController
+   action:           editCV
+   parameters:       [ ]
+editProfileImg:
+   uri:              /admin/informations/changer_image_profil/
+   controller:       AdminController
+   action:           editProfileImg
    parameters:       [ ]
 showSocialList:
    uri:              /admin/reseaux/

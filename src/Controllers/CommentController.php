@@ -36,10 +36,10 @@ class CommentController extends Controller {
          "id" => $this->params['id']
       ]);
       if ($comment->getStatus()==1) {
-         $this->messageHandler->setMessage('danger', 'Le commentaire numéro '.$comment->getStatus().' ne sera plus affiché');
+         $this->messageHandler->setMessage('danger', 'Le commentaire numéro '.$comment->getId().' ne sera plus affiché');
          $comment->setStatus(0);
       } else {
-         $this->messageHandler->setMessage('success', 'Le commentaire numéro '.$comment->getStatus().' sera maintenant affiché');
+         $this->messageHandler->setMessage('success', 'Le commentaire numéro '.$comment->getId().' sera maintenant affiché');
          $comment->setStatus(1);
       }
       if ($this->commentManager->update($comment)) {

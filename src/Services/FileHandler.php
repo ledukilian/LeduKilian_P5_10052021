@@ -2,41 +2,56 @@
 namespace App\Services;
 
 class FileHandler {
-   protected String $defaultPath;
-   protected String $defaultName;
-   protected Float $maxSize;
-   protected String $formats;
-   protected String $fileName
    protected Array $file;
-   protected Array $field;
+   protected String $filePath;
+   protected String $fileType;
+   protected String $fileExtension;
+   protected Array $allowedTypes;
 
-   public function __construct(String $field) {
-      if (isset($_FILES[$field])) {
-         $this->file = $_FILES[$field];
-         $this->defaultPath = '/public/img/articles/';
-         $this->defaultName = 'article.png';
-         $this->maxSize = 2000000;
+   public function __construct(String $key) {
+      $this->allowedTypes = [
+         'application/pdf' => 'pdf',
+         'image/png' => 'png',
+         'image/jpeg' => 'jpg'
+      ];
+      if (isset($_FILES[$key])) {
+         $this->file = $_FILES[$key];
+         $this->fileName = $_FILES[$key]['name'];
+         $this->filePath = $_FILES[$key]['tmp_name'];
+         $this->fileType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $this->filePath);
+         $this->fileExtension = $this->allowedTypes[$this->fileType];
       }
    }
 
+   public function uploadCV() {
+      return $this->upload(PDF_DIR . "/CV.pdf");
+   }
 
-   public function copyToDir() {
-      copy("___file___", $espacePhoto."Par_defaut.png");
+   public function uploadProfileImg() {
+      return $this->upload(IMG_DIR . "/" . $this->fileName . "." . $this->fileExtension);
+   }
+
+   public function uploadPostImg(String $slug) {
+      return $this->upload(IMG_DIR . "/articles/" . $slug . "." . $this->fileExtension);
+   }
+
+   public function upload(String $toPath) {
+      if (!copy($this->filePath, $toPath)) {
+         return false;
+      }
+      unlink($this->filePath);
+      return true;
    }
 
 
-   public function c
 
-if (!is_dir($espacePhoto)) {
-    mkdir($espacePhoto, 0777);
-};
 
-if (isset($_FILES['photo']) && $_FILES['photo']['error']<=0) {
-    /* On "explose" le nom de l'image */
-    $nomPhotoExploded = explode(".", $_FILES['photo']['name']);
-    /* On récupère l'extension du logo */
-    $extensionLogo = strtolower(end($nomPhotoExploded));
-    /* On déplace l'image dans le répertoire correspondant */
-    move_uploaded_file($_FILES['photo']["tmp_name"], $espacePhoto.$_POST['nomphoto']);
-    // echo '<br /><br /><h1>Là ça a russie</h1><br /><br />';
+
+
+
+
+
+
+
+
 }

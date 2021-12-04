@@ -18,7 +18,10 @@ class Validator {
       'link' => ' n\'est pas un format de lien valide',
       'min_length' => ' ne contient pas assez de caractères',
       'max_length' => ' comporte trop de caractères',
-      'compare' => ' ne correspondent pas entre eux'
+      'file' => ' doit comporter un fichier',
+      'size' => ' dépasse la taille limite autorisée',
+      'type' => ' ne fait pas partie des formats autorisés',
+      'compare' => ' ne correspond pas'
    ];
    public static $fields = [
       'email' => 'adresse mail',
@@ -36,6 +39,9 @@ class Validator {
       'lead' => 'phrase d\'accroche',
       'icon' => 'icône',
       'link' => 'lien',
+      'urlCv' => 'CV',
+      'avatarUrl' => 'image de profil',
+      'avatarAltUrl' => 'texte image de profil',
       'comment' => 'commentaire'
    ];
 
@@ -93,11 +99,11 @@ class Validator {
    public function checkSocial() {
       $this->basicValidation()
            ->containsAlphabet('name')
-           ->length('name', 6, 48)
+           ->length('name', 2, 48)
            ->containsAlphabet('icon')
-           ->length('icon', 6, 48)
+           ->length('icon', 2, 48)
            ->containsAlphabet('link')
-           ->length('link', 6, 256)
+           ->length('link', 2, 256)
            ->link('link');
       return $this->isValid();
    }
@@ -106,6 +112,26 @@ class Validator {
       $this->basicValidation()
            ->containsAlphabet('comment')
            ->length('comment', 2, 512);
+      return $this->isValid();
+   }
+
+   public function checkCV() {
+      $this->validator->file('urlCv')
+                      ->size('urlCv', 1000000)
+                      ->type('urlCv', [
+                        'application/pdf' => 'pdf'
+                      ]);
+      return $this->isValid();
+   }
+
+   public function checkProfileImg() {
+      $this->validator->file('avatarUrl')
+                      ->size('avatarUrl', 2000000)
+                      ->type('avatarUrl', [
+                        'image/png' => 'png',
+                        'image/jpeg' => 'jpg'
+                      ])
+                      ->minLength('avatarAltUrl', 3);
       return $this->isValid();
    }
 
@@ -124,10 +150,11 @@ class Validator {
 
    public function checkInformations() {
       if (key_exists('password', $this->data) && !empty($this->data['password'])) {
-         $this->password('password')
-              ->password('password-confirm')
-              ->compare('password', 'password-confirm');
+         $this->validator->compare('password', 'password-confirm')
+                         ->password('password');
       } else {
+         unset($_POST['password']);
+         unset($_POST['password-confirm']);
          unset($this->data['password']);
          unset($this->data['password-confirm']);
          $this->validator->updateData($this->data);

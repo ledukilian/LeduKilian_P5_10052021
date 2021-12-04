@@ -24,7 +24,7 @@ class BlogController extends Controller {
    }
 
    public function showBlog() {
-      $pagination['per_page'] = 6;
+      $pagination['per_page'] = 3;
       $pagination['page_count'] = ceil(($this->postManager->countElements())/$pagination['per_page']);
       $limit = $pagination['per_page'];
       $pagination['current'] = $this->params['page'];

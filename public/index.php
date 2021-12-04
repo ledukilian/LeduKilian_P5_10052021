@@ -3,6 +3,9 @@ use App\Core\Router;
 use App\Controllers\ErrorController;
 
 define('ROOT_DIR', realpath(dirname(__DIR__)));
+define('CSS_DIR', realpath(dirname(__DIR__)) . '/public/css');
+define('IMG_DIR', realpath(dirname(__DIR__)) . '/public/img');
+define('PDF_DIR', realpath(dirname(__DIR__)) . '/public/pdf');
 define('CONF_DIR', realpath(dirname(__DIR__)) . '/config');
 define('TEMPLATE_DIR', realpath(dirname(__DIR__)) . '/templates');
 
