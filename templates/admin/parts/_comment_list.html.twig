@@ -1,4 +1,7 @@
 <div class="d-flex flex-row flex-wrap col-lg-12 mb-4">
+{% if comments is empty %}
+   <div class="small text-muted font-italic">Il n'y a pas encore de commentaire</div>
+{% endif %}
 {% for comment in comments %}
    <div class="mb-3 col-sm-12 col-md-6">
       <div class="card bg-light d-flex flex-row flex-wrap card-body p-2 shadow-sm {% if comment.status == 0 %}comment-disabled{% endif %}">
@@ -7,7 +10,7 @@
             <input type="checkbox" class="custom-control-input" name="{{ comment.id }}" id="{{ comment.id }}" {% if comment.status == 1 %}value="1"{% else %}value="0"{% endif %} {% if comment.status == 1 %} checked {% endif %} onchange="this.form.submit()" />
             <label class="custom-control-label" for="{{ comment.id }}">Afficher</label>
          </form>
-         <span class="small">Par <span class="text-warning font-weight-bold">{{ comment.author }}</span> le {{comment.createdAt|date('d/m/Y à H:i')}} </span>
+         <span class="small col-12 px-0">Par <span class="text-warning font-weight-bold">{{ comment.author }}</span> le {{comment.createdAt|date('d/m/Y à H:i')}} </span>
          <blockquote class="blockquote col-12 m-0 px-0">
            <small class="card card-text text-dark col-12 p-3 mt-2">{{ comment.comment }}</small>
          </blockquote>

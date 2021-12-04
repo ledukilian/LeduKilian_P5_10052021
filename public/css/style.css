@@ -14,7 +14,7 @@ a:hover {
    top: 0%;
    left: 0%;
    width: 100%;
-   background-color: rgba(0, 0, 0, 0.9) !important;
+   background-color: rgba(0, 0, 0, 0.8) !important;
 }
 #logo {
    transition: 0.4s;
@@ -44,6 +44,12 @@ a:hover {
 }
 .mt-6 {
    margin-top: 6em !important;
+}
+.mt-7 {
+   margin-top: 8em !important;
+}
+.mb-7 {
+   margin-bottom: 8em !important;
 }
 .w-90 {
    width: 90% !important;
@@ -75,37 +81,35 @@ input[type=text]
 .alert {
    transition: 0.4s;
    border: none;
-   border-left: 12px solid;
    opacity: 1;
+   color: #FFFFFF;
+   text-shadow: 1px 1px #333333;
+}
+.alert-secondary {
+   border-color: #383d41;
+   background-color: rgb(56,61,65,0.8);
 }
 .alert-primary {
    border-color: #008aff;
-   color: #008aff;
-   background-color: #d7ebff;
+   background-color: rgb(0,138,255,0.8);
 }
 .alert-success {
    border-color: #00b907;
-   color: #00b907;
-   background-color: #e2ffe9;
+   background-color: rgb(0,185,7,0.8);
 }
 .alert-warning {
    border-color: #fda300;
-   color: #fda300;
-   background-color: #fff4cf;
+   background-color: rgb(253,163,0,0.8);
 }
 .alert-danger {
    border-color: #f62035;
-   color: #f62035;
-   background-color: #ffdee1;
+   background-color: rgb(246,32,53,0.8);
 }
 form .alert {
-   border-radius: 0px 0.25rem 0.25rem 0px;
    border: none;
-   border-left: 4px solid;
    font-size: 0.9em;
-   margin-top: 8px;
-   padding: 8px;
-   padding-left: 14px;
+   margin: 3px 1px;
+   padding: 4px 12px;
    width: 100%;
    text-align: left;
 }
@@ -123,6 +127,10 @@ form .alert-dismissible .close {
 .zoom-effect:hover {
    transition: 0.4s;
    transform: scale(1.03);
+}
+.reverse-h {
+   -webkit-transform: scaleX(-1);
+   transform: scaleX(-1);
 }
 
 

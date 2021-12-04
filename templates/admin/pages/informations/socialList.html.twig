@@ -16,19 +16,28 @@
             <i class="fas fa-hashtag text-warning mr-2"></i>Gestion des réseaux sociaux</h1>
          </div>
          <div class="d-flex flex-column col-lg-12 mb-4">
-            <form class="card px-3 py-1" action="/admin/reseaux/ajouter" id="formSocial" method="POST">
+            <form class="card px-3 py-2" action="/admin/reseaux/ajouter" id="formSocial" method="POST">
                <div class="form-group d-flex flex-row flex-wrap">
-                  <label class="col-12 px-0 font-weight-bold text-dark mb-3">Ajouter un réseau</label>
-                  <small class="col-12"><i class="fas fa-info-circle mr-2 mb-3"></i>Icône à récupérer sur <a href="https://fontawesome.com/v5.15/icons/" target="_blank">https://fontawesome.com/v5.15/icons/</a></small>
-                  <input type="text" class="form-control w-25" id="icon" name="icon" required="required" placeholder="Icône" />
-                  <input type="text" class="form-control w-75" id="name" name="name" required="required" placeholder="Texte du réseau" />
+                  <label class="col-12 px-0 font-weight-bold text-dark mb-3"><i class="fas fa-layer-group text-warning mr-2"></i>Ajouter un réseau</label>
+                  <small class="col-12"><i class="fas fa-info-circle mr-2 mb-3"></i>Icône à récupérer au format HTML sur <a href="https://fontawesome.com/v5.15/icons/" target="_blank">https://fontawesome.com/v5.15/icons/ <i class="fas fa-external-link-alt ml-1"></i></a></small>
+                  <input type="text" class="form-control w-25" id="icon" name="icon" required="required" placeholder="Icône" value="{{ _post.icon }}" />
+                  <input type="text" class="form-control w-75" id="name" name="name" required="required" placeholder="Texte du réseau" value="{{ _post.name }}" />
+                  {% if messages.icon is defined %}
+                     {% include "client/parts/_message.html.twig" with {'message': messages.icon.message} %}
+                  {% endif %}
+                  {% if messages.name is defined %}
+                     {% include "client/parts/_message.html.twig" with {'message': messages.name.message} %}
+                  {% endif %}
                   <div class="input-group w-100 mt-2">
                      <div class="input-group-prepend">
                         <span class="input-group-text">
                            <i class="fas fa-link"></i>
                         </span>
                      </div>
-                     <input type="text" class="form-control" id="link" name="link" required="required" placeholder="Lien vers le réseau social" />
+                     <input type="text" class="form-control" id="link" name="link" required="required" placeholder="Lien vers le réseau social" value="{{ _post.link }}" />
+                     {% if messages.link is defined %}
+                        {% include "client/parts/_message.html.twig" with {'message': messages.link.message} %}
+                     {% endif %}
                   </div>
                </div>
                <div class="form-group mb-1 align-self-end">
@@ -39,7 +48,7 @@
             </form>
 
             <div class="d-flex flex-row flex-wrap my-4 px-3 py-1">
-               <label class="col-12 px-0 font-weight-bold text-dark mb-3">Liste des réseaux sociaux</label>
+               <label class="col-12 px-0 font-weight-bold text-dark mb-3"><i class="fas fa-layer-group text-warning mr-2"></i>Liste des réseaux sociaux</label>
                {% for social in socials %}
                <div class="my-3 col-sm-12 col-md-6">
                   <div class="card bg-light d-flex flex-row flex-wrap card-body p-2 shadow-sm">
