@@ -16,7 +16,7 @@
                <span class="small">Le {{post.createdAt | date('d/m/y à H:i')}} </span>
                <div class="ml-auto">
                   <a href="/blog/{{post.slug}}" class="text-primary mx-1"><i class="fas fa-eye"></i></a>
-                  <a href="/admin/blog/{{post.slug}}/modifier/" class="text-warning mx-1"><i class="fas fa-pen"></i></a>
+                  <a href="/admin/blog/{{post.slug}}/" class="text-warning mx-1"><i class="fas fa-pen"></i></a>
                   <a href="#" class="text-danger mx-1" onclick="showModal(this);return false;" data-toggle="modal" data-target="confirm" data-action="/admin/blog/{{post.slug}}/supprimer/" data-title="Supprimer" data-content="{{ "Voulez-vous vraiment supprimer l'article "~post.title~" ?"}}"><i class="fas fa-trash-alt"></i></a>
                </div>
             </div>
