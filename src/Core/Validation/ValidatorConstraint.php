@@ -66,13 +66,6 @@ class ValidatorConstraint {
       return $this;
    }
 
-   public function containsNumber(String $key) {
-      if (!preg_match('~[0-9]+~', $this->data[$key])) {
-         $this->addError($key, 'number');
-      }
-      return $this;
-   }
-
    public function minLength(String $key, $min) {
       if (strlen($this->data[$key])<$min) {
          $this->addError($key, 'min_length');
@@ -83,13 +76,6 @@ class ValidatorConstraint {
    public function maxLength(String $key, $max) {
       if (strlen($this->data[$key])>$max) {
          $this->addError($key, 'max_length');
-      }
-      return $this;
-   }
-
-   public function slug(String $key) {
-      if(!preg_match('/^[a-z][-a-z0-9]*$/', $this->data[$key])){
-         $this->addError($key, 'slug');
       }
       return $this;
    }

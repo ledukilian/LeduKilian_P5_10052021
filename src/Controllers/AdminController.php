@@ -244,10 +244,6 @@ class AdminController extends Controller {
       $this->redirectIfNotAdmin();
       if (!empty($_POST)) {
          $this->validator = new Validator($_POST, $this->postManager);
-         // var_dump($this->validator->checkPost());
-         // var_dump($_POST);
-         // var_dump($_FILES);
-         // die;
          if ($this->validator->checkPost()) {
             $post = $this->postManager->findOneBy([
                'slug' => $this->params['slug']

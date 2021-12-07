@@ -11,11 +11,13 @@ use App\Services\Mailer;
 
 class AccountController extends Controller {
    protected UserManager $userManager;
+   protected Mailer $mailer;
 
    public function __construct($action, $params = NULL) {
       parent::__construct($action, $params);
       $this->userManager = new UserManager();
       $this->validator = new Validator($_POST);
+      $this->mailer = new Mailer();
    }
 
    public function login() {
@@ -43,7 +45,7 @@ class AccountController extends Controller {
             $user = (new User($_POST))->setDefaultRegistered();
             if ($this->userManager->insert($user)) {
                $this->messageHandler->setMessage('success', 'Création de compte réussie, veuillez vous connecter.');
-               $mailer = (new Mailer())->registered($user);
+               $this->mailer->registered($user);
                $this->redirectToIndex();
             }
          }

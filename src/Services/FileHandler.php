@@ -36,10 +36,6 @@ class FileHandler {
       return $slug . "." . $this->fileExtension;
    }
 
-   public function getUploadDir() {
-      return;
-   }
-
    public function upload(String $toPath) {
       if (!copy($this->filePath, $toPath)) {
          return false;
@@ -49,7 +45,7 @@ class FileHandler {
       return true;
    }
 
-   public function delete(String $toPath) {
+   public function delete() {
       unlink($this->filePath);
       return true;
    }
