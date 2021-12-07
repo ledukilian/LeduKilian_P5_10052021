@@ -224,6 +224,17 @@ class AdminController extends Controller {
       }
    }
 
+   public function deleteSocial() {
+      $this->redirectIfNotAdmin();
+      $social = $this->socialManager->findOneBy(['id' => $this->params['id']]);
+      if ($this->deleteElement($this->socialManager, $social, $this->params['id'])) {
+         $this->messageHandler->setMessage('success', 'Le réseau social a bien été supprimé');
+         $this->redirectToSocial();
+      } else {
+         $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de la suppression du réseau social');
+      }
+   }
+
    public function showPostEdit() {
       $this->redirectIfNotAdmin();
       $slug = $this->params['slug'];
@@ -261,20 +272,6 @@ class AdminController extends Controller {
             }
             $this->redirectToAdmin();
          }
-      }
-   }
-
-
-
-
-   public function deleteSocial() {
-      $this->redirectIfNotAdmin();
-      $social = $this->socialManager->findOneBy(['id' => $this->params['id']]);
-      if ($this->deleteElement($this->socialManager, $social, $this->params['id'])) {
-         $this->messageHandler->setMessage('success', 'Le réseau social a bien été supprimé');
-         $this->redirectToSocial();
-      } else {
-         $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de la suppression du réseau social');
       }
    }
 
