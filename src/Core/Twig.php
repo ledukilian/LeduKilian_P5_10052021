@@ -14,6 +14,7 @@ use Twig\Extra\Markdown\MarkdownRuntime;
 use Twig\RuntimeLoader\RuntimeLoaderInterface;
 use Twig\Extra\Markdown\MarkdownExtension;
 use App\Services\TwigGlobals;
+use App\Services\MessageHandler;
 
 class Twig {
     /** @var Environment */
@@ -71,7 +72,10 @@ class Twig {
       $twig->addGlobal('admin', $twigGlobals->getAdmin());
       $twig->addGlobal('session', $twigGlobals->getSession());
       $twig->addGlobal('socials', $twigGlobals->getSocials());
-      $twig->addGlobal('portfolio', $twigGlobals->getPortfolio());
+      $twig->addGlobal('_post', $_POST);
+      $twig->addGlobal('_get', $_GET);
+      $messageHandler = new MessageHandler();
+      $messageHandler->resetMessages();
    }
 
     /**

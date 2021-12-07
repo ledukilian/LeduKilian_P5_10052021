@@ -4,32 +4,49 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Managers\CommentManager;
 use App\Models\Comment;
-use App\Services\FormHandler;
+use App\Services\MessageHandler;
+use App\Core\Validation\Validator;
 
 
 class CommentController extends Controller {
+   protected CommentManager $commentManager;
+
+   public function __construct($action, $params = NULL) {
+      parent::__construct($action, $params);
+      $this->commentManager = new CommentManager();
+   }
 
    public function addComment() {
-      if (!empty($_POST) && (new FormHandler())->checkform($_POST)) {
-         $commentManager = new CommentManager();
-         $comment = new Comment($_POST);
-         $comment->setUserId($_SESSION['user']->getId());
-         $comment->setStatus(1);
-         if ($commentManager->insert($comment)) {
-            header('Location: /blog/'.$this->params['slug']);
-            exit;
+      if (!empty($_POST)) {
+         $this->validator = new Validator($_POST);
+         if ($this->validator->checkComment()) {
+            $comment = new Comment($_POST);
+            $comment->setUserId($_SESSION['user']->getId());
+            $comment->setStatus(0);
+            if ($this->commentManager->insert($comment)) {
+               $this->messageHandler->setMessage('success', 'Votre commentaire a bien été pris en compte, il sera traité prochainement');
+            }
          }
+         header('Location: /blog/'.$this->params['id']);
+         exit;
       }
    }
 
    public function toggleCommentStatus() {
-      // TODO : Si commentaire statut = 1 On désactive
-
-
-
-
-
-
+      $comment = $this->commentManager->findOneBy([
+         "id" => $this->params['id']
+      ]);
+      if ($comment->getStatus()==1) {
+         $this->messageHandler->setMessage('danger', 'Le commentaire numéro '.$comment->getId().' ne sera plus affiché');
+         $comment->setStatus(0);
+      } else {
+         $this->messageHandler->setMessage('success', 'Le commentaire numéro '.$comment->getId().' sera maintenant affiché');
+         $comment->setStatus(1);
+      }
+      if ($this->commentManager->update($comment)) {
+         header('Location: /admin/blog/commentaires/');
+         exit;
+      }
 
    }
 

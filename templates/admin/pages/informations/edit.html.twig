@@ -1,0 +1,106 @@
+{% set assets_directory = '../../../' %}
+
+{% extends "admin/base.html.twig" %}
+
+{% block title %}
+   Modifier le portfolio -
+   {{parent()}}
+{% endblock %}
+
+{% block main %}
+   {% include "admin/parts/_navbar.html.twig" %}
+   <div class="container-fluid">
+      <div class="row">
+         <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-dark mx-2">
+               <i class="fas fa-edit text-warning mr-2"></i>Modifier le portfolio</h1>
+         </div>
+         <div class="d-flex flex-column col-lg-12 mb-4">
+
+            <form class="card px-3 py-2" action="/admin/informations/changer_informations/" method="POST">
+               <div class="form-group d-flex flex-row flex-wrap">
+                  <label class="col-12 px-0 font-weight-bold text-dark mb-3" for="cvProfil"><i class="fas fa-layer-group text-warning mr-2"></i>Informations générales</label>
+                  <div class="form-group col-12">
+                     <div class="input-group pb-2">
+                        <label class="text-dark w-100" for="catchPhrase"><i class="fas fa-chevron-right text-warning mr-2"></i>Phrase d'accroche</label>
+                        <input type="text" class="form-control" id="catchPhrase" name="catchPhrase" value="{{ admin.catchphrase }}" required="required" />
+                        {% if messages.catchPhrase is defined %}
+                           {% include "client/parts/_message.html.twig" with {'message': messages.catchPhrase.message} %}
+                        {% endif %}
+                        <label class="text-dark w-100 mt-2" for="email"><i class="fas fa-chevron-right text-warning mr-2"></i>Adresse mail</label>
+                        <input class="form-control" type="email" id="email" name="email" value="{{ admin.email }}" required="required" />
+                        {% if messages.email is defined %}
+                           {% include "client/parts/_message.html.twig" with {'message': messages.email.message} %}
+                        {% endif %}
+                        <label class="text-dark w-100 mt-2" for="lastnamePortfolio"><i class="fas fa-chevron-right text-warning mr-2"></i>Nom et prénom</label>
+                        <input class="form-control" type="text" id="lastname" name="lastname" placeholder="Nom" value="{{ admin.lastname }}" required="required" />
+                        <input class="form-control" type="text" id="firstname" name="firstname" placeholder="Prénom" value="{{ admin.firstname }}" required="required" />
+                        {% if messages.lastname is defined %}
+                           {% include "client/parts/_message.html.twig" with {'message': messages.lastname.message} %}
+                        {% endif %}
+                        {% if messages.firstname is defined %}
+                           {% include "client/parts/_message.html.twig" with {'message': messages.firstname.message} %}
+                        {% endif %}
+                        <label class="text-dark w-100 mt-2" for="username"><i class="fas fa-chevron-right text-warning mr-2"></i>Nom d'utilisateur</label>
+                        <input class="form-control" id="username" name="username" type="text" value="{{ admin.username }}" required="required" />
+                        {% if messages.username is defined %}
+                           {% include "client/parts/_message.html.twig" with {'message': messages.username.message} %}
+                        {% endif %}
+                        <label class="text-dark w-100 mt-2" for="password"><i class="fas fa-chevron-right text-warning mr-2"></i>Mot de passe</label>
+                        <small class="col-12 px-0 mb-2"><i class="fas fa-info-circle mr-2"></i>Laissez vide pour ne pas changer.</small>
+                        <input class="form-control" id="password" name="password" type="password" placeholder="Mot de passe" />
+                        <input class="form-control" id="password-confirm" name="password-confirm" type="password" placeholder="Confirmation" />
+                        {% if messages.password is defined %}
+                           {% include "client/parts/_message.html.twig" with {'message': messages.password.message} %}
+                        {% endif %}
+                     </div>
+                  </div>
+               </div>
+               <div class="form-group align-self-end">
+                  <button class="btn btn-success">
+                     <i class="fas fa-save mr-2"></i>
+                     Enregistrer les informations</button>
+               </div>
+            </form>
+            <hr>
+            <form class="card px-3 py-2" enctype="multipart/form-data" action="/admin/informations/changer_cv/" method="POST">
+               <div class="form-group d-flex flex-row flex-wrap">
+                  <label class="col-12 px-0 font-weight-bold text-dark mb-3" for="urlCv"><i class="fas fa-layer-group text-warning mr-2"></i>CV</label>
+                  <input class="col-12" type="file" required="required" id="urlCv" name="urlCv" accept="application/pdf" />
+                  {% if messages.urlCv is defined %}
+                     {% include "client/parts/_message.html.twig" with {'message': messages.urlCv.message} %}
+                  {% endif %}
+                  <small class="col-12"><i class="fas fa-info-circle mr-2"></i>Au format PDF uniquement.</small>
+                  <small class="col-12"><i class="fas fa-info-circle mr-2"></i>Laissez vide pour ne pas changer.</small>
+               </div>
+               <div class="form-group align-self-end">
+                  <button class="btn btn-success">
+                     <i class="fas fa-save mr-2"></i>
+                     Enregistrer le CV</button>
+               </div>
+            </form>
+            <hr>
+            <form class="card px-3 py-2" enctype="multipart/form-data" action="/admin/informations/changer_image_profil/" method="POST">
+               <div class="form-group d-flex flex-row flex-wrap">
+                  <label class="col-12 px-0 font-weight-bold text-dark mb-3" for="avatarUrl"><i class="fas fa-layer-group text-warning mr-2"></i>Image de profil</label>
+                  <input class="col-12 col-md-5" type="file" id="avatarUrl" name="avatarUrl" accept="image/png, image/gif, image/jpeg" />
+                  <input type="text" class="form-control col-12 col-md-6" id="avatarAltUrl" name="avatarAltUrl" placeholder="Texte alternatif de l'image de profil" value="{{ admin.avataralturl }}" />
+                  {% if messages.avatarUrl is defined %}
+                     {% include "client/parts/_message.html.twig" with {'message': messages.avatarUrl.message} %}
+                  {% endif %}
+                  {% if messages.avatarAltUrl is defined %}
+                     {% include "client/parts/_message.html.twig" with {'message': messages.avatarAltUrl.message} %}
+                  {% endif %}
+                  <small class="col-12"><i class="fas fa-info-circle mr-2"></i>Laissez vide pour ne pas changer.</small>
+               </div>
+               <div class="form-group align-self-end">
+                  <button class="btn btn-success">
+                     <i class="fas fa-save mr-2"></i>
+                     Enregistrer l'image</button>
+               </div>
+            </form>
+
+         </div>
+      </div>
+   </div>
+{% endblock %}

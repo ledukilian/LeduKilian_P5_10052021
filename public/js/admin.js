@@ -19,5 +19,16 @@ function showModal(element) {
    // console.log(modal.getElementsByClassName('modal-content')[0].innerHTML);
    modal.getElementsByClassName('modal-body')[0].innerHTML = data.content;
    modal.getElementsByClassName('modal-title')[0].innerHTML = data.title;
+   console.log(data);
+   $('#modalAction').attr('action', data.action);
    $('#' + data.target).modal('show');
+}
+
+function loadForm(element) {
+   data = element.dataset;
+   $('#name').val(data.name);
+   $('#link').val(data.link);
+   $('#icon').val(data.icon);
+   $('#formSocial').attr('action', '/admin/reseaux/'+data.id+'/edit/')
+   $('#submitSocial').html('<i class="fas fa-pen mr-2"></i>Modifier')
 }

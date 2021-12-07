@@ -18,12 +18,12 @@ class UserManager extends Manager {
          if (password_verify($password, $user->getPassword())) {
             $user->setPassword('Hidden');
             self::createSession($user);
-            return true;
+            return $user;
          } else {
-            return false;
+            return 'Le mot de passe ne correspond pas à l\'adresse mail associée';
          }
       } else {
-         return null;
+         return 'Le compte avec l\'adresse mail suivante n\'existe pas';
       }
    }
 

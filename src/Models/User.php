@@ -48,12 +48,14 @@ class User extends Entity {
       return $this->_password;
    }
 
-   public function setPassword($value) {
-      $this->_password = $value;
-   }
-
    public function setPasswordHashed($value) {
       $this->_password = password_hash($value, PASSWORD_DEFAULT);
+   }
+
+   public function setPassword($value) {
+      if (!empty(trim($value))) {
+         $this->_password = $value;
+      }
    }
 
    public function getRole() {
@@ -62,6 +64,15 @@ class User extends Entity {
 
    public function setRole($value) {
       $this->_role = $value;
+   }
+
+   public function isAdmin() {
+      return ($this->_role)=='ADMIN';
+   }
+
+   public function setDefaultRegistered() {
+      $this->setRole("USER");
+      $this->setPasswordHashed($this->getPassword());
    }
 
 }

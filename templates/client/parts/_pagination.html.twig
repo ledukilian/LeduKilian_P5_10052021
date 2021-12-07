@@ -1,10 +1,10 @@
 <div class="btn-toolbar mt-3" role="toolbar" aria-label="Toolbar with button groups">
       {% for i in 1 .. pagination.page_count %}
          {% if i == pagination.current %}
-             <button type="button" class="btn btn-dark mx-1 active">{{ i }}</button>
+             <button type="button" class="btn btn-warning mx-1 py-2 px-3">{{ i }}</button>
          {% else %}
          <a href="/blog/{{ i }}/">
-             <button type="button" class="btn btn-dark mx-1">{{ i }}</button>
+             <button type="button" class="btn btn-dark mx-1 py-2 px-3">{{ i }}</button>
           </a>
          {% endif %}
       {% endfor %}

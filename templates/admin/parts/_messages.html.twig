@@ -1,0 +1,11 @@
+
+<div id="alert-area" class="col-sm-12 offset-md-1 col-md-8">
+      {% if messages.global is defined %}
+         {% include "client/parts/_message.html.twig" with {'message': messages.global.message, 'type': messages.global.type} %}
+      {% endif %}
+   {% if session.messages is defined %}
+      {% for message in session.messages %}
+            {% include "client/parts/_message.html.twig" with {'message': message.text, 'type': message.type} %}
+      {% endfor %}
+   {% endif %}
+</div>

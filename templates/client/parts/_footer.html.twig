@@ -2,8 +2,7 @@
    <div class="footer1">
       <div class="container">
          <div class="row">
-            <div class="col-md-5 widget">
-               <h3 class="widget-title">Réseaux sociaux</h3>
+            <div class="col-md-12 text-center widget">
                <div class="widget-body">
                   {% for social in socials %}
                      <a class="h1 m-2" href="{{social.link}}" target="_blank">
@@ -11,49 +10,11 @@
                      </a>
                   {% endfor %}
                </div>
-            </div>
-            <div class="col-md-7 widget">
-               <h3 class="widget-title">Contactez-moi</h3>
-               <div class="widget-body">
-                  <form>
-                     <div class="form-group">
-                        <div class="input-group mb-2">
-                           <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                 <i class="fa fa-envelope text-dark"></i>
-                              </div>
-                           </div>
-                           <label for="contact-mail" class="d-none">Adresse mail</label>
-                           <input type="email" class="form-control" name="nom" id="contact-mail" placeholder="Adresse mail" minlength="6" maxlength="256" required="required">
-                        </div>
-                     </div>
-                     <div class="form-group">
-                        <div class="input-group mb-2">
-                           <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                 <i class="fa fa-user text-dark"></i>
-                              </div>
-                           </div>
-                           <label for="contact-nom" class="d-none">Nom et prénom</label>
-                           <input type="text" class="form-control" name="nom" id="contact-nom" placeholder="Nom et prénom" minlength="6" maxlength="256" required="required">
-                        </div>
-                     </div>
-                     <div class="form-group">
-                        <div class="input-group mb-2">
-                           <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                 <i class="fa fa-comment text-dark"></i>
-                              </div>
-                           </div>
-                           <label for="contact-message" class="d-none">Message</label>
-                           <textarea class="form-control" name="message" id="contact-message" placeholder="Message" required="required" minlength="6" maxlength="2048"></textarea>
-                        </div>
-                     </div>
-                     <div class="text-center">
-                        <input type="submit" value="Envoyer" class="btn btn-warning btn-block rounded-0 py-2">
-                     </div>
-                  </form>
-               </div>
+               {% if session.logged == true %}
+                     {% if session.user.role == "ADMIN" %}
+                        <a class="nav-link mt-4 text-secondary" href="/admin/">Accéder à l'administration</a>
+                     {% endif %}
+               {% endif %}
             </div>
          </div>
       </div>
@@ -61,21 +22,10 @@
    <div class="footer2">
       <div class="container">
          <div class="row">
-            <div class="col-md-6 widget">
+            <div class="col-md-12 widget">
                <div class="widget-body">
-                  <p class="simplenav">
-                     <a href="#">Accueil</a>
-                     |
-                     <a href="#">Contact</a>
-                     |
-                     <a href="#">Authentification</a>
-                  </p>
-               </div>
-            </div>
-            <div class="col-md-6 widget">
-               <div class="widget-body">
-                  <p class="text-right">
-                     Copyright &copy; 2021 - LE DU Kilian
+                  <p class="text-center">
+                     Copyright &copy; 2021 - <span class="font-weight-bold text-warning">KLD Blog</span> - LE DU Kilian
                   </p>
                </div>
             </div>

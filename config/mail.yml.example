@@ -1,9 +1,12 @@
 mailer:
-   host: smtp.example.com
+   host: smtp-vpk.alwaysdata.net
    smtp: true
-   username: user@example.com
-   password: secret
+   username: p5.ocr@ledukilian.fr
+   password: sekrai
    port: 465
 from:
-   mail: from@example.com
-   name: Guy Mauve
+   mail: p5.ocr@ledukilian.fr
+   name: Contact LDK Blog
+contact-to:
+   mail: ledu.kilian@gmail.com
+   name: LE DU Kilian

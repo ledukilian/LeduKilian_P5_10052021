@@ -240,7 +240,7 @@
 #head {
    background: #1F1F1F url(/img/image_background.jpg) no-repeat;
    background-size: cover;
-   min-height: 520px;
+   min-height: 730px;
    text-align: center;
    padding-top: 220px;
    color: white;
@@ -302,7 +302,7 @@
 
 @media (max-width: 767px) {
    #head {
-      min-height: 420px;
+      min-height: 570px;
       padding-top: 160px;
    }
 
@@ -358,7 +358,6 @@ h1, .h1, h2, .h2, h3, .h3 {
 }
 
 blockquote {
-   font-style: italic;
    color: #999;
    margin: 30px 0 30px;
 }
@@ -461,7 +460,7 @@ img.pull-left {
 }
 
 .footer1 a:hover {
-   color: #fff;
+   color: #FFB107;
 }
 
 .footer1 .widget {
@@ -529,4 +528,9 @@ img.pull-left {
 
 .widget-simplenav a {
    margin: 0 5px;
+}
+
+.img-profile {
+   max-width: 110px;
+   border: 3px solid #EFEFEF;
 }

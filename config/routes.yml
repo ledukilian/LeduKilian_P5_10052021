@@ -8,11 +8,6 @@ contact:
   controller:       IndexController
   action:           showContact
   parameters:       [ ]
-portfolio:
-  uri:              /portfolio
-  controller:       IndexController
-  action:           showPortfolio
-  parameters:       [ ]
 blogPage:
   uri:              /blog/([0-9-]+)/
   controller:       BlogController
@@ -33,16 +28,46 @@ listComments:
    controller:       AdminController
    action:           showCommentList
    parameters:       [ ]
-editPortfolio:
-   uri:              /admin/portfolio/
+showEditInformations:
+   uri:              /admin/informations/
    controller:       AdminController
-   action:           editPortfolio
+   action:           showEditInformations
    parameters:       [ ]
-editSocials:
+editInformations:
+   uri:              /admin/informations/changer_informations/
+   controller:       AdminController
+   action:           editInformations
+   parameters:       [ ]
+editCV:
+   uri:              /admin/informations/changer_cv/
+   controller:       AdminController
+   action:           editCV
+   parameters:       [ ]
+editProfileImg:
+   uri:              /admin/informations/changer_image_profil/
+   controller:       AdminController
+   action:           editProfileImg
+   parameters:       [ ]
+showSocialList:
    uri:              /admin/reseaux/
    controller:       AdminController
-   action:           editSocials
+   action:           showSocialList
    parameters:       [ ]
+addSocial:
+   uri:              /admin/reseaux/ajouter
+   controller:       AdminController
+   action:           addSocial
+   parameters:       [ ]
+deleteSocial:
+   uri:              /admin/reseaux/([a-zA-Z0-9-]+)/supprimer/
+   controller:       AdminController
+   action:           deleteSocial
+   parameters:       ["id"]
+editSocial:
+   uri:              /admin/reseaux/([a-zA-Z0-9-]+)/edit/
+   controller:       AdminController
+   action:           editSocial
+   parameters:       ["id"]
 listPost:
   uri:              /admin/blog/
   controller:       AdminController
@@ -57,6 +82,11 @@ addComment:
   uri:              /blog/([a-zA-Z0-9-]+)/commentaire/ajouter/
   controller:       CommentController
   action:           addComment
+  parameters:       ["id"]
+showPostEdit:
+  uri:              /admin/blog/([a-zA-Z0-9-]+)/
+  controller:       AdminController
+  action:           showPostEdit
   parameters:       ["slug"]
 editPost:
   uri:              /admin/blog/([a-zA-Z0-9-]+)/modifier/
@@ -89,12 +119,12 @@ toggleCommentStatus:
    action:          toggleCommentStatus
    parameters:      ["id"]
 error:
- uri:              /erreur
- controller:       IndexController
- action:           showError
- parameters:       [ ]
+   uri:              /erreur
+   controller:       IndexController
+   action:           showError
+   parameters:       [ ]
 errorAdmin:
- uri:              /admin/erreur
- controller:       IndexController
- action:           showError
- parameters:       [ ]
+   uri:              /admin/erreur
+   controller:       IndexController
+   action:           showError
+   parameters:       [ ]

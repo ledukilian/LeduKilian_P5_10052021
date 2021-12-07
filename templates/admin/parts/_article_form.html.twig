@@ -1,43 +1,67 @@
 {% if form_type == 'add' %}
+   {% set form_icon = 'fa-plus-circle' %}
    {% set form_title = 'Ajouter un nouvel article' %}
    {% set article_title = '' %}
    {% set button_label = 'Poster' %}
+   {% set action_route = '/admin/blog/ajouter/' %}
 {% elseif form_type == 'edit' %}
-   {% set form_title = 'Modifier un article' %}
+   {% set form_icon = 'fa-edit' %}
+   {% set form_title = 'Modifier l\'article <b>' ~ post.title ~ '</b>' %}
    {% set article_title = post.title %}
    {% set article_lead = post.lead %}
    {% set image_alt = post.coverAltImg %}
    {% set article_content = post.content %}
    {% set button_label = 'Modifier' %}
+   {% set action_route = '/admin/blog/' ~ post.slug ~ '/modifier/' %}
 {% endif %}
 
 <div class="container-fluid">
    <div class="row">
       <div class="d-sm-flex align-items-center justify-content-between mb-4">
-         <h1 class="h3 mb-0 text-gray-800 mx-2">
-            <i class="fas fa-plus-circle mr-2"></i>{{ form_title }}</h1>
+         <h1 class="h3 mb-0 text-dark mx-2">
+            <i class="fas {{ form_icon }} text-warning mr-2"></i>{{ form_title | raw }}</h1>
       </div>
-      <form class="d-flex flex-column col-lg-12 mb-0" action="/admin/blog/ajouter/" method="POST">
+      <form class="d-flex flex-column col-lg-12 mb-0" action="{{ action_route }}" method="POST" enctype="multipart/form-data">
          <div class="form-group">
-            <label for="titreArticle">Titre</label>
+            <label for="titreArticle" class="text-dark"><i class="fas fa-chevron-right text-warning mr-2"></i>Titre</label>
             <input type="text" name="title" class="form-control" id="title" placeholder="Titre de l'article"  required="required" value="{{ article_title }}">
+            {% if messages.title is defined %}
+               {% include "client/parts/_message.html.twig" with {'message': messages.title.message} %}
+            {% endif %}
          </div>
          <div class="form-group">
-            <label for="titreArticle">Lead Phrase</label>
+            <label for="titreArticle" class="text-dark"><i class="fas fa-chevron-right text-warning mr-2"></i>Lead Phrase</label>
             <input type="text" class="form-control" name="lead" id="lead" placeholder="Phrase d'entête" required="required" value="{{ article_lead }}">
+            {% if messages.lead is defined %}
+               {% include "client/parts/_message.html.twig" with {'message': messages.lead.message} %}
+            {% endif %}
          </div>
          <div class="form-group d-flex flex-row flex-wrap">
-            <label class="col-12 px-0" for="imageArticle">Image</label>
-            <input class="col-12 col-md-5" type="file" required="required" name="coverImg" id="coverImg">
-            <input type="text" class="form-control col-12 col-md-6" name="coverAltImg" id="coverAltImg" placeholder="Texte alternatif de l'image" required="required" value="{{ image_alt }}">
+            <label class="col-12 px-0 text-dark" for="imageArticle"><i class="fas fa-chevron-right text-warning mr-2"></i>Image</label>
+            {% if form_type == 'edit' %}
+               <small>
+                  <img src="/img/articles/{{ post.coverImg }}" class="w-25 rounded mb-1">
+               </small>
+            {% endif %}
+            <input class="col-12 col-md-5" type="file" name="coverImg" id="coverImg">
+            <input type="text" class="form-control col-12 col-md-6" name="coverAltImg" id="coverAltImg" required="required" placeholder="Texte alternatif de l'image" value="{{ image_alt }}">
+            {% if messages.coverImg is defined %}
+               {% include "client/parts/_message.html.twig" with {'message': messages.coverImg.message} %}
+            {% endif %}
+            {% if messages.coverAltImg is defined %}
+               {% include "client/parts/_message.html.twig" with {'message': messages.coverAltImg.message} %}
+            {% endif %}
          </div>
          <div class="form-group">
-            <label for="titreArticle">Contenu</label>
+            <label for="titreArticle" class="text-dark"><i class="fas fa-chevron-right text-warning mr-2"></i>Contenu</label>
             <textarea class="form-control" name="content" id="content" rows="12" required="required" placeholder="Contenu de l'article">{{ article_content }}</textarea>
+            {% if messages.content is defined %}
+               {% include "client/parts/_message.html.twig" with {'message': messages.content.message} %}
+            {% endif %}
          </div>
 
          {% if form_type == 'edit' %}
-            <small class="col-12">
+            <small>
                <i class="fas fa-history mr-2"></i>Dernière modification le
                {{ post.updatedat | date('d/m/y à H:i') }}
             </small>

@@ -6,10 +6,16 @@ use App\Managers\PostManager;
 
 
 class BlogController extends Controller {
+   protected PostManager $postManager;
+
+   public function __construct($action, $params = NULL) {
+      parent::__construct($action, $params);
+      $this->postManager = new PostManager();
+   }
+
    public function showPost() {
       $slug = $this->params['slug'];
-      $postManager = new PostManager();
-      $post = $postManager->findPostAndComments(
+      $post = $this->postManager->findPostAndComments(
          $slug
       );
       $this->render("@client/pages/post.html.twig", [
@@ -18,13 +24,12 @@ class BlogController extends Controller {
    }
 
    public function showBlog() {
-      $pagination['per_page'] = 6;
-      $postManager = new PostManager();
-      $pagination['page_count'] = ceil(($postManager->countElements())/$pagination['per_page']);
+      $pagination['per_page'] = 3;
+      $pagination['page_count'] = ceil(($this->postManager->countElements())/$pagination['per_page']);
       $limit = $pagination['per_page'];
       $pagination['current'] = $this->params['page'];
       $offset = ($this->params['page']) * $pagination['per_page'] - $pagination['per_page'];
-      $posts = $postManager->findBy(
+      $posts = $this->postManager->findBy(
          [],
          [
             'created_at' => 'DESC'

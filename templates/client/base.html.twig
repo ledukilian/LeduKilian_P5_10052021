@@ -20,7 +20,9 @@
       <meta name="twitter:description" content="{{  block('metaDescription') }}"/>
       <meta name="twitter:image" content="{{  block('ogImage') }}"/>
 
-      <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
       <link rel="icon" href="{{ assets_directory }}img/logo.png" type="image/x-icon"/>
@@ -34,6 +36,7 @@
       <main>
          {% block main %}{% endblock %}
       </main>
+      {% include "client/parts/_messages.html.twig" %}
       {% include "client/parts/_footer.html.twig" %}
    </body>
 </html>
