@@ -18,7 +18,8 @@ class CommentController extends Controller {
 
    public function addComment() {
       if (!empty($_POST)) {
-         if ((new Validator($_POST))->checkComment()) {
+         $this->validator = new Validator($_POST);
+         if ($this->validator->checkComment()) {
             $comment = new Comment($_POST);
             $comment->setUserId($_SESSION['user']->getId());
             $comment->setStatus(0);
