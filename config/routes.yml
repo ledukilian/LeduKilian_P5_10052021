@@ -83,6 +83,11 @@ addComment:
   controller:       CommentController
   action:           addComment
   parameters:       ["id"]
+showPostEdit:
+  uri:              /admin/blog/([a-zA-Z0-9-]+)/
+  controller:       AdminController
+  action:           showPostEdit
+  parameters:       ["slug"]
 editPost:
   uri:              /admin/blog/([a-zA-Z0-9-]+)/modifier/
   controller:       AdminController
