@@ -52,7 +52,8 @@ class AdminController extends Controller {
          'posts' => $posts,
          'users_count' => $this->userManager->countElements(),
          'articles_count' => $this->postManager->countElements(),
-         'comments_count' => $this->commentManager->countElements()
+         'comments_count' => $this->commentManager->countElements(),
+         'messages' => $this->messageHandler->getMessages()
       ]);
    }
 
@@ -158,17 +159,24 @@ class AdminController extends Controller {
       ]);
    }
 
-   public function addPost() {
+   public function showPostForm() {
       $this->redirectIfNotAdmin();
+      $this->messageHandler->addMessages($this->validator->getMessages());
+      $this->render("@admin/pages/blog/add.html.twig", [
+         'messages' => $this->messageHandler->getMessages()
+      ]);
+
+   }
+
+   public function addPost() {
       if (!empty($_POST)) {
          $this->validator = new Validator($_POST, $this->postManager);
-         var_dump($this->validator->checkPost());
-         var_dump($this->validator->getMessages());
-         die;
          if ($this->validator->checkPost()) {
+            $this->fileHandler = new FileHandler('coverImg');
             $post = new Post($_POST);
             $post->setAdminId($_SESSION['user']->getId());
             $post->setSlug($this->postManager->slugify($_POST['title']));
+            $post->setCoverImg($this->fileHandler->uploadPostImg($post->getSlug()));
             if ($this->postManager->insert($post)) {
                $this->messageHandler->addMessage('success', 'Le nouveau post a bien été ajouté');
                $this->redirectToAdmin();
@@ -178,10 +186,7 @@ class AdminController extends Controller {
          }
          $this->redirectToSelf();
       }
-      $this->messageHandler->addMessages($this->validator->getMessages());
-      $this->render("@admin/pages/blog/add.html.twig", [
-         'messages' => $this->messageHandler->getMessages()
-      ]);
+      $this->showPostForm();
    }
 
    public function addSocial() {
@@ -219,23 +224,52 @@ class AdminController extends Controller {
       }
    }
 
-   public function editPost() {
-      if ((new Validator($_POST, $this->userManager))->checkPost()) {
-         $this->redirectIfNotAdmin();
-         $slug = $this->params['slug'];
-         $post = $this->postManager->findBy(
-            [
-               'slug' => $slug
-            ],
-            [
-               'created_at' => 'DESC'
-            ]
-         );
-      }
+   public function showPostEdit() {
+      $this->redirectIfNotAdmin();
+      $slug = $this->params['slug'];
+      $post = $this->postManager->findBy(
+         [
+            'slug' => $slug
+         ],
+         [
+            'created_at' => 'DESC'
+         ]
+      );
       $this->render("@admin/pages/blog/edit.html.twig", [
          'post' => $post[0]
       ]);
    }
+
+   public function editPost() {
+      $this->redirectIfNotAdmin();
+      if (!empty($_POST)) {
+         $this->validator = new Validator($_POST, $this->postManager);
+         // var_dump($this->validator->checkPost());
+         // var_dump($_POST);
+         // var_dump($_FILES);
+         // die;
+         if ($this->validator->checkPost()) {
+            $post = $this->postManager->findOneBy([
+               'slug' => $this->params['slug']
+            ]);
+            $post->hydrate($_POST);
+            if (isset($_FILES['coverImg']) && $_FILES['coverImg']['error']==0) {
+               $this->fileHandler = new FileHandler('coverImg');
+               $post->setSlug($this->postManager->slugify($_POST['title']));
+               $post->setCoverImg($this->fileHandler->uploadPostImg($post->getSlug()));
+            }
+            if ($this->postManager->update($post)) {
+               $this->messageHandler->setMessage('success', 'Le post a bien été modifié');
+            } else {
+               $this->messageHandler->setMessage('danger', 'Une erreur est survenue lors de la modification du post');
+            }
+            $this->redirectToAdmin();
+         }
+      }
+   }
+
+
+
 
    public function deleteSocial() {
       $this->redirectIfNotAdmin();
