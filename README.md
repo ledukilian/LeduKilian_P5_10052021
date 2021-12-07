@@ -24,7 +24,7 @@ You just need to import the database structure named `database.example.sql` that
 **IMPORTANT :** Do not delete the admin user located inside the `admin` table with the 1 id and the id_user rattached to him in `user` table.
 <br /><br />
 ### ✏️ Initial configuration
-There is 2 important configurations files located in the `config/` folder, you can use the .example and add your own configuration for each of one.
+There is 2 important configurations files located in the `config/` folder, you can use the `.example` and add your own configuration for each of one.
 - [ ] `db-config.yml` : Configure link to database, you need to input your own.
 - [ ] `mail.yml` : Configure mail, you need to input, please note :
     >
