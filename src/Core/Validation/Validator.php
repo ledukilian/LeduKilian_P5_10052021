@@ -136,6 +136,14 @@ class Validator {
    }
 
    public function checkPost() {
+      if (key_exists('coverImg', $_FILES) && !empty($_FILES['coverImg']) && $_FILES['coverImg']['error']==0) {
+         $this->validator->file('coverImg')
+         ->size('coverImg', 2000000)
+         ->type('coverImg', [
+           'image/png' => 'png',
+           'image/jpeg' => 'jpg'
+        ]);
+     }
       $this->basicValidation()
            ->containsAlphabet('title')
            ->length('title', 2, 512)
@@ -144,7 +152,8 @@ class Validator {
            ->containsAlphabet('coverAltImg')
            ->length('coverAltImg', 2, 512)
            ->containsAlphabet('content')
-           ->length('content', 2, 512);
+           ->length('content', 2, 512)
+           ->minLength('coverAltImg', 3);
       return $this->isValid();
    }
 
