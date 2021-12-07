@@ -59,7 +59,7 @@ class Controller {
    }
 
    public function redirectIfNotAdmin() {
-      if (!$_SESSION['user']->isAdmin()) {
+      if (!key_exists('user', $_SESSION) || empty($_SESSION['user']) || !$_SESSION['user']->isAdmin()) {
          header('Location: /');
          exit;
       }
