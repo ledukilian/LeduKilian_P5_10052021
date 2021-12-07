@@ -32,13 +32,24 @@ class FileHandler {
    }
 
    public function uploadPostImg(String $slug) {
-      return $this->upload(IMG_DIR . "/articles/" . $slug . "." . $this->fileExtension);
+      $this->upload(IMG_DIR . "/articles/" . $slug . "." . $this->fileExtension);
+      return $slug . "." . $this->fileExtension;
+   }
+
+   public function getUploadDir() {
+      return;
    }
 
    public function upload(String $toPath) {
       if (!copy($this->filePath, $toPath)) {
          return false;
       }
+      $this->delete($this->filePath);
+      unlink($this->filePath);
+      return true;
+   }
+
+   public function delete(String $toPath) {
       unlink($this->filePath);
       return true;
    }
