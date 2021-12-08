@@ -14,11 +14,12 @@ List of the package used :
 - [ ] Twig
 - [ ] Slugify
 - [ ] PHPMailer
-- [ ] Yaml extension
+- [ ] Yaml extension (PHP 7.4 at least)
+> **NOTE** : Depending of your configuration, you might need to install the Yaml extension to your PHP version
 <br /><br />
 ### ⚙️ Database
 The second step is to create your database, name it as you will as long as it is **UTF-8**.
-You just need to import the database structure named `database.example.sql` that can be found inside `config/` folder.
+You just need to import the database structure named `database.sql` that can be found inside the main folder of the project `/`.
 > **NOTE** : The database contains several samples for demonstration, you can remove them as you like
 
 **IMPORTANT :** Do not delete the admin user located inside the `admin` table with the 1 id and the id_user rattached to him in `user` table.
