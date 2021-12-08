@@ -16,10 +16,11 @@
          <h1 class="col-12 mt-4">{{ post.title }}</h1>
          <h3 class="col-12 mt-1">{{ post.lead }}</h3>
          <p class="col-12 text-justify">{{ post.content }}</p>
-         <a href="/blog/1/" class="col-12 mb-5 ml-auto">
-            <button class="btn btn-warning">
-               <i class="fas fa-arrow-circle-left mr-2"></i>Retour au blog</button>
-         </a>
+         <div class="col-12 mb-5 ml-auto">
+            <a href="/blog/1/" class="btn btn-warning">
+               <i class="fas fa-arrow-circle-left mr-2"></i>Retour au blog
+            </a>
+         </div>
       </div>
       <div class="col-sm-12 col-md-5">
          {% if session.logged == false %}
