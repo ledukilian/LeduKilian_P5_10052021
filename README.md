@@ -15,15 +15,16 @@ List of the package used :
 - [ ] Slugify
 - [ ] PHPMailer
 - [ ] Yaml extension (PHP 7.4 at least)
+
 > **NOTE** : Depending of your configuration, you might need to install the Yaml extension to your PHP version
-<br /><br />
+
 ### ⚙️ Database
 The second step is to create your database, name it as you will as long as it is **UTF-8**.
 You just need to import the database structure named `database.sql` that can be found inside the main folder of the project `/`.
 > **NOTE** : The database contains several samples for demonstration, you can remove them as you like
 
 **IMPORTANT :** Do not delete the admin user located inside the `admin` table with the 1 id and the id_user rattached to him in `user` table.
-<br /><br />
+<br />
 ### ✏️ Initial configuration
 There is 2 important configurations files located in the `config/` folder, you can use the `.example` and add your own configuration for each of one.
 - [ ] `db-config.yml` : Configure link to database, you need to input your own.
@@ -31,7 +32,7 @@ There is 2 important configurations files located in the `config/` folder, you c
     >
     - [ ] `from` : Registration mail will be sent with those.
     - [ ] `contact-to` : Contact mail will be sent to this one.
-<br /><br />
+
 ### 🔐 First login
 You can use the default account for the first login :
 - [ ] **Email** : `admin@admin.dev`
