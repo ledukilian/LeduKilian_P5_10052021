@@ -20,7 +20,7 @@
             <h1 class="h3 mb-0 font-weight-bold text-dark my-3"><i class="fas fa-envelope text-warning mr-2"></i>Par message électronique</h1>
          <form action="/contact" method="post" name="contact" id="contact-form" class="d-flex flex-column form-inline p-1">
             <div class="d-flex flex-column col-12 form-group">
-               <label for="contact-nom" class="text-secondary align-self-start pb-1"><i class="fas fa-chevron-right text-warning mr-2"></i>Nom</label>
+               <label for="contact-name" class="text-secondary align-self-start pb-1"><i class="fas fa-chevron-right text-warning mr-2"></i>Nom</label>
                <input required="required" type="text" name="name" id="contact-name" class="form-control w-100" value="{{ _post.name }}" minlength="2" maxlength="48" required="required" />
             </div>
             {% if messages.name is defined %}
@@ -36,7 +36,7 @@
             {% endif %}
 
             <div class="d-flex flex-column col-12 form-group mt-2">
-               <label for="contact-sujet" class="text-secondary align-self-start pb-1"><i class="fas fa-chevron-right text-warning mr-2"></i>Sujet</label>
+               <label for="contact-subject" class="text-secondary align-self-start pb-1"><i class="fas fa-chevron-right text-warning mr-2"></i>Sujet</label>
                <input required="required" type="text" name="subject" id="contact-subject" class="form-control w-100" value="{{ _post.subject }}" minlength="2" maxlength="256" required="required" />
             </div>
             {% if messages.subject is defined %}

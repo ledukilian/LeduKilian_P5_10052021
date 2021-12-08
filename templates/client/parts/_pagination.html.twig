@@ -3,8 +3,8 @@
          {% if i == pagination.current %}
              <button type="button" class="btn btn-warning mx-1 py-2 px-3">{{ i }}</button>
          {% else %}
-         <a href="/blog/{{ i }}/">
-             <button type="button" class="btn btn-dark mx-1 py-2 px-3">{{ i }}</button>
+         <a href="/blog/{{ i }}/" class="btn btn-dark mx-1 py-2 px-3">
+             {{ i }}
           </a>
          {% endif %}
       {% endfor %}
