@@ -2,9 +2,10 @@
 # <p align="center">🟣 Project 5 : Create your first blog using PHP 🟣</p>
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ledukilian_LeduKilian_P5_10052021&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ledukilian_LeduKilian_P5_10052021)
 [![Maintainability](https://api.codeclimate.com/v1/badges/706fe8c458f4273b5932/maintainability)](https://codeclimate.com/github/ledukilian/LeduKilian_P5_10052021/maintainability)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=ledukilian_LeduKilian_P5_10052021&metric=bugs)](https://sonarcloud.io/dashboard?id=ledukilian_LeduKilian_P5_10052021)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=ledukilian_LeduKilian_P5_10052021&metric=security_rating)](https://sonarcloud.io/dashboard?id=ledukilian_LeduKilian_P5_10052021)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/17e69317ec4042099804ca93d28f9840)](https://www.codacy.com/gh/ledukilian/LeduKilian_P5_10052021/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ledukilian/LeduKilian_P5_10052021&amp;utm_campaign=Badge_Grade)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=ledukilian_LeduKilian_P5_10052021&metric=ncloc)](https://sonarcloud.io/dashboard?id=ledukilian_LeduKilian_P5_10052021)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=ledukilian_LeduKilian_P5_10052021&metric=bugs)](https://sonarcloud.io/dashboard?id=ledukilian_LeduKilian_P5_10052021)
 
 ## 🧱 Project install
 ### 🧩 Prerequisites
