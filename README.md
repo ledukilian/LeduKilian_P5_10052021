@@ -15,6 +15,8 @@ List of the package used :
 - [ ] Twig
 - [ ] Slugify
 - [ ] PHPMailer
+
+Once it's done you need to make sure you have the YAML Package installed with your PHP version (can be found here : https://pecl.php.net/package/yaml)
 - [ ] Yaml extension (PHP 7.4 at least)
 
 > **NOTE** : Depending of your configuration, you might need to install the Yaml extension to your PHP version
